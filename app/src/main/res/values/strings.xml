@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Quranku</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="tab_text_1">Home Fragment</string>
+    <string name="tab_text_2">Surat Fragment</string>
+    <string name="nama_surat">al-fatihah</string>
+    <string name="nomor_surat">1</string>
+    <string name="arti_surat">Arti</string>
+    <string name="jumlah_ayat">7 ayat</string>
 </resources>

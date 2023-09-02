@@ -1,11 +1,15 @@
 package com.muhammadfiqrit.quranku.data
 
+import android.provider.ContactsContract.RawContacts.Data
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.Transformations
 import com.muhammadfiqrit.quranku.data.source.local.LocalDataSource
 import com.muhammadfiqrit.quranku.data.source.local.entity.SuratEntity
 import com.muhammadfiqrit.quranku.data.source.remote.RemoteDataSource
 import com.muhammadfiqrit.quranku.data.source.remote.network.ApiResponse
 import com.muhammadfiqrit.quranku.data.source.remote.response.SuratResponse
+import com.muhammadfiqrit.quranku.domain.model.Surat
+import com.muhammadfiqrit.quranku.domain.repository.ISuratRepository
 import com.muhammadfiqrit.quranku.utils.AppExecutors
 import com.muhammadfiqrit.quranku.utils.DataMapper
 
@@ -13,7 +17,7 @@ class SuratRepository private constructor(
     private val remoteDataSource: RemoteDataSource,
     private val localDataSource: LocalDataSource,
     private val appExecutors: AppExecutors
-) {
+) : ISuratRepository {
     companion object {
         @Volatile
         private var instance: SuratRepository? = null
@@ -26,10 +30,12 @@ class SuratRepository private constructor(
         }
     }
 
-    fun getAllSurat(): LiveData<Resource<List<SuratEntity>>> =
-        object : NetworkBoundResource<List<SuratEntity>, List<SuratResponse>>(appExecutors) {
-            override fun loadFromDB(): LiveData<List<SuratEntity>> {
-                return localDataSource.getAllSurat()
+   override fun getAllSurat(): LiveData<Resource<List<Surat>>> =
+        object : NetworkBoundResource<List<Surat>, List<SuratResponse>>(appExecutors) {
+            override fun loadFromDB(): LiveData<List<Surat>> {
+                return Transformations.map(localDataSource.getAllSurat()){
+                    DataMapper.mapEntityToDomain(it)
+                }
             }
 
             override fun createCall(): LiveData<ApiResponse<List<SuratResponse>>> =
@@ -41,8 +47,10 @@ class SuratRepository private constructor(
                 localDataSource.insertSurat(suratList)
             }
 
-            override fun shouldFetch(data: List<SuratEntity>?): Boolean =
+            override fun shouldFetch(data: List<Surat>?): Boolean =
                 data == null || data.isEmpty()
 
         }.asLiveData()
+
+
 }

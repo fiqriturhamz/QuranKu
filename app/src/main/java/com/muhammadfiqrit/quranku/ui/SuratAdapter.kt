@@ -7,12 +7,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.muhammadfiqrit.quranku.R
 import com.muhammadfiqrit.quranku.data.source.local.entity.SuratEntity
 import com.muhammadfiqrit.quranku.databinding.ItemListSuratBinding
+import com.muhammadfiqrit.quranku.domain.model.Surat
 import com.muhammadfiqrit.quranku.ui.surat.SuratFragment
 
 class SuratAdapter : RecyclerView.Adapter<SuratAdapter.SuratViewHolder>() {
-    private var listData = ArrayList<SuratEntity>()
+    private var listData = ArrayList<Surat>()
 
-    fun setData(newListData: List<SuratEntity>?) {
+    fun setData(newListData: List<Surat>?) {
         if (newListData == null) return
         listData.clear()
         listData.addAll(newListData)
@@ -21,7 +22,7 @@ class SuratAdapter : RecyclerView.Adapter<SuratAdapter.SuratViewHolder>() {
 
     inner class SuratViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val binding = ItemListSuratBinding.bind(itemView)
-        fun bind(data: SuratEntity) {
+        fun bind(data: Surat) {
             with(binding) {
                 namaSurat.text = data.namaSurat
                 nomorSurat.text = data.nomorSurat.toString()

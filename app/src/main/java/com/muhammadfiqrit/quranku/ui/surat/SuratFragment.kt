@@ -39,6 +39,7 @@ class SuratFragment : Fragment() {
 
             suratViewModel.surat.observe(viewLifecycleOwner) { surat ->
                 if (surat != null) {
+
                     when (surat) {
                         is Resource.Loading -> binding.suratProgressBar.visibility = View.VISIBLE
                         is Resource.Success -> {
