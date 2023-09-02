@@ -1,0 +1,33 @@
+package com.muhammadfiqrit.quranku.data.source.local.entity
+
+import androidx.annotation.NonNull
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "surat")
+data class SuratEntity(
+    @PrimaryKey
+    @NonNull
+    @ColumnInfo(name = "nomorSurat")
+    var nomorSurat: Int,
+
+    @ColumnInfo(name = "nameSurat")
+    var namaSurat: String,
+
+    @ColumnInfo(name = "jumlahAyat")
+    var jumlahAyat: Int,
+
+    @ColumnInfo("tempatTurun")
+    var tempatTurun: String,
+
+    @ColumnInfo("arti")
+    var arti: String,
+
+    @ColumnInfo("deskripsi")
+    var deskripsi: String,
+
+    @ColumnInfo("namaLatin")
+    var namaLatin: String
+
+)
