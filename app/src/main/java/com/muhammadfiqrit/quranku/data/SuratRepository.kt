@@ -12,6 +12,8 @@ import com.muhammadfiqrit.quranku.domain.model.Surat
 import com.muhammadfiqrit.quranku.domain.repository.ISuratRepository
 import com.muhammadfiqrit.quranku.utils.AppExecutors
 import com.muhammadfiqrit.quranku.utils.DataMapper
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
 class SuratRepository private constructor(
     private val remoteDataSource: RemoteDataSource,
@@ -30,19 +32,17 @@ class SuratRepository private constructor(
         }
     }
 
-   override fun getAllSurat(): LiveData<Resource<List<Surat>>> =
-        object : NetworkBoundResource<List<Surat>, List<SuratResponse>>(appExecutors) {
-            override fun loadFromDB(): LiveData<List<Surat>> {
-                return Transformations.map(localDataSource.getAllSurat()){
-                    DataMapper.mapEntityToDomain(it)
-                }
+   override fun getAllSurat(): Flow<Resource<List<Surat>>> =
+        object : NetworkBoundResource<List<Surat>, List<SuratResponse>>() {
+            override fun loadFromDB(): Flow<List<Surat>> {
+                return localDataSource.getAllSurat().map { DataMapper.mapEntityToDomain(it) }
             }
 
-            override fun createCall(): LiveData<ApiResponse<List<SuratResponse>>> =
+            override suspend fun createCall(): Flow<ApiResponse<List<SuratResponse>>> =
                 remoteDataSource.getAllSurat()
 
 
-            override fun saveCallResult(data: List<SuratResponse>) {
+            override suspend fun saveCallResult(data: List<SuratResponse>) {
                 val suratList = DataMapper.mapResponsesToEntities(data)
                 localDataSource.insertSurat(suratList)
             }
@@ -50,7 +50,7 @@ class SuratRepository private constructor(
             override fun shouldFetch(data: List<Surat>?): Boolean =
                 data == null || data.isEmpty()
 
-        }.asLiveData()
+        }.asFlow()
 
 
 }

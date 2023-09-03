@@ -7,13 +7,15 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import com.muhammadfiqrit.quranku.data.source.local.entity.SuratEntity
+import kotlinx.coroutines.flow.Flow
+
 
 @Dao
 interface SuratDao {
     @Query("SELECT * FROM surat")
-    fun getAllSurat() : LiveData<List<SuratEntity>>
+    fun getAllSurat() : Flow<List<SuratEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertSurat(surat: List<SuratEntity>)
+    suspend fun insertSurat(surat: List<SuratEntity>)
 
 }

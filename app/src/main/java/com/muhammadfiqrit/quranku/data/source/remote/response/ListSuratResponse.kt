@@ -8,7 +8,7 @@ data class ListSuratResponse(
 	val code: Int? = null,
 
 	@field:SerializedName("data")
-	val data: List<SuratResponse>? = null,
+	val data: List<SuratResponse> ,
 
 	@field:SerializedName("message")
 	val message: String? = null

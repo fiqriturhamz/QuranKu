@@ -7,9 +7,14 @@ import com.muhammadfiqrit.quranku.data.source.remote.network.ApiResponse
 import com.muhammadfiqrit.quranku.data.source.remote.network.ApiService
 import com.muhammadfiqrit.quranku.data.source.remote.response.ListSuratResponse
 import com.muhammadfiqrit.quranku.data.source.remote.response.SuratResponse
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.lang.Exception
 
 
 class RemoteDataSource private constructor(private val apiService: ApiService) {
@@ -24,8 +29,24 @@ class RemoteDataSource private constructor(private val apiService: ApiService) {
         }
     }
 
-    fun getAllSurat(): LiveData<ApiResponse<List<SuratResponse>>> {
-        val resultData = MutableLiveData<ApiResponse<List<SuratResponse>>>()
+    suspend fun getAllSurat(): Flow<ApiResponse<List<SuratResponse>>> {
+
+        return flow {
+            try {
+                val response = apiService.getSurat()
+                val dataArray = response.data
+                if(dataArray.isNotEmpty()){
+                    emit(ApiResponse.Success(response.data))
+                }else
+                {
+                    emit(ApiResponse.Empty)
+                }
+            }catch (e: Exception){
+                emit(ApiResponse.Error(e.toString()))
+                Log.e("RemoteDataSource", e.toString())
+            }
+        }.flowOn(Dispatchers.IO)
+      /*  val resultData = MutableLiveData<ApiResponse<List<SuratResponse>>>()
 
         val client = apiService.getSurat()
         client.enqueue(object : Callback<ListSuratResponse> {
@@ -48,6 +69,6 @@ class RemoteDataSource private constructor(private val apiService: ApiService) {
             }
 
         })
-        return resultData
+        return resultData*/
     }
 }
