@@ -17,17 +17,7 @@ import retrofit2.Response
 import java.lang.Exception
 
 
-class RemoteDataSource private constructor(private val apiService: ApiService) {
-    companion object {
-        @Volatile
-        private var instance: RemoteDataSource? = null
-
-        fun getInstance(service: ApiService): RemoteDataSource = instance ?: synchronized(this) {
-            instance ?: synchronized(this) {
-                instance ?: RemoteDataSource(service)
-            }
-        }
-    }
+class RemoteDataSource(private val apiService: ApiService) {
 
     suspend fun getAllSurat(): Flow<ApiResponse<List<SuratResponse>>> {
 

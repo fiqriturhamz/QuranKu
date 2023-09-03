@@ -1,4 +1,4 @@
-package com.muhammadfiqrit.quranku.viewmodel
+package com.muhammadfiqrit.quranku.ui.surat
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData

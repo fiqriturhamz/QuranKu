@@ -15,23 +15,11 @@ import com.muhammadfiqrit.quranku.utils.DataMapper
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-class SuratRepository private constructor(
+class SuratRepository(
     private val remoteDataSource: RemoteDataSource,
     private val localDataSource: LocalDataSource,
     private val appExecutors: AppExecutors
 ) : ISuratRepository {
-    companion object {
-        @Volatile
-        private var instance: SuratRepository? = null
-        fun getInstance(
-            remoteData: RemoteDataSource,
-            localData: LocalDataSource,
-            appExecutors: AppExecutors
-        ): SuratRepository = instance ?: synchronized(this) {
-            instance ?: SuratRepository(remoteData, localData, appExecutors)
-        }
-    }
-
    override fun getAllSurat(): Flow<Resource<List<Surat>>> =
         object : NetworkBoundResource<List<Surat>, List<SuratResponse>>() {
             override fun loadFromDB(): Flow<List<Surat>> {

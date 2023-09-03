@@ -10,18 +10,4 @@ import com.muhammadfiqrit.quranku.data.source.local.entity.SuratEntity
 abstract class SuratDatabase : RoomDatabase() {
     abstract fun suratDao(): SuratDao
 
-    companion object {
-        @Volatile
-        private var INSTANCE: SuratDatabase? = null
-        fun getInstance(context: Context): SuratDatabase = INSTANCE ?: synchronized(this) {
-            val instance = Room.databaseBuilder(
-                context.applicationContext,
-                SuratDatabase::class.java,
-                "Surat.db"
-            ).fallbackToDestructiveMigration()
-                .build()
-            INSTANCE = instance
-            instance
-        }
-    }
 }

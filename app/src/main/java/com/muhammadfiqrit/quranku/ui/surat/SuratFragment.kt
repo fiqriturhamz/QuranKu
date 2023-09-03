@@ -6,19 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.muhammadfiqrit.quranku.R
 import com.muhammadfiqrit.quranku.data.Resource
 import com.muhammadfiqrit.quranku.databinding.FragmentSuratBinding
-import com.muhammadfiqrit.quranku.ui.SuratAdapter
-import com.muhammadfiqrit.quranku.viewmodel.SuratViewModel
-import com.muhammadfiqrit.quranku.viewmodel.ViewModelFactory
+
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class SuratFragment : Fragment() {
 
-    private lateinit var suratViewModel: SuratViewModel
+    private  val suratViewModel: SuratViewModel by viewModel()
     private var _binding: FragmentSuratBinding? = null
     private val binding get() = _binding!!
     override fun onCreateView(
@@ -34,8 +31,7 @@ class SuratFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         if (activity != null) {
             val suratAdapter = SuratAdapter()
-            val factory = ViewModelFactory.getInstance(requireActivity())
-            suratViewModel = ViewModelProvider(this, factory)[SuratViewModel::class.java]
+
 
             suratViewModel.surat.observe(viewLifecycleOwner) { surat ->
                 if (surat != null) {

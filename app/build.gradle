@@ -68,5 +68,12 @@ dependencies {
     kapt "androidx.room:room-compiler:$room_version"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
 
+    //viewpager2
     implementation "androidx.viewpager2:viewpager2:$viewPager2"
+
+    //koin
+    implementation "io.insert-koin:koin-android:3.3.2"
+
+    implementation "io.insert-koin:koin-core:3.3.2"
+    androidTestImplementation "io.insert-koin:koin-test-junit4:3.3.2"
 }

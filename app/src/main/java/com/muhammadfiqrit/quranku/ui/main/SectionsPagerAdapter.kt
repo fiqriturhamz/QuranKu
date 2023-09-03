@@ -1,9 +1,9 @@
-package com.muhammadfiqrit.quranku.ui
+package com.muhammadfiqrit.quranku.ui.main
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.muhammadfiqrit.quranku.HomeFragment
+import com.muhammadfiqrit.quranku.ui.home.HomeFragment
 import com.muhammadfiqrit.quranku.ui.surat.SuratFragment
 
 class SectionsPagerAdapter(activity: AppCompatActivity) : FragmentStateAdapter(activity) {

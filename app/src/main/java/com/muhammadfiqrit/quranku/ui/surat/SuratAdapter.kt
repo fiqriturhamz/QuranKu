@@ -1,14 +1,12 @@
-package com.muhammadfiqrit.quranku.ui
+package com.muhammadfiqrit.quranku.ui.surat
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.muhammadfiqrit.quranku.R
-import com.muhammadfiqrit.quranku.data.source.local.entity.SuratEntity
 import com.muhammadfiqrit.quranku.databinding.ItemListSuratBinding
 import com.muhammadfiqrit.quranku.domain.model.Surat
-import com.muhammadfiqrit.quranku.ui.surat.SuratFragment
 
 class SuratAdapter : RecyclerView.Adapter<SuratAdapter.SuratViewHolder>() {
     private var listData = ArrayList<Surat>()
@@ -35,12 +33,12 @@ class SuratAdapter : RecyclerView.Adapter<SuratAdapter.SuratViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): SuratAdapter.SuratViewHolder = SuratViewHolder(
+    ): SuratViewHolder = SuratViewHolder(
         LayoutInflater.from(parent.context).inflate(R.layout.item_list_surat, parent, false)
     )
 
 
-    override fun onBindViewHolder(holder: SuratAdapter.SuratViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: SuratViewHolder, position: Int) {
         val data = listData[position]
         holder.bind(data)
     }

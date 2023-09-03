@@ -1,4 +1,4 @@
-package com.muhammadfiqrit.quranku.ui
+package com.muhammadfiqrit.quranku.ui.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
