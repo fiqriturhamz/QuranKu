@@ -8,4 +8,5 @@
     <string name="nomor_surat">1</string>
     <string name="arti_surat">Arti</string>
     <string name="jumlah_ayat">7 ayat</string>
+    <string name="tab_text_3">Favorite</string>
 </resources>

@@ -4,6 +4,7 @@ import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.muhammadfiqrit.quranku.data.source.remote.response.detail.AyatResponse
 
 @Entity(tableName = "surat")
 data class SuratEntity(
@@ -30,4 +31,7 @@ data class SuratEntity(
     @ColumnInfo("namaLatin")
     var namaLatin: String,
 
+
+    @ColumnInfo(name = "isFavorite")
+    var isFavorite: Boolean = false
 )

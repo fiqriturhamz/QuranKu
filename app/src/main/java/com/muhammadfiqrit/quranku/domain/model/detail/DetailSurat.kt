@@ -1,14 +1,13 @@
 package com.muhammadfiqrit.quranku.domain.model.detail
 
-import com.muhammadfiqrit.quranku.data.source.remote.response.detail.AyatResponse
-
 data class DetailSurat(
-    var namaSurat : String,
-    var jumlahAyat : Int,
-    var namaLatin : String,
-    var tempatTurun : String,
-    var arti : String,
-    var nomorSurat : Int,
-    var deskripsi : String,
-    var ayat : List<Ayat>
-)
+    val nomor : Int,
+    val nama :  String,
+    val jumlahAyat : Int,
+    val arti : String,
+    val namaLatin : String,
+    val deskripsi : String,
+    val tempatTurun : String,
+    val isFavorite : Boolean,
+
+    )
