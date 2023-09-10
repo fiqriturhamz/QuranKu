@@ -6,10 +6,15 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.muhammadfiqrit.quranku.R
 import com.muhammadfiqrit.quranku.databinding.ItemListSuratBinding
-import com.muhammadfiqrit.quranku.domain.model.Surat
+import com.muhammadfiqrit.quranku.domain.model.surat.Surat
 
-class SuratAdapter : RecyclerView.Adapter<SuratAdapter.SuratViewHolder>() {
+class SuratAdapter() : RecyclerView.Adapter<SuratAdapter.SuratViewHolder>() {
     private var listData = ArrayList<Surat>()
+
+    private lateinit var onItemClickCallback: OnItemClickCallback
+    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
+        this.onItemClickCallback = onItemClickCallback
+    }
 
     fun setData(newListData: List<Surat>?) {
         if (newListData == null) return
@@ -18,30 +23,35 @@ class SuratAdapter : RecyclerView.Adapter<SuratAdapter.SuratViewHolder>() {
         notifyDataSetChanged()
     }
 
-    inner class SuratViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val binding = ItemListSuratBinding.bind(itemView)
-        fun bind(data: Surat) {
-            with(binding) {
-                namaSurat.text = data.namaSurat
-                nomorSurat.text = data.nomorSurat.toString()
-                jumlahAyat.text = data.jumlahAyat.toString()
-                arti.text = data.arti
-            }
-        }
+    inner class SuratViewHolder(var binding: ItemListSuratBinding) :
+        RecyclerView.ViewHolder(binding.root) {
     }
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): SuratViewHolder = SuratViewHolder(
-        LayoutInflater.from(parent.context).inflate(R.layout.item_list_surat, parent, false)
+        ItemListSuratBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+
     )
 
 
     override fun onBindViewHolder(holder: SuratViewHolder, position: Int) {
         val data = listData[position]
-        holder.bind(data)
+        holder.apply {
+            binding.namaSurat.text = data.nama
+            binding.nomorSurat.text = data.nomor.toString()
+            binding.jumlahAyat.text = data.jumlahAyat.toString()
+            binding.arti.text = data.arti
+            itemView.setOnClickListener {
+                onItemClickCallback.onSuratClick(data)
+            }
+        }
     }
 
     override fun getItemCount(): Int = listData.size
+
+    interface OnItemClickCallback {
+        fun onSuratClick(data: Surat)
+    }
 }

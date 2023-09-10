@@ -1,10 +1,17 @@
 package com.muhammadfiqrit.quranku.domain.repository
 
-import androidx.lifecycle.LiveData
 import com.muhammadfiqrit.quranku.data.Resource
-import com.muhammadfiqrit.quranku.domain.model.Surat
+import com.muhammadfiqrit.quranku.domain.model.detail.Ayat
+import com.muhammadfiqrit.quranku.domain.model.detail.DetailSurat
+import com.muhammadfiqrit.quranku.domain.model.surat.Surat
 import kotlinx.coroutines.flow.Flow
 
 interface ISuratRepository {
     fun getAllSurat() : Flow<Resource<List<Surat>>>
+
+    fun getSuratByNomor(nomorSurat : Int) : Flow<Resource<DetailSurat>>
+
+
+
+
 }

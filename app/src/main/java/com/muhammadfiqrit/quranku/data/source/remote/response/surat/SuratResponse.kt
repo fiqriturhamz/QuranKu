@@ -1,4 +1,4 @@
-package com.muhammadfiqrit.quranku.data.source.remote.response
+package com.muhammadfiqrit.quranku.data.source.remote.response.surat
 
 import com.google.gson.annotations.SerializedName
 

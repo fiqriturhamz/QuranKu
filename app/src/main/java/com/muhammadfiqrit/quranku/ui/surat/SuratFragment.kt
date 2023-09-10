@@ -1,5 +1,6 @@
 package com.muhammadfiqrit.quranku.ui.surat
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,6 +10,8 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.muhammadfiqrit.quranku.data.Resource
 import com.muhammadfiqrit.quranku.databinding.FragmentSuratBinding
+import com.muhammadfiqrit.quranku.domain.model.surat.Surat
+import com.muhammadfiqrit.quranku.ui.detail.DetailSuratActivity
 
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -32,6 +35,14 @@ class SuratFragment : Fragment() {
         if (activity != null) {
             val suratAdapter = SuratAdapter()
 
+            suratAdapter.setOnItemClickCallback(object : SuratAdapter.OnItemClickCallback{
+                override fun onSuratClick(data: Surat) {
+                    val intent = Intent(requireActivity(), DetailSuratActivity::class.java)
+                    intent.putExtra(DetailSuratActivity.EXTRA_SURAT_NOMOR, data.nomor)
+                    startActivity(intent)
+                }
+
+            })
 
             suratViewModel.surat.observe(viewLifecycleOwner) { surat ->
                 if (surat != null) {
@@ -41,6 +52,7 @@ class SuratFragment : Fragment() {
                         is Resource.Success -> {
                             binding.suratProgressBar.visibility = View.GONE
                             suratAdapter.setData(surat.data)
+
                         }
 
                         is Resource.Error -> {
@@ -64,5 +76,4 @@ class SuratFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
 }

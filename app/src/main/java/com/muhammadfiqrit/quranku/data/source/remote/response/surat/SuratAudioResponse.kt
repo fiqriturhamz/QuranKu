@@ -1,8 +1,8 @@
-package com.muhammadfiqrit.quranku.data.source.remote.response
+package com.muhammadfiqrit.quranku.data.source.remote.response.surat
 
 import com.google.gson.annotations.SerializedName
 
-data class SuratAudio(
+data class SuratAudioResponse(
 
     @field:SerializedName("01")
     val jsonMember01: String? = null,

@@ -9,5 +9,4 @@ import com.muhammadfiqrit.quranku.data.source.local.entity.SuratEntity
 @Database(entities = [SuratEntity::class], version = 1, exportSchema = false)
 abstract class SuratDatabase : RoomDatabase() {
     abstract fun suratDao(): SuratDao
-
 }

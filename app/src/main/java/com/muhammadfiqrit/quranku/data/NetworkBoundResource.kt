@@ -1,11 +1,6 @@
 package com.muhammadfiqrit.quranku.data
 
-import android.widget.ResourceCursorAdapter
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.asFlow
 import com.muhammadfiqrit.quranku.data.source.remote.network.ApiResponse
-import com.muhammadfiqrit.quranku.utils.AppExecutors
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emitAll
 import kotlinx.coroutines.flow.first
@@ -14,29 +9,32 @@ import kotlinx.coroutines.flow.map
 
 
 abstract class NetworkBoundResource<ResultType, RequestType> {
-    private var result: Flow<Resource<ResultType>> = flow{
+    private var result: Flow<Resource<ResultType>> = flow {
         emit(Resource.Loading())
         val dbSource = loadFromDB().first()
-        if(shouldFetch(dbSource)){
+        if (shouldFetch(dbSource)) {
             emit(Resource.Loading())
-            when(val apiResponse = createCall().first()){
+            when (val apiResponse = createCall().first()) {
                 is ApiResponse.Success -> {
                     saveCallResult(apiResponse.data)
                     emitAll(loadFromDB().map { Resource.Success(it) })
                 }
+
                 is ApiResponse.Empty -> {
                     emitAll(loadFromDB().map { Resource.Success(it) })
                 }
+
                 is ApiResponse.Empty -> {
                     emitAll(loadFromDB().map { Resource.Success(it) })
                 }
-                is ApiResponse.Error ->{
+
+                is ApiResponse.Error -> {
                     onFetchFailed()
                     emit(Resource.Error(apiResponse.errorMessage))
                 }
 
             }
-        }else{
+        } else {
             emitAll(loadFromDB().map { Resource.Success(it) })
         }
     }

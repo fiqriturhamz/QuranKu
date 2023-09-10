@@ -9,11 +9,11 @@ import androidx.room.PrimaryKey
 data class SuratEntity(
     @PrimaryKey
     @NonNull
-    @ColumnInfo(name = "nomorSurat")
-    var nomorSurat: Int,
+    @ColumnInfo(name = "nomor")
+    var nomor: Int,
 
-    @ColumnInfo(name = "nameSurat")
-    var namaSurat: String,
+    @ColumnInfo(name = "nama")
+    var nama: String,
 
     @ColumnInfo(name = "jumlahAyat")
     var jumlahAyat: Int,
@@ -28,6 +28,6 @@ data class SuratEntity(
     var deskripsi: String,
 
     @ColumnInfo("namaLatin")
-    var namaLatin: String
+    var namaLatin: String,
 
 )

@@ -1,20 +1,15 @@
 package com.muhammadfiqrit.quranku.data.source.remote
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.muhammadfiqrit.quranku.data.source.remote.network.ApiResponse
 import com.muhammadfiqrit.quranku.data.source.remote.network.ApiService
-import com.muhammadfiqrit.quranku.data.source.remote.response.ListSuratResponse
-import com.muhammadfiqrit.quranku.data.source.remote.response.SuratResponse
+import com.muhammadfiqrit.quranku.data.source.remote.response.detail.DataDetailSuratResponse
+import com.muhammadfiqrit.quranku.data.source.remote.response.surat.SuratResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import java.lang.Exception
+import kotlin.Exception
 
 
 class RemoteDataSource(private val apiService: ApiService) {
@@ -25,40 +20,34 @@ class RemoteDataSource(private val apiService: ApiService) {
             try {
                 val response = apiService.getSurat()
                 val dataArray = response.data
-                if(dataArray.isNotEmpty()){
+                if (dataArray.isNotEmpty()) {
                     emit(ApiResponse.Success(response.data))
-                }else
-                {
+                } else {
                     emit(ApiResponse.Empty)
                 }
-            }catch (e: Exception){
+            } catch (e: Exception) {
                 emit(ApiResponse.Error(e.toString()))
-                Log.e("RemoteDataSource", e.toString())
+                Log.e("Remote.getSurat", e.toString())
             }
         }.flowOn(Dispatchers.IO)
-      /*  val resultData = MutableLiveData<ApiResponse<List<SuratResponse>>>()
 
-        val client = apiService.getSurat()
-        client.enqueue(object : Callback<ListSuratResponse> {
-            override fun onResponse(
-                call: Call<ListSuratResponse>,
-                response: Response<ListSuratResponse>
-            ) {
-                if (response.isSuccessful) {
-                    val dataArray = response.body()?.data
-                    if (dataArray != null) {
-                        resultData.value = ApiResponse.Success(dataArray)
-                    } else ApiResponse.Empty
+    }
+
+
+    suspend fun getDetailSurat(nomorSurat : Int) : Flow<ApiResponse<DataDetailSuratResponse>>{
+        return flow {
+            try {
+                val response = apiService.getDetailSurat(nomorSurat)
+                val data = response.data
+                if (data != null){
+                    emit(ApiResponse.Success(response.data))
+                }else{
+                    emit(ApiResponse.Empty)
                 }
-
+            }catch (e : Exception){
+                emit(ApiResponse.Error(e.toString()))
+                Log.e("Remote.getDetailSurat", e.toString())
             }
-
-            override fun onFailure(call: Call<ListSuratResponse>, t: Throwable) {
-                resultData.value = ApiResponse.Error(t.message.toString())
-                Log.e("RemoteDataSource", t.message.toString())
-            }
-
-        })
-        return resultData*/
+        }.flowOn(Dispatchers.IO)
     }
 }
