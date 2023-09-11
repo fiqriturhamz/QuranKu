@@ -9,29 +9,12 @@ import com.muhammadfiqrit.quranku.data.source.remote.response.detail.AyatRespons
 @Entity(tableName = "surat")
 data class SuratEntity(
     @PrimaryKey
-    @NonNull
-    @ColumnInfo(name = "nomor")
-    var nomor: Int,
-
-    @ColumnInfo(name = "nama")
-    var nama: String,
-
-    @ColumnInfo(name = "jumlahAyat")
-    var jumlahAyat: Int,
-
-    @ColumnInfo("tempatTurun")
-    var tempatTurun: String,
-
-    @ColumnInfo("arti")
-    var arti: String,
-
-    @ColumnInfo("deskripsi")
-    var deskripsi: String,
-
-    @ColumnInfo("namaLatin")
-    var namaLatin: String,
-
-
-    @ColumnInfo(name = "isFavorite")
-    var isFavorite: Boolean = false
+    val nomor: Int,
+    val nama: String,
+    val namaLatin: String,
+    val jumlahAyat: Int,
+    val tempatTurun: String,
+    val arti: String,
+    val deskripsi: String,
+    var isFavorite : Boolean = false
 )

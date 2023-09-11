@@ -31,7 +31,7 @@ interface SuratDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertDetailSurat(surat: SuratEntity)
 
-    @Query("SELECT * FROM ayat WHERE nomorSurat = :nomorSurat")
+    @Query("SELECT * FROM ayat WHERE suratNomor = :nomorSurat")
     fun getAyatBySurat(nomorSurat : Int) : Flow<List<AyatEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

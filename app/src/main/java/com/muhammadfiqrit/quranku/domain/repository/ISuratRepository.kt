@@ -11,12 +11,11 @@ interface ISuratRepository {
 
     fun getSuratByNomor(nomorSurat : Int) : Flow<Resource<DetailSurat>>
 
+/*    fun getAyatBySurat(nomorSurat: Int) : Flow<Resource<List<Ayat>>>*/
+
     fun getFavoriteSurat() : Flow<List<Surat>>
 
     fun setFavoriteSurat(surat : DetailSurat, newState:Boolean)
-
-    fun getAyatBySurat(nomorSurat: Int) : Flow<Resource<List<Ayat>>>
-
 
 
 

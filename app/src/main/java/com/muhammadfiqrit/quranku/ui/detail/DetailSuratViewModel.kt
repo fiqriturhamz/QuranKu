@@ -5,7 +5,6 @@ import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import com.muhammadfiqrit.quranku.domain.model.detail.DetailSurat
-import com.muhammadfiqrit.quranku.domain.model.surat.Surat
 import com.muhammadfiqrit.quranku.domain.usecase.SuratUseCase
 
 class DetailSuratViewModel(private val suratUseCase: SuratUseCase) : ViewModel() {
@@ -17,9 +16,9 @@ class DetailSuratViewModel(private val suratUseCase: SuratUseCase) : ViewModel()
 
     }
 
-    val ayatDetail = Transformations.switchMap(suratId) {
+ /*   val ayatDetail = Transformations.switchMap(suratId) {
         suratUseCase.getAyatBySurat(it).asLiveData()
-    }
+    }*/
 
     fun setId(id: Int) {
         if (suratId.value == id) return

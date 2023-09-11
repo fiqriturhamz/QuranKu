@@ -26,13 +26,9 @@ class DetailSuratActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailSuratBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-
         val suratNomor = intent.getIntExtra(EXTRA_SURAT_NOMOR, 0)
 
         populateDataDetail(suratNomor)
-
-
         Log.e("suratNomor", suratNomor.toString())
 
 
@@ -47,15 +43,16 @@ class DetailSuratActivity : AppCompatActivity() {
                     is Resource.Success -> {
                         binding.detailProgressBar.visibility = View.GONE
                         it.data?.let { detailSurat ->
-                            binding.tvDetailArtiSurat.text = detailSurat.arti
-                            binding.tvDetailNamaSurat.text = detailSurat.nama
-                            binding.tvDetailNomorSurat.text = detailSurat.nomor.toString()
+                            binding.tvDetailArtiSurat.text = detailSurat.surat.arti
+                            binding.tvDetailNamaSurat.text = detailSurat.surat.nama
+                            binding.tvDetailNomorSurat.text = detailSurat.surat.nomor.toString()
 
+                            val ayatAdapter = AyatAdapter(detailSurat.ayat)
                             binding.rvAyat.layoutManager = LinearLayoutManager(this)
                             binding.rvAyat.setHasFixedSize(true)
+                            binding.rvAyat.adapter = ayatAdapter
 
-
-                            var statusFavorite = detailSurat.isFavorite
+                            var statusFavorite = false
                             setStatusFavorite(statusFavorite)
 
                             binding.fabFavorite.setOnClickListener {
@@ -78,27 +75,26 @@ class DetailSuratActivity : AppCompatActivity() {
                 }
             }
         }
+        /*  detailSuratViewModel.ayatDetail.observe(this) {
+              if (it != null) {
+                  when (it) {
+                      is Resource.Loading -> binding.detailProgressBar.visibility = View.VISIBLE
+                      is Resource.Success -> {
+                          binding.detailProgressBar.visibility = View.GONE
+                          val ayatAdapter = AyatAdapter(it.data!!)
+                          binding.rvAyat.layoutManager = LinearLayoutManager(this)
+                          binding.rvAyat.setHasFixedSize(true)
+                          binding.rvAyat.adapter = ayatAdapter
+                      }
 
-        detailSuratViewModel.ayatDetail.observe(this) {
-            if (it != null) {
-                when (it) {
-                    is Resource.Loading -> binding.detailProgressBar.visibility = View.VISIBLE
-                    is Resource.Success -> {
-                        binding.detailProgressBar.visibility = View.GONE
-                        val ayatAdapter = AyatAdapter(it.data!!)
-                        binding.rvAyat.layoutManager = LinearLayoutManager(this)
-                        binding.rvAyat.setHasFixedSize(true)
-                        binding.rvAyat.adapter = ayatAdapter
-                    }
+                      is Resource.Error -> {
+                          Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
+                          binding.detailProgressBar.visibility = View.GONE
+                      }
+                  }
+              }
 
-                    is Resource.Error -> {
-                        Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
-                        binding.detailProgressBar.visibility = View.GONE
-                    }
-                }
-            }
-
-        }
+          }*/
     }
 
     private fun setStatusFavorite(statusFavorite: Boolean) {

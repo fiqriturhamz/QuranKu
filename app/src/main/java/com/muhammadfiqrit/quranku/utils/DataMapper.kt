@@ -8,7 +8,6 @@ import com.muhammadfiqrit.quranku.data.source.remote.response.surat.SuratRespons
 import com.muhammadfiqrit.quranku.domain.model.detail.Ayat
 import com.muhammadfiqrit.quranku.domain.model.detail.DetailSurat
 import com.muhammadfiqrit.quranku.domain.model.surat.Surat
-import kotlinx.coroutines.flow.flowOf
 
 
 object DataMapper {
@@ -23,8 +22,9 @@ object DataMapper {
                 nama = it.nama,
                 tempatTurun = it.tempatTurun,
                 namaLatin = it.namaLatin,
-                isFavorite = false
-            )
+                isFavorite = false,
+
+                )
             suratList.add(surat)
         }
         return suratList
@@ -45,50 +45,53 @@ object DataMapper {
 
         }
 
-
-    /*    fun mapDataDetailSuratResponseToDetailSurat(input: DataDetailSuratResponse) =
-            flowOf(
-                DetailSurat(
-                    nama = input.nama,
-                    nomor = input.nomor,
-                    jumlahAyat = input.jumlahAyat,
-                    tempatTurun = input.tempatTurun,
-                    arti = input.arti,
-                    deskripsi = input.deskripsi,
-                    namaLatin = input.namaLatin,
-                    ayat = input.ayat.map { ayatResponse ->
-                        Ayat(
-                            nomorAyat = ayatResponse.nomorAyat,
-                            teksArab = ayatResponse.teksArab,
-                            teksIndonesia = ayatResponse.teksIndonesia,
-                            teksLatin = ayatResponse.teksLatin
-                        )
-                    },
-                    isFavorite = false
-                )
-            )*/
+    /*
+            fun mapDataDetailSuratResponseToDetailSurat(input: DataDetailSuratResponse) =
+                flowOf(
+                    DetailSurat(
+                        nama = input.nama,
+                        nomor = input.nomor,
+                        jumlahAyat = input.jumlahAyat,
+                        tempatTurun = input.tempatTurun,
+                        arti = input.arti,
+                        deskripsi = input.deskripsi,
+                        namaLatin = input.namaLatin,
+                        ayat = input.ayat.map { ayatResponse ->
+                            Ayat(
+                                nomorAyat = ayatResponse.nomorAyat,
+                                teksArab = ayatResponse.teksArab,
+                                teksIndonesia = ayatResponse.teksIndonesia,
+                                teksLatin = ayatResponse.teksLatin
+                            )
+                        },
+                        isFavorite = false
+                    )
+                )*/
 
     fun mapDetailSuratToSuratEntity(input: DetailSurat) = SuratEntity(
-        nomor = input.nomor,
-        nama = input.nama,
-        namaLatin = input.namaLatin,
-        arti = input.arti,
-        jumlahAyat = input.jumlahAyat,
-        tempatTurun = input.tempatTurun,
-        deskripsi = input.deskripsi,
-        isFavorite = input.isFavorite
+
+        nomor = input.surat.nomor,
+        nama = input.surat.nama,
+        namaLatin = input.surat.namaLatin,
+        arti = input.surat.arti,
+        jumlahAyat = input.surat.jumlahAyat,
+        tempatTurun = input.surat.tempatTurun,
+        deskripsi = input.surat.deskripsi,
+        isFavorite = false
     )
 
     fun mapSuratEntityToDetailSurat(input: SuratEntity) =
-        DetailSurat(
-            nomor = input.nomor,
-            nama = input.nama,
-            namaLatin = input.namaLatin,
-            arti = input.arti,
-            jumlahAyat = input.jumlahAyat,
-            tempatTurun = input.tempatTurun,
-            deskripsi = input.deskripsi,
-            isFavorite = input.isFavorite,
+        Surat(
+
+                nomor = input.nomor,
+                nama = input.nama,
+                jumlahAyat = input.jumlahAyat,
+                arti = input.arti,
+                namaLatin = input.namaLatin,
+                deskripsi = input.deskripsi,
+                tempatTurun = input.tempatTurun
+
+
         )
 
 
@@ -112,8 +115,9 @@ object DataMapper {
             jumlahAyat = input.jumlahAyat,
             nomor = input.nomor,
             tempatTurun = input.tempatTurun,
-            isFavorite = false
-        )
+            isFavorite = false,
+
+            )
     }
 
     fun mapAyatResponsesToAyatEntities(
@@ -126,13 +130,13 @@ object DataMapper {
                 teksLatin = ayat.teksLatin,
                 teksIndonesia = ayat.teksIndonesia,
                 teksArab = ayat.teksArab,
-                nomorSurat = nomorSurat
-
+                suratNomor = nomorSurat,
             )
         }
 
 
     }
+
 
 }
 

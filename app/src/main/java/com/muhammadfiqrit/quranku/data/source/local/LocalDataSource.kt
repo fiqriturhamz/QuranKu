@@ -3,7 +3,6 @@ package com.muhammadfiqrit.quranku.data.source.local
 import com.muhammadfiqrit.quranku.data.source.local.entity.SuratEntity
 import com.muhammadfiqrit.quranku.data.source.local.entity.detail.AyatEntity
 import com.muhammadfiqrit.quranku.data.source.local.room.SuratDao
-import com.muhammadfiqrit.quranku.domain.model.surat.Surat
 import kotlinx.coroutines.flow.Flow
 
 
@@ -25,6 +24,8 @@ class LocalDataSource(private val suratDao: SuratDao) {
 
     suspend fun insertAyat(ayat: List<AyatEntity>) = suratDao.insertAyat(ayat)
     fun getAyatBySurat(nomorSurat: Int) = suratDao.getAyatBySurat(nomorSurat)
+
+
 
 
 }

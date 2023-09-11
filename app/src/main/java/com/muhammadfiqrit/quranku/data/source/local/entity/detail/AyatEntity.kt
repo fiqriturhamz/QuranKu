@@ -7,22 +7,12 @@ import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 import com.muhammadfiqrit.quranku.data.source.local.entity.SuratEntity
 
-@Entity(
-    tableName = "ayat",
-    foreignKeys = [ForeignKey(
-        entity = SuratEntity::class, parentColumns = ["nomor"],
-        childColumns = ["nomorSurat"], onDelete = ForeignKey.CASCADE
-    )
-    ]
-)
+@Entity(tableName = "ayat")
 data class AyatEntity(
-    @PrimaryKey val nomorAyat : Int,
-    @ColumnInfo(name = "nomorSurat")
-    var nomorSurat: Int,
-    @ColumnInfo(name = "teksArab")
-    var teksArab: String,
-    @ColumnInfo(name = "teksLatin")
-    var teksLatin: String,
-    @ColumnInfo(name = "teksIndonesia")
-    var teksIndonesia: String
+    @PrimaryKey
+    val nomorAyat: Int,
+    val teksArab: String,
+    val teksLatin: String,
+    val teksIndonesia: String,
+    val suratNomor: Int // Kolom untuk menghubungkan ayat dengan surat
 )

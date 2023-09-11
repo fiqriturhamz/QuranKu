@@ -13,6 +13,4 @@ data class Surat(
     val namaLatin : String,
     val deskripsi : String,
     val tempatTurun : String,
-
-
 )
