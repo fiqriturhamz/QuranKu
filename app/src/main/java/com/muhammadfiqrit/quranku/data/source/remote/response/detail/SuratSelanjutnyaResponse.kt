@@ -5,14 +5,14 @@ import com.google.gson.annotations.SerializedName
 data class SuratSelanjutnyaResponse(
 
     @field:SerializedName("jumlahAyat")
-    val jumlahAyat: Int? = null,
+    val jumlahAyat: Int,
 
     @field:SerializedName("nama")
-    val nama: String? = null,
+    val nama: String,
 
     @field:SerializedName("nomor")
-    val nomor: Int? = null,
+    val nomor: Int,
 
     @field:SerializedName("namaLatin")
-    val namaLatin: String? = null
+    val namaLatin: String
 )

@@ -12,10 +12,6 @@ class SuratInteractor(private val suratRepository: ISuratRepository) : SuratUseC
     override fun getSuratByNomor(nomorSurat: Int) =
         suratRepository.getSuratByNomor(nomorSurat = nomorSurat)
 
-
-    /*override fun getAyatBySurat(nomorSurat: Int): Flow<Resource<List<Ayat>>> =
-        suratRepository.getAyatBySurat(nomorSurat)*/
-
     override fun getFavoriteSurat(): Flow<List<Surat>> = suratRepository.getFavoriteSurat()
 
     override fun setFavoriteSurat(surat: DetailSurat, state: Boolean) =

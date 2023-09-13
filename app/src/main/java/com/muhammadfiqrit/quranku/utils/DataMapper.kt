@@ -2,11 +2,14 @@ package com.muhammadfiqrit.quranku.utils
 
 import com.muhammadfiqrit.quranku.data.source.local.entity.SuratEntity
 import com.muhammadfiqrit.quranku.data.source.local.entity.detail.AyatEntity
+import com.muhammadfiqrit.quranku.data.source.local.entity.detail.SuratSelanjutnyaEntity
 import com.muhammadfiqrit.quranku.data.source.remote.response.detail.AyatResponse
 import com.muhammadfiqrit.quranku.data.source.remote.response.detail.DataDetailSuratResponse
+import com.muhammadfiqrit.quranku.data.source.remote.response.detail.SuratSelanjutnyaResponse
 import com.muhammadfiqrit.quranku.data.source.remote.response.surat.SuratResponse
 import com.muhammadfiqrit.quranku.domain.model.detail.Ayat
 import com.muhammadfiqrit.quranku.domain.model.detail.DetailSurat
+import com.muhammadfiqrit.quranku.domain.model.detail.SuratSelanjutnya
 import com.muhammadfiqrit.quranku.domain.model.surat.Surat
 
 
@@ -83,13 +86,13 @@ object DataMapper {
     fun mapSuratEntityToDetailSurat(input: SuratEntity) =
         Surat(
 
-                nomor = input.nomor,
-                nama = input.nama,
-                jumlahAyat = input.jumlahAyat,
-                arti = input.arti,
-                namaLatin = input.namaLatin,
-                deskripsi = input.deskripsi,
-                tempatTurun = input.tempatTurun
+            nomor = input.nomor,
+            nama = input.nama,
+            jumlahAyat = input.jumlahAyat,
+            arti = input.arti,
+            namaLatin = input.namaLatin,
+            deskripsi = input.deskripsi,
+            tempatTurun = input.tempatTurun
 
 
         )
@@ -101,7 +104,8 @@ object DataMapper {
                 nomorAyat = it.nomorAyat,
                 teksArab = it.teksArab,
                 teksLatin = it.teksLatin,
-                teksIndonesia = it.teksIndonesia
+                teksIndonesia = it.teksIndonesia,
+                nomorSurat = it.nomorSurat
             )
         }
 
@@ -130,15 +134,48 @@ object DataMapper {
                 teksLatin = ayat.teksLatin,
                 teksIndonesia = ayat.teksIndonesia,
                 teksArab = ayat.teksArab,
-                suratNomor = nomorSurat,
+                nomorSurat = nomorSurat,
             )
         }
 
 
     }
 
+    fun suratSelanjutnyaResponseToSuratSelanjutnyaEntities(
+        it: SuratSelanjutnyaResponse,
+        nomorSurat: Int
+    ): SuratSelanjutnyaEntity {
+        // Cek tipe data "it" untuk menentukan cara mengonversinya
+
+        // Jika "it" adalah objek SuratSelanjutnyaResponse, gunakan langsung
+        return SuratSelanjutnyaEntity(
+            nama = it.nama,
+            namaLatin = it.namaLatin,
+            nomorSurat = nomorSurat,
+            jumlahAyat = it.jumlahAyat,
+            nomor = it.nomor
+        )
+
+    }
+
+
+    fun suratSelanjutnyaEntityToSuratSelanjutnya(
+        suratSelanjutnyaEntity: SuratSelanjutnyaEntity?,
+    ): SuratSelanjutnya {
+        return SuratSelanjutnya(
+            suratSelanjutnyaEntity?.nomor,
+            suratSelanjutnyaEntity?.nama,
+            suratSelanjutnyaEntity?.namaLatin,
+            suratSelanjutnyaEntity?.jumlahAyat,
+            suratSelanjutnyaEntity?.nomorSurat
+        )
+    }
 
 }
+
+
+
+
 
 
 

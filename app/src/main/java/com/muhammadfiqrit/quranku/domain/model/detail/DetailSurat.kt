@@ -4,5 +4,6 @@ import com.muhammadfiqrit.quranku.domain.model.surat.Surat
 
 data class DetailSurat(
   val surat : Surat,
-  val ayat : List<Ayat>
+  val ayat : List<Ayat>,
+  val suratSelanjutnya: Any
 )

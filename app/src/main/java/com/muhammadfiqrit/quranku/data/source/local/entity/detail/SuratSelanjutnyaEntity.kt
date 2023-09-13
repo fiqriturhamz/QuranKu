@@ -1,14 +1,31 @@
 package com.muhammadfiqrit.quranku.data.source.local.entity.detail
 
+import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
+import com.muhammadfiqrit.quranku.data.source.local.entity.SuratEntity
 
-@Entity(tableName = "surat_selanjutnya")
+@Entity(
+    tableName = "surat_selanjutnya",
+    foreignKeys = [ForeignKey(
+        entity = SuratEntity::class,
+        parentColumns = ["nomor"],
+        childColumns = ["nomorSurat"],
+        onDelete = ForeignKey.CASCADE
+    )]
+)
+
 data class SuratSelanjutnyaEntity(
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
+    @NonNull
+    @ColumnInfo(name = "id")
+    val id: Long = 0,
     @ColumnInfo(name = "nomor")
     val nomor: Int,
+    @ColumnInfo(name = "nomorSurat")
+    val nomorSurat: Int,
     @ColumnInfo(name = "nama")
     val nama: String,
     @ColumnInfo(name = "namaLatin")

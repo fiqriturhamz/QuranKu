@@ -5,4 +5,5 @@ data class Ayat(
     var teksArab : String,
     var teksLatin : String,
     var teksIndonesia : String,
+    var nomorSurat : Int,
 )
