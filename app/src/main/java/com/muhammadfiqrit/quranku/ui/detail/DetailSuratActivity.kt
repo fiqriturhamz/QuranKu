@@ -1,18 +1,21 @@
 package com.muhammadfiqrit.quranku.ui.detail
 
-import androidx.appcompat.app.AppCompatActivity
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
+import android.widget.Button
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.muhammadfiqrit.quranku.R
 import com.muhammadfiqrit.quranku.data.Resource
 import com.muhammadfiqrit.quranku.databinding.ActivityDetailSuratBinding
-import com.muhammadfiqrit.quranku.domain.model.surat.Surat
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import kotlin.math.log
+
 
 class DetailSuratActivity : AppCompatActivity() {
 
@@ -32,6 +35,7 @@ class DetailSuratActivity : AppCompatActivity() {
         Log.e("suratNomor", suratNomor.toString())
 
 
+
     }
 
     private fun populateDataDetail(suratNomor: Int) {
@@ -40,11 +44,12 @@ class DetailSuratActivity : AppCompatActivity() {
             if (it != null) {
                 when (it) {
                     is Resource.Loading -> binding.detailProgressBar.visibility = View.VISIBLE
+
                     is Resource.Success -> {
                         binding.detailProgressBar.visibility = View.GONE
                         it.data?.let { detailSurat ->
                             binding.tvDetailArtiSurat.text = detailSurat.surat.arti
-                            binding.tvDetailNamaSurat.text = detailSurat.surat.nama
+                            binding.tvDetailNamaSurat.text = detailSurat.surat.namaLatin
                             binding.tvDetailNomorSurat.text = detailSurat.surat.nomor.toString()
 
                             val ayatAdapter = AyatAdapter(detailSurat.ayat)
@@ -102,16 +107,17 @@ class DetailSuratActivity : AppCompatActivity() {
             binding.fabFavorite.setImageDrawable(
                 ContextCompat.getDrawable(
                     this,
-                    R.drawable.favorite_white
+                    com.muhammadfiqrit.quranku.R.drawable.favorite_white
                 )
             )
         } else {
             binding.fabFavorite.setImageDrawable(
                 ContextCompat.getDrawable(
                     this,
-                    R.drawable.not_favorite_white
+                    com.muhammadfiqrit.quranku.R.drawable.not_favorite_white
                 )
             )
         }
     }
+
 }

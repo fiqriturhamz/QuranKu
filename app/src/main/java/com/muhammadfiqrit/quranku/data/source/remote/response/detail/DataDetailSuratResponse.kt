@@ -30,6 +30,9 @@ data class DataDetailSuratResponse(
     @field:SerializedName("nomor")
     val nomor: Int,
 
+    @field:SerializedName("audio")
+    val audio: AudioResponse,
+
     @field:SerializedName("namaLatin")
     val namaLatin: String
 )

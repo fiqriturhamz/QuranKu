@@ -5,17 +5,17 @@ import com.google.gson.annotations.SerializedName
 data class AudioResponse(
 
     @field:SerializedName("01")
-    val jsonMember01: String? = null,
+    val audio1: String? = null,
 
     @field:SerializedName("02")
-    val jsonMember02: String? = null,
+    val audio2: String? = null,
 
     @field:SerializedName("03")
-    val jsonMember03: String? = null,
+    val audio3: String? = null,
 
     @field:SerializedName("04")
-    val jsonMember04: String? = null,
+    val audio4: String? = null,
 
     @field:SerializedName("05")
-    val jsonMember05: String? = null
+    val audio5: String? = null
 )

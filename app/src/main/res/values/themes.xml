@@ -5,5 +5,8 @@
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
+    <style name="Theme.Quranku.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"></style>
+    <style name="Theme.Quranku.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"></style>
+
     <style name="Theme.Quranku" parent="Base.Theme.Quranku" />
 </resources>
