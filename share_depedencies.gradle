@@ -1,0 +1,16 @@
+dependencies {
+    implementation "androidx.core:core-ktx:$core_ktx_version"
+    implementation "androidx.appcompat:appcompat:$appcompat_version"
+    implementation "com.google.android.material:material:$android_material_version"
+    implementation "androidx.constraintlayout:constraintlayout:$constraint_layout"
+    testImplementation "junit:junit:$junit_version"
+    androidTestImplementation "androidx.test.ext:junit:$androidx_junit_version"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
+
+    //koin
+    implementation "io.insert-koin:koin-android:$koin_version"
+
+    implementation "io.insert-koin:koin-core:$koin_version"
+    androidTestImplementation "io.insert-koin:koin-test-junit4:$koin_version"
+
+}

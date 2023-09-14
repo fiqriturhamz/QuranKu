@@ -1,9 +1,9 @@
 package com.muhammadfiqrit.quranku
 
 import android.app.Application
-import com.muhammadfiqrit.quranku.data.di.databaseModule
-import com.muhammadfiqrit.quranku.data.di.networkModule
-import com.muhammadfiqrit.quranku.data.di.repositoryModule
+import com.muhammadfiqrit.quranku.core.di.databaseModule
+import com.muhammadfiqrit.quranku.core.di.networkModule
+import com.muhammadfiqrit.quranku.core.di.repositoryModule
 import com.muhammadfiqrit.quranku.di.useCaseModule
 import com.muhammadfiqrit.quranku.di.viewModelModule
 import org.koin.android.ext.koin.androidContext

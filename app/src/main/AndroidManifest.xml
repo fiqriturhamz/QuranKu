@@ -17,10 +17,10 @@
         android:theme="@style/Theme.Quranku"
         tools:targetApi="31">
         <activity
-            android:name=".ui.detail.DetailSuratActivity"
+            android:name=".detail.DetailSuratActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.main.MainActivity"
+            android:name=".main.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
