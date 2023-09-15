@@ -1,13 +1,13 @@
 package com.muhammadfiqrit.quranku.detail
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.muhammadfiqrit.quranku.core.ui.AyatAdapter
+import com.google.android.material.tabs.TabLayoutMediator
+import com.muhammadfiqrit.quranku.R
+import com.muhammadfiqrit.quranku.core.domain.model.detail.Ayat
 import com.muhammadfiqrit.quranku.databinding.ActivityDetailSuratBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -16,20 +16,31 @@ class DetailSuratActivity : AppCompatActivity() {
 
     companion object {
         const val EXTRA_SURAT_NOMOR = "extra_surat_nomor"
+        const val EXTRA_SURAT_NOMOR_FOR_FRAGMENT = "extra_surat_nomor_for_fragment"
+
+        @StringRes
+        private val DETAIL_TAB_TITLES =
+            intArrayOf(R.string.detail_tab_text_1, R.string.detail_tab_text_2)
     }
 
     private lateinit var binding: ActivityDetailSuratBinding
     private val detailSuratViewModel: DetailSuratViewModel by viewModel()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailSuratBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val suratNomor = intent.getIntExtra(EXTRA_SURAT_NOMOR, 0)
+        val tabTafsirAyatAdapter = TabTafsirAyatAdapter(this)
+        binding.viewpagerAyatTafsir.adapter = tabTafsirAyatAdapter
+        TabLayoutMediator(binding.tabLayout, binding.viewpagerAyatTafsir) { tab, position ->
+            tab.text = resources.getString(DETAIL_TAB_TITLES[position])
+        }.attach()
+
+        val suratNomor = intent.getIntExtra(EXTRA_SURAT_NOMOR, 1)
+
+        AyatFragment.suratNomor = suratNomor
 
         populateDataDetail(suratNomor)
-        Log.e("suratNomor", suratNomor.toString())
-
-
 
     }
 
@@ -38,33 +49,36 @@ class DetailSuratActivity : AppCompatActivity() {
         detailSuratViewModel.suratDetail.observe(this) {
             if (it != null) {
                 when (it) {
-                    is com.muhammadfiqrit.quranku.core.data.Resource.Loading -> binding.detailProgressBar.visibility = View.VISIBLE
+                    is com.muhammadfiqrit.quranku.core.data.Resource.Loading -> binding.detailProgressBar.visibility =
+                        View.VISIBLE
 
                     is com.muhammadfiqrit.quranku.core.data.Resource.Success -> {
                         binding.detailProgressBar.visibility = View.GONE
                         it.data?.let { detailSurat ->
                             binding.tvDetailArtiSurat.text = detailSurat.surat.arti
-                            binding.tvDetailNamaSurat.text = detailSurat.surat.namaLatin
+                            binding.tvDetailTempatTurun.text = detailSurat.surat.tempatTurun
+                            binding.tvDetailNamaLatin.text = detailSurat.surat.namaLatin
+                            binding.tvDetailNamaSurat.text = detailSurat.surat.nama
                             binding.tvDetailNomorSurat.text = detailSurat.surat.nomor.toString()
 
-                            val ayatAdapter = AyatAdapter(detailSurat.ayat)
-                            binding.rvAyat.layoutManager = LinearLayoutManager(this)
-                            binding.rvAyat.setHasFixedSize(true)
-                            binding.rvAyat.adapter = ayatAdapter
+                            /*  val ayatAdapter = AyatAdapter(detailSurat.ayat)
+                              binding.rvAyat.layoutManager = LinearLayoutManager(this)
+                              binding.rvAyat.setHasFixedSize(true)
+                              binding.rvAyat.adapter = ayatAdapter*/
+                            /*
+                                                        var statusFavorite = false
+                                                        setStatusFavorite(statusFavorite)*/
 
-                            var statusFavorite = false
-                            setStatusFavorite(statusFavorite)
+                            /*           binding.fabFavorite.setOnClickListener {
 
-                            binding.fabFavorite.setOnClickListener {
-
-                                Log.e("status_favorite", statusFavorite.toString())
-                                statusFavorite = !statusFavorite
-                                detailSuratViewModel.setFavoriteSurat(
-                                    detailSurat,
-                                    statusFavorite
-                                )
-                                setStatusFavorite(statusFavorite)
-                            }
+                                           Log.e("status_favorite", statusFavorite.toString())
+                                           statusFavorite = !statusFavorite
+                                           detailSuratViewModel.setFavoriteSurat(
+                                               detailSurat,
+                                               statusFavorite
+                                           )
+                                           setStatusFavorite(statusFavorite)
+                                       }*/
                         }
                     }
 
@@ -75,44 +89,25 @@ class DetailSuratActivity : AppCompatActivity() {
                 }
             }
         }
-        /*  detailSuratViewModel.ayatDetail.observe(this) {
-              if (it != null) {
-                  when (it) {
-                      is Resource.Loading -> binding.detailProgressBar.visibility = View.VISIBLE
-                      is Resource.Success -> {
-                          binding.detailProgressBar.visibility = View.GONE
-                          val ayatAdapter = AyatAdapter(it.data!!)
-                          binding.rvAyat.layoutManager = LinearLayoutManager(this)
-                          binding.rvAyat.setHasFixedSize(true)
-                          binding.rvAyat.adapter = ayatAdapter
-                      }
 
-                      is Resource.Error -> {
-                          Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
-                          binding.detailProgressBar.visibility = View.GONE
-                      }
-                  }
-              }
-
-          }*/
     }
 
-    private fun setStatusFavorite(statusFavorite: Boolean) {
-        if (statusFavorite) {
-            binding.fabFavorite.setImageDrawable(
-                ContextCompat.getDrawable(
-                    this,
-                    com.muhammadfiqrit.quranku.R.drawable.favorite_white
+    /*    private fun setStatusFavorite(statusFavorite: Boolean) {
+            if (statusFavorite) {
+                binding.fabFavorite.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        this,
+                        com.muhammadfiqrit.quranku.R.drawable.favorite_white
+                    )
                 )
-            )
-        } else {
-            binding.fabFavorite.setImageDrawable(
-                ContextCompat.getDrawable(
-                    this,
-                    com.muhammadfiqrit.quranku.R.drawable.not_favorite_white
+            } else {
+                binding.fabFavorite.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        this,
+                        com.muhammadfiqrit.quranku.R.drawable.not_favorite_white
+                    )
                 )
-            )
-        }
-    }
+            }
+        }*/
 
 }

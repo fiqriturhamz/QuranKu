@@ -7,8 +7,10 @@
     <string name="nama_surat">al-fatihah</string>
     <string name="nomor_surat">1</string>
     <string name="arti_surat">Arti</string>
+    <string name="detail_tab_text_1">Surat</string>
+    <string name="detail_tab_text_2">Tafsir</string>
     <string name="nama_latin">الفاتحة</string>
     <string name="jumlah_ayat">7 ayat</string>
-    <string name="bismillah">بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ"</string>
+    <string name="bismillah">بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ</string>
     <string name="tab_text_3">Favorite</string>
 </resources>

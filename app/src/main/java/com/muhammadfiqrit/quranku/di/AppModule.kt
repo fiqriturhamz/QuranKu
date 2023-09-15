@@ -15,4 +15,5 @@ val viewModelModule = module {
     viewModel { SuratViewModel(get()) }
     viewModel { DetailSuratViewModel(get()) }
     viewModel { FavoriteViewModel(get()) }
+
 }

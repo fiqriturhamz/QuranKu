@@ -1,5 +1,6 @@
 package com.muhammadfiqrit.quranku.detail
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
@@ -16,9 +17,6 @@ class DetailSuratViewModel(private val suratUseCase: SuratUseCase) : ViewModel()
 
     }
 
- /*   val ayatDetail = Transformations.switchMap(suratId) {
-        suratUseCase.getAyatBySurat(it).asLiveData()
-    }*/
 
     fun setId(id: Int) {
         if (suratId.value == id) return

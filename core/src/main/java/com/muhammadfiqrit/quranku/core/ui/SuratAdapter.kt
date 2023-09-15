@@ -37,10 +37,12 @@ class SuratAdapter() : RecyclerView.Adapter<SuratAdapter.SuratViewHolder>() {
     override fun onBindViewHolder(holder: SuratViewHolder, position: Int) {
         val data = listData[position]
         holder.apply {
-            binding.namaSurat.text = data.nama
-            binding.nomorSurat.text = data.nomor.toString()
-            binding.jumlahAyat.text = data.jumlahAyat.toString()
-            binding.arti.text = data.arti
+            binding.tvNamaLatin.text = data.namaLatin
+            binding.tvNomorSurat.text = data.nomor.toString()
+            binding.tvJumlahAyat.text = "${data.jumlahAyat} Ayat"
+            binding.tvArti.text = data.arti
+            binding.tvNamaSurat.text = data.nama
+            binding.tvTempatTurun.text = data.tempatTurun
             itemView.setOnClickListener {
                 onItemClickCallback.onSuratClick(data)
             }

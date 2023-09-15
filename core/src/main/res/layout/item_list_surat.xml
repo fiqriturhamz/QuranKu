@@ -2,63 +2,132 @@
 
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:layout_margin="10dp"
     app:cardCornerRadius="10dp"
-    app:cardElevation="5dp"
-    android:layout_height="100dp">
+    app:cardElevation="5dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
         <TextView
-            android:id="@+id/nomor_surat"
+            android:id="@+id/tv_nomor_surat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/ic_bg_row"
+            android:gravity="center"
+            android:padding="10dp"
             android:text="@string/nomor_surat"
+            android:textColor="@color/black"
+            android:textSize="15sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
         </TextView>
 
         <TextView
-            android:id="@+id/nama_surat"
-            android:layout_width="wrap_content"
+
+            android:id="@+id/tv_nama_surat"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:text="@string/nama_surat"
-            app:layout_constraintStart_toStartOf="@+id/nomor_surat"
-            app:layout_constraintTop_toBottomOf="@+id/nomor_surat">
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/line"
+            app:layout_constraintStart_toEndOf="@+id/tv_arti"
+            app:layout_constraintTop_toBottomOf="@+id/line">
 
         </TextView>
 
         <TextView
-            android:id="@+id/arti"
-            android:layout_width="wrap_content"
+            android:id="@+id/tv_nama_latin"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@string/nama_surat"
+            android:textColor="@color/pink"
+            android:textSize="20sp"
+            android:textStyle="bold"
+
+
+            app:layout_constraintStart_toEndOf="@+id/tv_nomor_surat"
+            app:layout_constraintTop_toTopOf="@+id/tv_nomor_surat">
+
+        </TextView>
+
+        <View
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:text="@string/arti_surat"
-            app:layout_constraintStart_toStartOf="@+id/nama_surat"
-            app:layout_constraintTop_toBottomOf="@+id/nama_surat">
+            android:layout_marginEnd="16dp"
+            android:background="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_nomor_surat">
+
+        </View>
+
+        <TextView
+            android:id="@+id/tv_tempat_turun"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mekkah"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_nomor_surat"
+            app:layout_constraintStart_toStartOf="@+id/tv_nama_latin"
+            app:layout_constraintTop_toBottomOf="@+id/tv_nama_latin">
 
         </TextView>
 
         <TextView
-            android:id="@+id/jumlah_ayat"
+            android:id="@+id/tv_arti"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
+            android:text="@string/arti_surat"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@+id/line"
+            app:layout_constraintTop_toTopOf="@+id/tv_nama_surat">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/tv_operator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:text="-"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_tempat_turun"
+            app:layout_constraintStart_toEndOf="@+id/tv_tempat_turun"
+            app:layout_constraintTop_toBottomOf="@+id/tv_nama_latin">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/tv_jumlah_ayat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
             android:text="@string/jumlah_ayat"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:textColor="@color/black"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_tempat_turun"
+            app:layout_constraintStart_toEndOf="@+id/tv_operator"
+            app:layout_constraintTop_toTopOf="@+id/tv_tempat_turun"
+            app:layout_constraintVertical_bias="0.0">
 
         </TextView>
     </androidx.constraintlayout.widget.ConstraintLayout>
