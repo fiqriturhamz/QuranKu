@@ -3,7 +3,8 @@ package com.muhammadfiqrit.quranku.detail
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.muhammadfiqrit.quranku.core.domain.model.detail.Ayat
+import com.muhammadfiqrit.quranku.detail.ayat.AyatFragment
+import com.muhammadfiqrit.quranku.detail.tafsir.TafsirFragment
 
 class TabTafsirAyatAdapter(activity: AppCompatActivity) : FragmentStateAdapter(activity) {
     override fun getItemCount(): Int = 2

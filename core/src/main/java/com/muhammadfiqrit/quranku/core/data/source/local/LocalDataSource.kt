@@ -3,6 +3,7 @@ package com.muhammadfiqrit.quranku.core.data.source.local
 import com.muhammadfiqrit.quranku.core.data.source.local.entity.SuratEntity
 import com.muhammadfiqrit.quranku.core.data.source.local.entity.detail.AyatEntity
 import com.muhammadfiqrit.quranku.core.data.source.local.entity.detail.SuratSelanjutnyaEntity
+import com.muhammadfiqrit.quranku.core.data.source.local.entity.tafsir.TafsirEntity
 import com.muhammadfiqrit.quranku.core.data.source.local.room.SuratDao
 import kotlinx.coroutines.flow.Flow
 
@@ -30,6 +31,10 @@ class LocalDataSource(private val suratDao: SuratDao) {
         suratDao.insertSuratSelanjutnya(suratSelanjutnya)
 
     fun getSuratSelanjutnya(nomorSurat: Int) = suratDao.getSuratSelanjutnya(nomorSurat)
+
+
+    suspend fun insertTafsir(listTafsir: List<TafsirEntity>) = suratDao.insertTafsir(listTafsir)
+    fun getTafsir(nomorSurat: Int): Flow<List<TafsirEntity>> = suratDao.getTafsir(nomorSurat)
 
 
 }

@@ -13,4 +13,7 @@
     <string name="jumlah_ayat">7 ayat</string>
     <string name="bismillah">بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ</string>
     <string name="tab_text_3">Favorite</string>
+    <string name="title_home">Home</string>
+    <string name="surat">Surat</string>
+    <string name="favorit">Favorit\n</string>
 </resources>

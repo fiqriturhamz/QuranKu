@@ -1,24 +1,23 @@
 package com.muhammadfiqrit.quranku.core.data
 
-import android.content.Context
-import android.util.Log
+import android.provider.ContactsContract.RawContacts.Data
 import com.muhammadfiqrit.quranku.core.data.source.local.LocalDataSource
 import com.muhammadfiqrit.quranku.core.data.source.remote.RemoteDataSource
 import com.muhammadfiqrit.quranku.core.data.source.remote.network.ApiResponse
 import com.muhammadfiqrit.quranku.core.data.source.remote.response.detail.DataDetailSuratResponse
 import com.muhammadfiqrit.quranku.core.data.source.remote.response.surat.SuratResponse
+import com.muhammadfiqrit.quranku.core.data.source.remote.response.tafsir.ListTafsirResponse
+import com.muhammadfiqrit.quranku.core.data.source.remote.response.tafsir.TafsirItemResponse
+
 import com.muhammadfiqrit.quranku.core.domain.model.detail.DetailSurat
 import com.muhammadfiqrit.quranku.core.domain.model.surat.Surat
+import com.muhammadfiqrit.quranku.core.domain.model.tafsir.TafsirItem
 import com.muhammadfiqrit.quranku.core.domain.repository.ISuratRepository
 import com.muhammadfiqrit.quranku.core.utils.AppExecutors
 import com.muhammadfiqrit.quranku.core.utils.DataMapper
-import com.muhammadfiqrit.quranku.core.utils.Utilities.isInternetConnected
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.flatMapConcat
-import kotlinx.coroutines.flow.flatMapMerge
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.zip
 
 class SuratRepository(
     private val remoteDataSource: RemoteDataSource,
@@ -26,8 +25,9 @@ class SuratRepository(
     private val appExecutors: AppExecutors,
 
     ) : ISuratRepository {
-    override fun getAllSurat(): Flow<com.muhammadfiqrit.quranku.core.data.Resource<List<Surat>>> =
-        object : com.muhammadfiqrit.quranku.core.data.NetworkBoundResource<List<Surat>, List<SuratResponse>>() {
+    override fun getAllSurat(): Flow<Resource<List<Surat>>> =
+        object :
+            com.muhammadfiqrit.quranku.core.data.NetworkBoundResource<List<Surat>, List<SuratResponse>>() {
             override fun loadFromDB(): Flow<List<Surat>> {
                 return localDataSource.getAllSurat().map { DataMapper.mapSuratEntitiesToSurats(it) }
             }
@@ -114,5 +114,28 @@ class SuratRepository(
         appExecutors.diskIO().execute {
             localDataSource.setFavoriteSurat(suratEntity, newState)
         }
+    }
+
+    override fun getTafsir(nomorSurat: Int): Flow<Resource<List<TafsirItem>>> {
+        return object : NetworkBoundResource<List<TafsirItem>, ListTafsirResponse>() {
+            override fun loadFromDB(): Flow<List<TafsirItem>> {
+                return localDataSource.getTafsir(nomorSurat)
+                    .map { DataMapper.tafsirEntitiesToTafsir(it) }
+            }
+
+            override suspend fun createCall(): Flow<ApiResponse<ListTafsirResponse>> {
+                return remoteDataSource.getTafsir(nomorSurat)
+            }
+
+            override suspend fun saveCallResult(data: ListTafsirResponse) {
+                val tafsir = DataMapper.tafsirResponseToTafsirEntity(data.tafsir, nomorSurat)
+                localDataSource.insertTafsir(tafsir)
+            }
+
+            override fun shouldFetch(data: List<TafsirItem>?): Boolean {
+                return data != null
+            }
+
+        }.asFlow()
     }
 }

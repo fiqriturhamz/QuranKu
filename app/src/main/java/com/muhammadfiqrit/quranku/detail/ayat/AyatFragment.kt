@@ -1,4 +1,4 @@
-package com.muhammadfiqrit.quranku.detail
+package com.muhammadfiqrit.quranku.detail.ayat
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.muhammadfiqrit.quranku.core.data.Resource
 import com.muhammadfiqrit.quranku.core.ui.AyatAdapter
 import com.muhammadfiqrit.quranku.databinding.FragmentAyatBinding
+import com.muhammadfiqrit.quranku.detail.DetailSuratViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 

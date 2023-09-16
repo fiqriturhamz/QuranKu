@@ -17,7 +17,6 @@ class DetailSuratViewModel(private val suratUseCase: SuratUseCase) : ViewModel()
 
     }
 
-
     fun setId(id: Int) {
         if (suratId.value == id) return
         suratId.value = id

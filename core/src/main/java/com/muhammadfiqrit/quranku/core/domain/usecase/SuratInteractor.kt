@@ -1,9 +1,9 @@
 package com.muhammadfiqrit.quranku.core.domain.usecase
 
 import com.muhammadfiqrit.quranku.core.data.Resource
-import com.muhammadfiqrit.quranku.core.domain.model.detail.Ayat
 import com.muhammadfiqrit.quranku.core.domain.model.detail.DetailSurat
 import com.muhammadfiqrit.quranku.core.domain.model.surat.Surat
+import com.muhammadfiqrit.quranku.core.domain.model.tafsir.TafsirItem
 import com.muhammadfiqrit.quranku.core.domain.repository.ISuratRepository
 import kotlinx.coroutines.flow.Flow
 
@@ -16,4 +16,8 @@ class SuratInteractor(private val suratRepository: ISuratRepository) : SuratUseC
 
     override fun setFavoriteSurat(surat: DetailSurat, state: Boolean) =
         suratRepository.setFavoriteSurat(surat, state)
+
+    override fun getTafsir(nomorSurat: Int): Flow<Resource<List<TafsirItem>>> =
+        suratRepository.getTafsir(nomorSurat)
+
 }

@@ -3,14 +3,17 @@ package com.muhammadfiqrit.quranku.core.utils
 import com.muhammadfiqrit.quranku.core.data.source.local.entity.SuratEntity
 import com.muhammadfiqrit.quranku.core.data.source.local.entity.detail.AyatEntity
 import com.muhammadfiqrit.quranku.core.data.source.local.entity.detail.SuratSelanjutnyaEntity
+import com.muhammadfiqrit.quranku.core.data.source.local.entity.tafsir.TafsirEntity
 import com.muhammadfiqrit.quranku.core.data.source.remote.response.detail.AyatResponse
 import com.muhammadfiqrit.quranku.core.data.source.remote.response.detail.DataDetailSuratResponse
 import com.muhammadfiqrit.quranku.core.data.source.remote.response.detail.SuratSelanjutnyaResponse
 import com.muhammadfiqrit.quranku.core.data.source.remote.response.surat.SuratResponse
+import com.muhammadfiqrit.quranku.core.data.source.remote.response.tafsir.TafsirItemResponse
 import com.muhammadfiqrit.quranku.core.domain.model.detail.Ayat
 import com.muhammadfiqrit.quranku.core.domain.model.detail.DetailSurat
 import com.muhammadfiqrit.quranku.core.domain.model.detail.SuratSelanjutnya
 import com.muhammadfiqrit.quranku.core.domain.model.surat.Surat
+import com.muhammadfiqrit.quranku.core.domain.model.tafsir.TafsirItem
 
 
 object DataMapper {
@@ -170,6 +173,13 @@ object DataMapper {
             suratSelanjutnyaEntity?.nomorSurat
         )
     }
+
+    fun tafsirResponseToTafsirEntity(tafsir: List<TafsirItemResponse>, nomorSurat: Int) =
+        tafsir.map { TafsirEntity(ayat = it.ayat, teks = it.teks, nomorSurat = nomorSurat) }
+
+
+    fun tafsirEntitiesToTafsir(input: List<TafsirEntity>) =
+        input.map { TafsirItem(ayat = it.ayat, teks = it.teks) }
 
 }
 

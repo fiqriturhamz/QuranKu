@@ -7,8 +7,9 @@ import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.tabs.TabLayoutMediator
 import com.muhammadfiqrit.quranku.R
-import com.muhammadfiqrit.quranku.core.domain.model.detail.Ayat
 import com.muhammadfiqrit.quranku.databinding.ActivityDetailSuratBinding
+import com.muhammadfiqrit.quranku.detail.ayat.AyatFragment
+import com.muhammadfiqrit.quranku.detail.tafsir.TafsirFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -39,6 +40,7 @@ class DetailSuratActivity : AppCompatActivity() {
         val suratNomor = intent.getIntExtra(EXTRA_SURAT_NOMOR, 1)
 
         AyatFragment.suratNomor = suratNomor
+        TafsirFragment.suratNomor = suratNomor
 
         populateDataDetail(suratNomor)
 
@@ -49,11 +51,10 @@ class DetailSuratActivity : AppCompatActivity() {
         detailSuratViewModel.suratDetail.observe(this) {
             if (it != null) {
                 when (it) {
-                    is com.muhammadfiqrit.quranku.core.data.Resource.Loading -> binding.detailProgressBar.visibility =
-                        View.VISIBLE
+                    is com.muhammadfiqrit.quranku.core.data.Resource.Loading ->{}
 
                     is com.muhammadfiqrit.quranku.core.data.Resource.Success -> {
-                        binding.detailProgressBar.visibility = View.GONE
+
                         it.data?.let { detailSurat ->
                             binding.tvDetailArtiSurat.text = detailSurat.surat.arti
                             binding.tvDetailTempatTurun.text = detailSurat.surat.tempatTurun
@@ -84,7 +85,7 @@ class DetailSuratActivity : AppCompatActivity() {
 
                     is com.muhammadfiqrit.quranku.core.data.Resource.Error -> {
                         Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
-                        binding.detailProgressBar.visibility = View.GONE
+
                     }
                 }
             }
