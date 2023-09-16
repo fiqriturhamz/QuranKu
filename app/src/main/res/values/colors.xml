@@ -8,4 +8,8 @@
     <color name="aqua">#13ffff</color>
     <color name="purple_dark">#8C57E5</color>
     <color name="purple_light">#AB6ED5</color>
+
+    <color name="pink_20">#33EF7CB2</color>
+    <color name="pink_dark_20">#33F81BC2</color>
+    <color name="white_20">#33FFFFFF</color>
 </resources>
