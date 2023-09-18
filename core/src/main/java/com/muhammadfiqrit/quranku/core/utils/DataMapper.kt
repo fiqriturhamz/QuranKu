@@ -7,17 +7,22 @@ import com.muhammadfiqrit.quranku.core.data.source.local.entity.tafsir.TafsirEnt
 import com.muhammadfiqrit.quranku.core.data.source.remote.response.detail.AyatResponse
 import com.muhammadfiqrit.quranku.core.data.source.remote.response.detail.DataDetailSuratResponse
 import com.muhammadfiqrit.quranku.core.data.source.remote.response.detail.SuratSelanjutnyaResponse
-import com.muhammadfiqrit.quranku.core.data.source.remote.response.surat.SuratResponse
+import com.muhammadfiqrit.quranku.core.data.source.remote.response.sholat.jadwal.ResponseJadwalDataHarian
+import com.muhammadfiqrit.quranku.core.data.source.remote.response.surat.ResponseSurat
 import com.muhammadfiqrit.quranku.core.data.source.remote.response.tafsir.TafsirItemResponse
 import com.muhammadfiqrit.quranku.core.domain.model.detail.Ayat
 import com.muhammadfiqrit.quranku.core.domain.model.detail.DetailSurat
 import com.muhammadfiqrit.quranku.core.domain.model.detail.SuratSelanjutnya
+import com.muhammadfiqrit.quranku.core.domain.model.sholat.jadwal.JadwalDataHarian
 import com.muhammadfiqrit.quranku.core.domain.model.surat.Surat
 import com.muhammadfiqrit.quranku.core.domain.model.tafsir.TafsirItem
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOf
+import java.util.concurrent.Flow
 
 
 object DataMapper {
-    fun mapSuratResponsesToSuratEntities(input: List<SuratResponse>): List<SuratEntity> {
+    fun mapSuratResponsesToSuratEntities(input: List<ResponseSurat>): List<SuratEntity> {
         val suratList = ArrayList<SuratEntity>()
         input.map {
             val surat = SuratEntity(
@@ -180,6 +185,25 @@ object DataMapper {
 
     fun tafsirEntitiesToTafsir(input: List<TafsirEntity>) =
         input.map { TafsirItem(ayat = it.ayat, teks = it.teks) }
+
+    fun jadwalDataHarianToJadwalDataHarian(input: ResponseJadwalDataHarian) =
+        flowOf(
+            JadwalDataHarian(
+                id = input.id,
+                daerah = input.daerah,
+                lokasi = input.lokasi,
+                dhuha = input.jadwal.dhuha,
+                dzuhur = input.jadwal.dzuhur,
+                ashar = input.jadwal.ashar,
+                imsak = input.jadwal.imsak,
+                isya = input.jadwal.isya,
+                maghrib = input.jadwal.maghrib,
+                subuh = input.jadwal.subuh,
+                terbit = input.jadwal.terbit,
+                tanggal = input.jadwal.tanggal
+            )
+        )
+
 
 }
 

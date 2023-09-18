@@ -10,6 +10,7 @@ import com.muhammadfiqrit.quranku.R
 import com.muhammadfiqrit.quranku.databinding.ActivityDetailSuratBinding
 import com.muhammadfiqrit.quranku.detail.ayat.AyatFragment
 import com.muhammadfiqrit.quranku.detail.tafsir.TafsirFragment
+import com.muhammadfiqrit.quranku.utils.Utilities
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -43,6 +44,8 @@ class DetailSuratActivity : AppCompatActivity() {
         TafsirFragment.suratNomor = suratNomor
 
         populateDataDetail(suratNomor)
+
+        Utilities.setStatusBarGradiant(this)
 
     }
 

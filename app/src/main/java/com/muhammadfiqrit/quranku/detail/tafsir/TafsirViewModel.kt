@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
-import com.muhammadfiqrit.quranku.core.domain.usecase.SuratUseCase
+import com.muhammadfiqrit.quranku.core.domain.usecase.surat.SuratUseCase
 
 class TafsirViewModel(private val suratUsecase: SuratUseCase) : ViewModel() {
 

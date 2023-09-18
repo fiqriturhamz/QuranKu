@@ -2,7 +2,7 @@ package com.muhammadfiqrit.quranku.core.data.source.remote.response.surat
 
 import com.google.gson.annotations.SerializedName
 
-data class SuratResponse(
+data class ResponseSurat(
 
     @field:SerializedName("nomor")
     val nomor: Int,

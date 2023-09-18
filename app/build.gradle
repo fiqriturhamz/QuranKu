@@ -43,10 +43,7 @@ android {
 
 dependencies {
 
-    implementation project(":core")
-    //viewpager2
-    implementation "androidx.viewpager2:viewpager2:$viewPager2"
-
+    implementation project(':core')
     implementation "androidx.core:core-ktx:$core_ktx_version"
     implementation "androidx.appcompat:appcompat:$appcompat_version"
     implementation "com.google.android.material:material:$android_material_version"
@@ -54,15 +51,23 @@ dependencies {
     testImplementation "junit:junit:$junit_version"
     androidTestImplementation "androidx.test.ext:junit:$androidx_junit_version"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
+    implementation "androidx.multidex:multidex:$multidex_version"
+    //koin
+    implementation "io.insert-koin:koin-android:$koin_version"
+
+    implementation "io.insert-koin:koin-core:$koin_version"
+    androidTestImplementation "io.insert-koin:koin-test-junit4:$koin_version"
+
+
+    //viewpager2
+    implementation "androidx.viewpager2:viewpager2:$viewPager2"
 
     //navigation
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
 
 
-    //koin
-    implementation "io.insert-koin:koin-android:$koin_version"
+    //status bar
+    implementation 'com.readystatesoftware.systembartint:systembartint:1.0.3'
 
-    implementation "io.insert-koin:koin-core:$koin_version"
-    androidTestImplementation "io.insert-koin:koin-test-junit4:$koin_version"
 }

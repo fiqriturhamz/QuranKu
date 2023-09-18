@@ -9,7 +9,9 @@
     <color name="purple_dark">#8C57E5</color>
     <color name="purple_light">#AB6ED5</color>
 
-    <color name="pink_20">#33EF7CB2</color>
+    <color name="pink_20">#4DEF7CB2</color>
     <color name="pink_dark_20">#33F81BC2</color>
     <color name="white_20">#33FFFFFF</color>
+
+    <color name="pink_10">#B3EF7CB2</color>
 </resources>

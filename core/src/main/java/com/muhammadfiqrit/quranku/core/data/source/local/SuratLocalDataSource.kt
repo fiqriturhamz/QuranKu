@@ -8,7 +8,7 @@ import com.muhammadfiqrit.quranku.core.data.source.local.room.SuratDao
 import kotlinx.coroutines.flow.Flow
 
 
-class LocalDataSource(private val suratDao: SuratDao) {
+class SuratLocalDataSource(private val suratDao: SuratDao) {
 
     //Surat
     suspend fun insertSurat(suratList: List<SuratEntity>) = suratDao.insertSurat(suratList)

@@ -9,21 +9,21 @@ import kotlinx.coroutines.flow.map
 
 abstract class NetworkOnlyResource<ResultType, RequestType> {
 
-    private val result: Flow<com.muhammadfiqrit.quranku.core.data.Resource<ResultType>> = flow {
-        emit(com.muhammadfiqrit.quranku.core.data.Resource.Loading())
+    private val result: Flow<Resource<ResultType>> = flow {
+        emit(Resource.Loading())
         when (val apiResponse = createCall().first()) {
             is ApiResponse.Success -> {
                 emitAll(loadFromNetwork(apiResponse.data).map {
-                    com.muhammadfiqrit.quranku.core.data.Resource.Success(it)
+                   Resource.Success(it)
                 })
             }
             is ApiResponse.Error -> emit(
-                com.muhammadfiqrit.quranku.core.data.Resource.Error(
+               Resource.Error(
                     apiResponse.errorMessage
                 )
             )
             is ApiResponse.Empty -> emit(
-                com.muhammadfiqrit.quranku.core.data.Resource.Error(
+               Resource.Error(
                     "empty data"
                 )
             )
@@ -35,5 +35,5 @@ abstract class NetworkOnlyResource<ResultType, RequestType> {
 
     protected abstract suspend fun createCall(): Flow<ApiResponse<RequestType>>
 
-    fun asFlow(): Flow<com.muhammadfiqrit.quranku.core.data.Resource<ResultType>> = result
+    fun asFlow(): Flow<Resource<ResultType>> = result
 }

@@ -1,13 +1,13 @@
-package com.muhammadfiqrit.quranku.core.data
+package com.muhammadfiqrit.quranku.core.data.Repository
 
-import android.provider.ContactsContract.RawContacts.Data
-import com.muhammadfiqrit.quranku.core.data.source.local.LocalDataSource
-import com.muhammadfiqrit.quranku.core.data.source.remote.RemoteDataSource
+import com.muhammadfiqrit.quranku.core.data.NetworkBoundResource
+import com.muhammadfiqrit.quranku.core.data.Resource
+import com.muhammadfiqrit.quranku.core.data.source.local.SuratLocalDataSource
+import com.muhammadfiqrit.quranku.core.data.source.remote.SuratRemoteDataSource
 import com.muhammadfiqrit.quranku.core.data.source.remote.network.ApiResponse
 import com.muhammadfiqrit.quranku.core.data.source.remote.response.detail.DataDetailSuratResponse
-import com.muhammadfiqrit.quranku.core.data.source.remote.response.surat.SuratResponse
+import com.muhammadfiqrit.quranku.core.data.source.remote.response.surat.ResponseSurat
 import com.muhammadfiqrit.quranku.core.data.source.remote.response.tafsir.ListTafsirResponse
-import com.muhammadfiqrit.quranku.core.data.source.remote.response.tafsir.TafsirItemResponse
 
 import com.muhammadfiqrit.quranku.core.domain.model.detail.DetailSurat
 import com.muhammadfiqrit.quranku.core.domain.model.surat.Surat
@@ -20,25 +20,24 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
 
 class SuratRepository(
-    private val remoteDataSource: RemoteDataSource,
-    private val localDataSource: LocalDataSource,
+    private val suratRemoteDataSource: SuratRemoteDataSource,
+    private val suratLocalDataSource: SuratLocalDataSource,
     private val appExecutors: AppExecutors,
 
     ) : ISuratRepository {
     override fun getAllSurat(): Flow<Resource<List<Surat>>> =
         object :
-            com.muhammadfiqrit.quranku.core.data.NetworkBoundResource<List<Surat>, List<SuratResponse>>() {
+            NetworkBoundResource<List<Surat>, List<ResponseSurat>>() {
             override fun loadFromDB(): Flow<List<Surat>> {
-                return localDataSource.getAllSurat().map { DataMapper.mapSuratEntitiesToSurats(it) }
+                return suratLocalDataSource.getAllSurat().map { DataMapper.mapSuratEntitiesToSurats(it) }
             }
 
-            override suspend fun createCall(): Flow<ApiResponse<List<SuratResponse>>> =
-                remoteDataSource.getAllSurat()
+            override suspend fun createCall(): Flow<ApiResponse<List<ResponseSurat>>> =
+                suratRemoteDataSource.getAllSurat()
 
-
-            override suspend fun saveCallResult(data: List<SuratResponse>) {
+            override suspend fun saveCallResult(data: List<ResponseSurat>) {
                 val suratList = DataMapper.mapSuratResponsesToSuratEntities(data)
-                localDataSource.insertSurat(suratList)
+                suratLocalDataSource.insertSurat(suratList)
             }
 
             override fun shouldFetch(data: List<Surat>?): Boolean =
@@ -51,13 +50,13 @@ class SuratRepository(
 
         return object : NetworkBoundResource<DetailSurat, DataDetailSuratResponse>() {
             override fun loadFromDB(): Flow<DetailSurat> {
-                val suratFlow = localDataSource.getSuratByNomor(nomorSurat)
+                val suratFlow = suratLocalDataSource.getSuratByNomor(nomorSurat)
                     .map { DataMapper.mapSuratEntityToDetailSurat(it) }
 
-                val ayatFlow = localDataSource.getAyatBySurat(nomorSurat)
+                val ayatFlow = suratLocalDataSource.getAyatBySurat(nomorSurat)
                     .map { DataMapper.mapAyatEntitiesToAyat(it) }
 
-                val suratSelanjutnyaFlow = localDataSource.getSuratSelanjutnya(nomorSurat).map {
+                val suratSelanjutnyaFlow = suratLocalDataSource.getSuratSelanjutnya(nomorSurat).map {
                     DataMapper.suratSelanjutnyaEntityToSuratSelanjutnya(
                         it,
                     )
@@ -73,7 +72,7 @@ class SuratRepository(
             }
 
             override suspend fun createCall(): Flow<ApiResponse<DataDetailSuratResponse>> {
-                return remoteDataSource.getDetailSurat(nomorSurat)
+                return suratRemoteDataSource.getDetailSurat(nomorSurat)
             }
 
             override suspend fun saveCallResult(data: DataDetailSuratResponse) {
@@ -85,9 +84,9 @@ class SuratRepository(
                         nomorSurat
                     )
 
-                localDataSource.insertDetailSurat(surat)
-                localDataSource.insertAyat(ayat)
-                localDataSource.insertSuratSelanjutnya(suratSelanjutnya = suratSelanjutnya)
+                suratLocalDataSource.insertDetailSurat(surat)
+                suratLocalDataSource.insertAyat(ayat)
+                suratLocalDataSource.insertSuratSelanjutnya(suratSelanjutnya = suratSelanjutnya)
             }
 
             override fun shouldFetch(data: DetailSurat?): Boolean {
@@ -104,7 +103,7 @@ class SuratRepository(
 
 
     override fun getFavoriteSurat(): Flow<List<Surat>> {
-        return localDataSource.getFavoriteSurat().map {
+        return suratLocalDataSource.getFavoriteSurat().map {
             DataMapper.mapSuratEntitiesToSurats(it)
         }
     }
@@ -112,24 +111,24 @@ class SuratRepository(
     override fun setFavoriteSurat(surat: DetailSurat, newState: Boolean) {
         val suratEntity = DataMapper.mapDetailSuratToSuratEntity(surat)
         appExecutors.diskIO().execute {
-            localDataSource.setFavoriteSurat(suratEntity, newState)
+            suratLocalDataSource.setFavoriteSurat(suratEntity, newState)
         }
     }
 
     override fun getTafsir(nomorSurat: Int): Flow<Resource<List<TafsirItem>>> {
         return object : NetworkBoundResource<List<TafsirItem>, ListTafsirResponse>() {
             override fun loadFromDB(): Flow<List<TafsirItem>> {
-                return localDataSource.getTafsir(nomorSurat)
+                return suratLocalDataSource.getTafsir(nomorSurat)
                     .map { DataMapper.tafsirEntitiesToTafsir(it) }
             }
 
             override suspend fun createCall(): Flow<ApiResponse<ListTafsirResponse>> {
-                return remoteDataSource.getTafsir(nomorSurat)
+                return suratRemoteDataSource.getTafsir(nomorSurat)
             }
 
             override suspend fun saveCallResult(data: ListTafsirResponse) {
                 val tafsir = DataMapper.tafsirResponseToTafsirEntity(data.tafsir, nomorSurat)
-                localDataSource.insertTafsir(tafsir)
+                suratLocalDataSource.insertTafsir(tafsir)
             }
 
             override fun shouldFetch(data: List<TafsirItem>?): Boolean {

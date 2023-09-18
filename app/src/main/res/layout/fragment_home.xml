@@ -1,14 +1,313 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".home.HomeFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="350dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-</FrameLayout>
+        <ImageView
+            android:id="@+id/backgroundImageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="0.5"
+            android:scaleType="centerCrop"
+            android:src="@drawable/masjid"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="1"
+            android:background="@color/pink_10"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="0dp" />
+
+        <TextView
+            android:id="@+id/tv_lokasi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Jakarta, Indonesia"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/tv_tanggal_sekarang"
+            app:layout_constraintTop_toBottomOf="@+id/tv_tanggal_sekarang" />
+
+        <TextView
+            android:id="@+id/tv_countdown_timer"
+            android:layout_width="wrap_content"
+
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="04:41"
+            android:textColor="@color/white"
+            android:textSize="50sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_lokasi" />
+
+        <TextView
+            android:id="@+id/tv_tanggal_sekarang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="9 Ramadhan 1444 H"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_hours_minutes_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Fajr 3 Hours  9 Minutes left"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@+id/tv_countdown_timer"
+            app:layout_constraintStart_toStartOf="@+id/tv_countdown_timer"
+            app:layout_constraintTop_toBottomOf="@+id/tv_countdown_timer" />
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="25dp"
+            android:orientation="horizontal"
+            android:weightSum="5"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_hours_minutes_left">
+
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:gravity="center">
+
+
+                <ImageView
+                    android:id="@+id/iv_fajr"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_below="@id/tv_fajr"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="8dp"
+                    android:src="@drawable/ic_fajr" />
+
+                <TextView
+                    android:id="@+id/tv_fajr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="8dp"
+                    android:text="Fajr"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_waktu_fajr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/iv_fajr"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="8dp"
+                    android:text="04:41"
+                    android:textColor="@color/white" />
+
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                tools:layout_editor_absoluteX="110dp"
+                tools:layout_editor_absoluteY="177dp">
+
+
+                <TextView
+                    android:id="@+id/tv_dzuhur"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="8dp"
+                    android:text="Dzuhr"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_waktu_dzuhur"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/iv_dzuhur"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="8dp"
+                    android:text="12.01"
+                    android:textColor="@color/white" />
+
+                <ImageView
+                    android:id="@+id/iv_dzuhur"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_below="@id/tv_dzuhur"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="8dp"
+                    android:src="@drawable/ic_dzuhr" />
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                tools:layout_editor_absoluteX="188dp"
+                tools:layout_editor_absoluteY="185dp">
+
+
+                <TextView
+                    android:id="@+id/tv_asr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="8dp"
+                    android:text="Asr"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_waktu_asr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/iv_asr"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="8dp"
+                    android:text="15:14"
+                    android:textColor="@color/white" />
+
+                <ImageView
+                    android:id="@+id/iv_asr"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_below="@id/tv_asr"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="8dp"
+                    android:src="@drawable/ic_sunset" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                tools:layout_editor_absoluteX="252dp"
+                tools:layout_editor_absoluteY="181dp">
+
+
+                <TextView
+                    android:id="@+id/tv_waktu_maghrib"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/iv_maghrib"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:text="18:01"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/tv_maghrib"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerInParent="true"
+
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:text="Maghrib"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
+
+
+                <ImageView
+                    android:id="@+id/iv_maghrib"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_below="@id/tv_maghrib"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="8dp"
+                    android:src="@drawable/ic_maghrib" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+
+                android:layout_weight="1"
+                android:gravity="center"
+                tools:layout_editor_absoluteX="344dp"
+                tools:layout_editor_absoluteY="186dp">
+
+                <TextView
+                    android:id="@+id/tv_isya"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerInParent="true"
+
+                    android:text="Isha"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
+
+
+                <ImageView
+                    android:id="@+id/iv_isya"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_below="@+id/tv_isya"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="8dp"
+                    android:src="@drawable/ic_isya" />
+
+                <TextView
+                    android:id="@+id/tv_waktu_isya"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/iv_isya"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="8dp"
+                    android:text="19:11"
+                    android:textColor="@color/white" />
+
+            </RelativeLayout>
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

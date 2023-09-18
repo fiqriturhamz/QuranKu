@@ -1,15 +1,15 @@
 package com.muhammadfiqrit.quranku.core.data.source.remote.network
 
-import com.muhammadfiqrit.quranku.core.data.source.remote.response.surat.ListSuratResponse
+import com.muhammadfiqrit.quranku.core.data.source.remote.response.surat.ResponseListSurat
 import com.muhammadfiqrit.quranku.core.data.source.remote.response.tafsir.TafsirResponse
 import com.muhammadfiqrit.quranku.data.source.remote.response.DetailSuratResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
 
-interface ApiService {
+interface SuratService {
 
     @GET("surat")
-    suspend fun getSurat() : ListSuratResponse
+    suspend fun getSurat() : ResponseListSurat
 
 
     @GET("surat/{nomor_surat}")

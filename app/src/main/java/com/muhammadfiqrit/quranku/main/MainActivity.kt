@@ -10,6 +10,7 @@ import com.muhammadfiqrit.quranku.databinding.ActivityMainBinding
 import com.muhammadfiqrit.quranku.favorite.FavoriteFragment
 import com.muhammadfiqrit.quranku.home.HomeFragment
 import com.muhammadfiqrit.quranku.surat.SuratFragment
+import com.muhammadfiqrit.quranku.utils.Utilities
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,6 +23,8 @@ class MainActivity : AppCompatActivity() {
 
         supportActionBar?.elevation = 0f
 
+
+        Utilities.setStatusBarGradiant(this)
         supportFragmentManager.beginTransaction().setReorderingAllowed(true)
             .replace(R.id.fragment_container_view, HomeFragment(), null).commit()
         binding.homeLayout.setOnClickListener {
@@ -140,7 +143,7 @@ class MainActivity : AppCompatActivity() {
                         1f,
                         1f,
                         Animation.RELATIVE_TO_SELF,
-                        0.0f,
+                        1.0f,
                         Animation.RELATIVE_TO_SELF,
                         0.0f
                     )
