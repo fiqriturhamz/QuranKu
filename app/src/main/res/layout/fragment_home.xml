@@ -7,8 +7,10 @@
     tools:context=".home.HomeFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="350dp"
+        android:background="@drawable/custom_corner"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -17,7 +19,7 @@
             android:id="@+id/backgroundImageView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:alpha="0.5"
+            android:alpha="0.1"
             android:scaleType="centerCrop"
             android:src="@drawable/masjid"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -25,20 +27,12 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:alpha="1"
-            android:background="@color/pink_10"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="0dp" />
-
         <TextView
             android:id="@+id/tv_lokasi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:fontFamily="sans-serif-medium"
             android:text="Jakarta, Indonesia"
             android:textColor="@color/white"
             android:textSize="12sp"
@@ -52,6 +46,7 @@
 
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
+            android:fontFamily="sans-serif-medium"
             android:text="04:41"
             android:textColor="@color/white"
             android:textSize="50sp"
@@ -66,6 +61,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
+            android:fontFamily="sans-serif-medium"
             android:text="9 Ramadhan 1444 H"
             android:textColor="@color/white"
             android:textSize="14sp"
@@ -78,6 +74,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
+            android:fontFamily="sans-serif-medium"
             android:text="Fajr 3 Hours  9 Minutes left"
             android:textColor="@color/white"
             android:textSize="16sp"
@@ -103,7 +100,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@android:color/transparent"
                 android:gravity="center">
 
 
@@ -122,6 +118,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:layout_marginTop="8dp"
+                    android:fontFamily="sans-serif-medium"
                     android:text="Fajr"
                     android:textColor="@color/white"
                     android:textStyle="bold" />
@@ -133,6 +130,7 @@
                     android:layout_below="@+id/iv_fajr"
                     android:layout_centerInParent="true"
                     android:layout_marginTop="8dp"
+                    android:fontFamily="sans-serif-medium"
                     android:text="04:41"
                     android:textColor="@color/white" />
 
@@ -142,7 +140,7 @@
 
             <RelativeLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
                 tools:layout_editor_absoluteX="110dp"
@@ -156,6 +154,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_centerInParent="true"
                     android:layout_marginTop="8dp"
+                    android:fontFamily="sans-serif-medium"
                     android:text="Dzuhr"
                     android:textColor="@color/white"
                     android:textStyle="bold" />
@@ -167,6 +166,7 @@
                     android:layout_below="@id/iv_dzuhur"
                     android:layout_centerInParent="true"
                     android:layout_marginTop="8dp"
+                    android:fontFamily="sans-serif-medium"
                     android:text="12.01"
                     android:textColor="@color/white" />
 
@@ -183,7 +183,7 @@
 
             <RelativeLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
                 tools:layout_editor_absoluteX="188dp"
@@ -208,6 +208,7 @@
                     android:layout_below="@id/iv_asr"
                     android:layout_centerInParent="true"
                     android:layout_marginTop="8dp"
+                    android:fontFamily="sans-serif-medium"
                     android:text="15:14"
                     android:textColor="@color/white" />
 
@@ -223,7 +224,7 @@
 
             <RelativeLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
                 tools:layout_editor_absoluteX="252dp"
@@ -237,6 +238,7 @@
                     android:layout_below="@+id/iv_maghrib"
                     android:layout_centerInParent="true"
                     android:layout_marginTop="8dp"
+                    android:fontFamily="sans-serif-medium"
                     android:gravity="center"
                     android:text="18:01"
                     android:textColor="@color/white" />
@@ -246,8 +248,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
-                    android:layout_centerInParent="true"
 
+                    android:layout_centerInParent="true"
                     android:layout_marginTop="8dp"
                     android:gravity="center"
                     android:text="Maghrib"
@@ -268,7 +270,7 @@
 
             <RelativeLayout
                 android:layout_width="wrap_content"
-                android:layout_height="100dp"
+                android:layout_height="match_parent"
 
                 android:layout_weight="1"
                 android:gravity="center"
@@ -281,7 +283,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:layout_centerInParent="true"
-
+                    android:layout_marginTop="8dp"
                     android:text="Isha"
                     android:textColor="@color/white"
                     android:textStyle="bold" />
@@ -303,6 +305,7 @@
                     android:layout_below="@+id/iv_isya"
                     android:layout_centerInParent="true"
                     android:layout_marginTop="8dp"
+                    android:fontFamily="sans-serif-medium"
                     android:text="19:11"
                     android:textColor="@color/white" />
 
@@ -310,4 +313,172 @@
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <TextView
+        android:id="@+id/tv_all_features"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="All Features"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="@+id/tv_all_features"
+        app:layout_constraintTop_toBottomOf="@+id/tv_all_features">
+
+        <RelativeLayout
+            android:id="@+id/quran_feature"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_weight="1">
+
+
+            <androidx.cardview.widget.CardView
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:layout_margin="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="5dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:background="@drawable/custom_cv_all_feature">
+
+                    <ImageView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_selected_quran"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                    </ImageView>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </androidx.cardview.widget.CardView>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/sholat_feature"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_weight="1">
+
+
+            <androidx.cardview.widget.CardView
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:layout_margin="10dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="5dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:background="@drawable/custom_cv_all_feature">
+
+                    <ImageView
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:src="@drawable/ic_sujud"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                    </ImageView>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/donation_feature"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_weight="1">
+
+
+            <androidx.cardview.widget.CardView
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:layout_margin="10dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="5dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:background="@drawable/custom_cv_all_feature">
+
+                    <ImageView
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:src="@drawable/ic_heart"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                    </ImageView>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_random_quotes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Quotes"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+    </TextView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_quotes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_random_quotes"
+        tools:listitem="@layout/item_list_quotes">
+
+    </androidx.recyclerview.widget.RecyclerView>
 </androidx.constraintlayout.widget.ConstraintLayout>
