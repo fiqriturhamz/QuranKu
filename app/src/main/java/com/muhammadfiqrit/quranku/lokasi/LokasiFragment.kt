@@ -29,7 +29,9 @@ class LokasiFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (activity != null) {
-            val lokasiAdapter = LokasiAdapter(requireContext(),lokasiViewModel)
+
+
+            val lokasiAdapter = LokasiAdapter(requireContext(), lokasiViewModel)
             lokasiViewModel.lokasi.observe(viewLifecycleOwner) { lokasi ->
                 if (lokasi != null) {
                     when (lokasi) {

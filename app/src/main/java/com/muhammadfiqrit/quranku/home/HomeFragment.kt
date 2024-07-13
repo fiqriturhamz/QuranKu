@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import com.muhammadfiqrit.quranku.core.data.Resource
 import com.muhammadfiqrit.quranku.core.domain.model.sholat.jadwal.JadwalDataHarian
 import com.muhammadfiqrit.quranku.databinding.FragmentHomeBinding
+import com.muhammadfiqrit.quranku.lokasi.LokasiViewModel
 import com.muhammadfiqrit.quranku.utils.Utilities
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
@@ -24,6 +25,7 @@ class HomeFragment : Fragment() {
 
     private val homeViewModel: HomeViewModel by viewModel()
     private var _binding: FragmentHomeBinding? = null
+    private val lokasiViewModel: LokasiViewModel by viewModel()
     private val binding get() = _binding!!
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -42,7 +44,15 @@ class HomeFragment : Fragment() {
         val calendarMonth = gregorianCalendar.get(Calendar.MONTH) + 1
         val calendarDay = gregorianCalendar.get(Calendar.DAY_OF_MONTH)
         Log.e("gregorian", calendarDay.toString())
-        populateData("$calendarYear-$calendarMonth-$calendarDay", 1301)
+        lokasiViewModel.lokasiSekarang.observe(viewLifecycleOwner) { lokasi ->
+            if (lokasi != null) {
+                populateData("$calendarYear-$calendarMonth-$calendarDay", lokasi.idLokasi.toInt())
+            }
+
+
+
+        }
+
 
     }
 
@@ -57,7 +67,6 @@ class HomeFragment : Fragment() {
 
                     is Resource.Success -> {
                         bindingData(it)
-
                         countDownWaktuSholat(it)
 
                     }
@@ -165,12 +174,12 @@ class HomeFragment : Fragment() {
             }
 
             override fun onFinish() {
- /*               val gregorianCalendar = GregorianCalendar()
-                val calendarYear = gregorianCalendar.get(Calendar.YEAR)
-                val calendarMonth = gregorianCalendar.get(Calendar.MONTH) + 1
-                val calendarDay = gregorianCalendar.get(Calendar.DAY_OF_MONTH)
-                Log.e("gregorian", calendarDay.toString())
-                populateData("$calendarYear-$calendarMonth-$calendarDay", 1301)*/
+                /*               val gregorianCalendar = GregorianCalendar()
+                               val calendarYear = gregorianCalendar.get(Calendar.YEAR)
+                               val calendarMonth = gregorianCalendar.get(Calendar.MONTH) + 1
+                               val calendarDay = gregorianCalendar.get(Calendar.DAY_OF_MONTH)
+                               Log.e("gregorian", calendarDay.toString())
+                               populateData("$calendarYear-$calendarMonth-$calendarDay", 1301)*/
             }
 
         }.start()

@@ -1,5 +1,6 @@
 package com.muhammadfiqrit.quranku.core.utils
 
+import androidx.annotation.Nullable
 import com.muhammadfiqrit.quranku.core.data.source.local.entity.surat.SuratEntity
 import com.muhammadfiqrit.quranku.core.data.source.local.entity.detail.AyatEntity
 import com.muhammadfiqrit.quranku.core.data.source.local.entity.detail.SuratSelanjutnyaEntity
@@ -230,13 +231,24 @@ object DataMapper {
         }
     }
 
-    fun mapLokasiEntityToLokasi(input: LokasiEntity): Lokasi {
-        return Lokasi(
-            idLokasi = input.idLokasi,
-            namaLokasi = input.namaLokasi,
-            lokasiSekarang = input.lokasiSekarang
-        )
+    fun mapLokasiEntityToLokasi( input: LokasiEntity?): Lokasi {
+        /*      val nonNullInput = input ?: return Lokasi(idLokasi = "1301", namaLokasi = "", lokasiSekarang = false)
+              return Lokasi(
+                  idLokasi = nonNullInput.idLokasi,
+                  namaLokasi = nonNullInput.namaLokasi,
+                  lokasiSekarang = nonNullInput.lokasiSekarang
+              )*/
+        return if (input == null) {
+            Lokasi(idLokasi = "1301", namaLokasi = "Jakarta", lokasiSekarang = false)
+        } else {
+            Lokasi(
+                idLokasi = input.idLokasi,
+                namaLokasi = input.namaLokasi,
+                lokasiSekarang = input.lokasiSekarang
+            )
+        }
     }
+
 
     fun mapDomainLokasiToLokasiEntity(input: Lokasi) = LokasiEntity(
         idLokasi = input.idLokasi,
