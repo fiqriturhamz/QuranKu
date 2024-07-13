@@ -6,6 +6,7 @@ import android.view.View
 import android.view.animation.Animation
 import android.view.animation.ScaleAnimation
 import com.muhammadfiqrit.quranku.R
+import com.muhammadfiqrit.quranku.lokasi.LokasiFragment
 import com.muhammadfiqrit.quranku.databinding.ActivityMainBinding
 import com.muhammadfiqrit.quranku.favorite.FavoriteFragment
 import com.muhammadfiqrit.quranku.home.HomeFragment
@@ -40,12 +41,15 @@ class MainActivity : AppCompatActivity() {
                 //unselect other tabs expect home tab
                 binding.tvQuran.visibility = View.GONE
                 binding.tvBookmark.visibility = View.GONE
+                binding.tvLocation.visibility = View.GONE
 
                 binding.ivQuran.setImageResource(R.drawable.ic_quran)
                 binding.ivBookmark.setImageResource(R.drawable.ic_bookmark)
+                binding.ivLocation.setImageResource(R.drawable.ic_location)
 
                 binding.quranLayout.setBackgroundColor(resources.getColor(android.R.color.transparent))
                 binding.bookmarkLayout.setBackgroundColor(resources.getColor(android.R.color.transparent))
+                binding.locationLayout.setBackgroundColor(resources.getColor(android.R.color.transparent))
 
                 //select home tab
                 binding.tvHome.visibility = View.VISIBLE
@@ -71,6 +75,8 @@ class MainActivity : AppCompatActivity() {
                 selectedTab = 1
             }
 
+
+
         }
         binding.quranLayout.setOnClickListener {
 
@@ -83,12 +89,15 @@ class MainActivity : AppCompatActivity() {
                 //unselect other tabs expect home tab
                 binding.tvHome.visibility = View.GONE
                 binding.tvBookmark.visibility = View.GONE
+                binding.tvLocation.visibility = View.GONE
 
                 binding.ivHome.setImageResource(R.drawable.ic_home)
                 binding.ivBookmark.setImageResource(R.drawable.ic_bookmark)
+                binding.ivLocation.setImageResource(R.drawable.ic_location)
 
                 binding.homeLayout.setBackgroundColor(resources.getColor(android.R.color.transparent))
                 binding.bookmarkLayout.setBackgroundColor(resources.getColor(android.R.color.transparent))
+                binding.locationLayout.setBackgroundColor(resources.getColor(android.R.color.transparent))
 
                 //select home tab
                 binding.tvQuran.visibility = View.VISIBLE
@@ -113,6 +122,9 @@ class MainActivity : AppCompatActivity() {
                 //selected tab
                 selectedTab = 2
             }
+
+        }
+
             binding.bookmarkLayout.setOnClickListener {
 
                 //set BookmarK fragment
@@ -124,12 +136,15 @@ class MainActivity : AppCompatActivity() {
                     //unselect other tabs expect home tab
                     binding.tvQuran.visibility = View.GONE
                     binding.tvHome.visibility = View.GONE
+                    binding.tvLocation.visibility = View.GONE
 
                     binding.ivQuran.setImageResource(R.drawable.ic_quran)
                     binding.ivHome.setImageResource(R.drawable.ic_home)
+                    binding.ivLocation.setImageResource(R.drawable.ic_location)
 
                     binding.quranLayout.setBackgroundColor(resources.getColor(android.R.color.transparent))
                     binding.homeLayout.setBackgroundColor(resources.getColor(android.R.color.transparent))
+                    binding.locationLayout.setBackgroundColor(resources.getColor(android.R.color.transparent))
 
                     //select home tab
                     binding.tvBookmark.visibility = View.VISIBLE
@@ -156,7 +171,46 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
+            binding.locationLayout.setOnClickListener {
+                supportFragmentManager.beginTransaction().setReorderingAllowed(true)
+                    .replace(R.id.fragment_container_view, LokasiFragment(), null).commit()
+                if (selectedTab != 4) {
+                    binding.tvQuran.visibility = View.GONE
+                    binding.tvHome.visibility = View.GONE
+                    binding.tvBookmark.visibility = View.GONE
+
+                    binding.ivQuran.setImageResource(R.drawable.ic_quran)
+                    binding.ivHome.setImageResource(R.drawable.ic_home)
+                    binding.ivBookmark.setImageResource(R.drawable.ic_bookmark)
+
+                    binding.quranLayout.setBackgroundColor(resources.getColor(android.R.color.transparent))
+                    binding.bookmarkLayout.setBackgroundColor(resources.getColor(android.R.color.transparent))
+                    binding.homeLayout.setBackgroundColor(resources.getColor(android.R.color.transparent))
+
+                    binding.tvLocation.visibility = View.VISIBLE
+                    binding.ivLocation.setImageResource(R.drawable.ic_selected_location)
+                    binding.locationLayout.setBackgroundResource(R.drawable.round_back_100)
+
+                    val scaleAnimation = ScaleAnimation(
+                        0.8f,
+                        1.0f,
+                        1f,
+                        1f,
+                        Animation.RELATIVE_TO_SELF,
+                        1.0f,
+                        Animation.RELATIVE_TO_SELF,
+                        0.0f
+                    )
+                    scaleAnimation.duration= 200
+                    scaleAnimation.fillAfter= true
+                    binding.locationLayout.startAnimation(scaleAnimation)
+
+
+                    selectedTab = 4
+
+                }
+            }
+
 
         }
     }
-}

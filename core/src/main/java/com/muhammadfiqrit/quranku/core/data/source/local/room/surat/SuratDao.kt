@@ -1,11 +1,11 @@
-package com.muhammadfiqrit.quranku.core.data.source.local.room
+package com.muhammadfiqrit.quranku.core.data.source.local.room.surat
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
-import com.muhammadfiqrit.quranku.core.data.source.local.entity.SuratEntity
+import com.muhammadfiqrit.quranku.core.data.source.local.entity.surat.SuratEntity
 import com.muhammadfiqrit.quranku.core.data.source.local.entity.detail.AyatEntity
 import com.muhammadfiqrit.quranku.core.data.source.local.entity.detail.SuratSelanjutnyaEntity
 import com.muhammadfiqrit.quranku.core.data.source.local.entity.tafsir.TafsirEntity

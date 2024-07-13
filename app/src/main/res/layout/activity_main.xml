@@ -11,9 +11,9 @@
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragment_container_view"
         android:layout_width="match_parent"
-        android:layout_marginTop="24dp"
         android:layout_height="match_parent"
-        android:layout_above="@+id/bottom_bar">
+        android:layout_above="@+id/bottom_bar"
+        android:layout_marginTop="24dp">
 
     </androidx.fragment.app.FragmentContainerView>
 
@@ -132,9 +132,41 @@
 
             </TextView>
         </LinearLayout>
-    </LinearLayout>
 
-   
+        <LinearLayout
+            android:id="@+id/location_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:background="@android:color/transparent"
+            android:orientation="horizontal"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp">
+
+            <ImageView
+                android:id="@+id/iv_location"
+                android:layout_width="27dp"
+                android:src="@drawable/ic_location"
+                android:adjustViewBounds="true"
+                android:layout_height="wrap_content">
+
+            </ImageView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Location"
+                android:visibility="gone"
+                android:textSize="16sp"
+                android:layout_marginStart="10dp"
+                android:textColor="@color/pink"
+                android:textStyle="bold"
+                android:id="@+id/tv_location">
+
+            </TextView>
+
+        </LinearLayout>
+    </LinearLayout>
 
 
 </RelativeLayout>

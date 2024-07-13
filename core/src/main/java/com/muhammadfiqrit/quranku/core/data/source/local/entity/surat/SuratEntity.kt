@@ -1,4 +1,4 @@
-package com.muhammadfiqrit.quranku.core.data.source.local.entity
+package com.muhammadfiqrit.quranku.core.data.source.local.entity.surat
 
 
 import androidx.room.ColumnInfo

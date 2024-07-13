@@ -18,8 +18,9 @@ class SholatRepository(
     override fun getJadwalSholatPerHari(tanggal: String, idKota : Int): Flow<Resource<JadwalDataHarian>> {
         return object : NetworkOnlyResource<JadwalDataHarian, ResponseJadwalDataHarian>() {
             override fun loadFromNetwork(data: ResponseJadwalDataHarian): Flow<JadwalDataHarian> {
-                return DataMapper.jadwalDataHarianToJadwalDataHarian(data)
+                return DataMapper.responseJadwalDataHarianToJadwalDataHarian(data)
             }
+
 
             override suspend fun createCall(): Flow<ApiResponse<ResponseJadwalDataHarian>> {
                 return sholatRemoteDataSource.getJadwalSholatPerHari(tanggal, idKota)

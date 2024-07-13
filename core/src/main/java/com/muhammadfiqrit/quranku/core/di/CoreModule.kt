@@ -1,14 +1,20 @@
 package com.muhammadfiqrit.quranku.core.di
 
 import androidx.room.Room
+import com.muhammadfiqrit.quranku.core.data.Repository.LokasiRepository
 import com.muhammadfiqrit.quranku.core.data.Repository.SholatRepository
 import com.muhammadfiqrit.quranku.core.data.Repository.SuratRepository
+import com.muhammadfiqrit.quranku.core.data.source.local.LokasiLocalDataSource
 import com.muhammadfiqrit.quranku.core.data.source.local.SuratLocalDataSource
-import com.muhammadfiqrit.quranku.core.data.source.local.room.SuratDatabase
+import com.muhammadfiqrit.quranku.core.data.source.local.room.sholat.lokasi.LokasiDatabase
+import com.muhammadfiqrit.quranku.core.data.source.local.room.surat.SuratDatabase
+import com.muhammadfiqrit.quranku.core.data.source.remote.LokasiRemoteDataSource
 import com.muhammadfiqrit.quranku.core.data.source.remote.SholatRemoteDataSource
 import com.muhammadfiqrit.quranku.core.data.source.remote.SuratRemoteDataSource
+import com.muhammadfiqrit.quranku.core.data.source.remote.network.LokasiService
 import com.muhammadfiqrit.quranku.core.data.source.remote.network.SholatService
 import com.muhammadfiqrit.quranku.core.data.source.remote.network.SuratService
+import com.muhammadfiqrit.quranku.core.domain.repository.ILokasiRepository
 import com.muhammadfiqrit.quranku.core.domain.repository.ISholatRepository
 import com.muhammadfiqrit.quranku.core.domain.repository.ISuratRepository
 import com.muhammadfiqrit.quranku.core.utils.AppExecutors
@@ -20,6 +26,7 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.create
 import java.util.concurrent.TimeUnit
 
 val databaseModule = module {
@@ -30,13 +37,22 @@ val databaseModule = module {
         Room.databaseBuilder(androidContext(), SuratDatabase::class.java, "Surat.db")
             .fallbackToDestructiveMigration().build()
     }
+
+    factory {
+        get<LokasiDatabase>().lokasiDao()
+    }
+    single {
+        Room.databaseBuilder(androidContext(), LokasiDatabase::class.java, "lokasi.db")
+            .fallbackToDestructiveMigration().build()
+    }
 }
 val networkModule = module {
     single {
         OkHttpClient.Builder()
             .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
-            .connectTimeout(120, TimeUnit.SECONDS)
-            .readTimeout(120, TimeUnit.SECONDS)
+            .connectTimeout(30, TimeUnit.SECONDS)
+            .readTimeout(30, TimeUnit.SECONDS)
+            .writeTimeout(30, TimeUnit.SECONDS)
             .build()
     }
     single {
@@ -56,15 +72,22 @@ val networkModule = module {
             .build()
         retrofitSolat.create(SholatService::class.java)
     }
+    single {
+        val retrofitLokasi = Retrofit.Builder()
+            .baseUrl(BASE_URL_SHOLAT)
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(get())
+            .build()
+        retrofitLokasi.create(LokasiService::class.java)
+    }
 }
 
 val repositoryModule = module {
+    factory { AppExecutors() }
     single {
         SuratLocalDataSource(get())
     }
-    single { SholatRemoteDataSource(get()) }
     single { SuratRemoteDataSource(get()) }
-    factory { AppExecutors() }
     single<ISuratRepository> {
         SuratRepository(
             get(),
@@ -72,6 +95,13 @@ val repositoryModule = module {
             get()
         )
     }
+    single<ILokasiRepository> {
+        LokasiRepository(get(), get(), get())
+    }
+
+    single { LokasiRemoteDataSource(get()) }
+    single { LokasiLocalDataSource(get()) }
+    single { SholatRemoteDataSource(get()) }
     single<ISholatRepository> { SholatRepository(get(), get()) }
 
 

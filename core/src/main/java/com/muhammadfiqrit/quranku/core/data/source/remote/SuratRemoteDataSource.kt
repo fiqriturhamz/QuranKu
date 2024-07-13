@@ -21,7 +21,7 @@ class SuratRemoteDataSource(private val suratService: SuratService) {
                 val response = suratService.getSurat()
                 val dataArray = response.data
                 if (dataArray.isNotEmpty()) {
-                    emit(ApiResponse.Success(response.data))
+                    emit(ApiResponse.Success(dataArray))
                 } else {
                     emit(ApiResponse.Empty)
                 }

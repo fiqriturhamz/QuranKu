@@ -1,24 +1,25 @@
 package com.muhammadfiqrit.quranku.core.utils
 
-import com.muhammadfiqrit.quranku.core.data.source.local.entity.SuratEntity
+import com.muhammadfiqrit.quranku.core.data.source.local.entity.surat.SuratEntity
 import com.muhammadfiqrit.quranku.core.data.source.local.entity.detail.AyatEntity
 import com.muhammadfiqrit.quranku.core.data.source.local.entity.detail.SuratSelanjutnyaEntity
+import com.muhammadfiqrit.quranku.core.data.source.local.entity.sholat.lokasi.LokasiEntity
 import com.muhammadfiqrit.quranku.core.data.source.local.entity.tafsir.TafsirEntity
 import com.muhammadfiqrit.quranku.core.data.source.remote.response.detail.AyatResponse
 import com.muhammadfiqrit.quranku.core.data.source.remote.response.detail.DataDetailSuratResponse
 import com.muhammadfiqrit.quranku.core.data.source.remote.response.detail.SuratSelanjutnyaResponse
 import com.muhammadfiqrit.quranku.core.data.source.remote.response.sholat.jadwal.ResponseJadwalDataHarian
+import com.muhammadfiqrit.quranku.core.data.source.remote.response.sholat.lokasi.ResponseSemuaLokasiItem
 import com.muhammadfiqrit.quranku.core.data.source.remote.response.surat.ResponseSurat
 import com.muhammadfiqrit.quranku.core.data.source.remote.response.tafsir.TafsirItemResponse
 import com.muhammadfiqrit.quranku.core.domain.model.detail.Ayat
 import com.muhammadfiqrit.quranku.core.domain.model.detail.DetailSurat
 import com.muhammadfiqrit.quranku.core.domain.model.detail.SuratSelanjutnya
+import com.muhammadfiqrit.quranku.core.domain.model.lokasi.Lokasi
 import com.muhammadfiqrit.quranku.core.domain.model.sholat.jadwal.JadwalDataHarian
 import com.muhammadfiqrit.quranku.core.domain.model.surat.Surat
 import com.muhammadfiqrit.quranku.core.domain.model.tafsir.TafsirItem
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
-import java.util.concurrent.Flow
 
 
 object DataMapper {
@@ -186,7 +187,7 @@ object DataMapper {
     fun tafsirEntitiesToTafsir(input: List<TafsirEntity>) =
         input.map { TafsirItem(ayat = it.ayat, teks = it.teks) }
 
-    fun jadwalDataHarianToJadwalDataHarian(input: ResponseJadwalDataHarian) =
+    fun responseJadwalDataHarianToJadwalDataHarian(input: ResponseJadwalDataHarian) =
         flowOf(
             JadwalDataHarian(
                 id = input.id,
@@ -203,6 +204,45 @@ object DataMapper {
                 tanggal = input.jadwal.tanggal
             )
         )
+
+
+    fun mapLokasiResponsesToLokasiEntities(input: List<ResponseSemuaLokasiItem>): List<LokasiEntity> {
+        val lokasiList = ArrayList<LokasiEntity>()
+        input.map {
+            val lokasi = LokasiEntity(
+                idLokasi = it.id,
+                namaLokasi = it.lokasi
+            )
+            lokasiList
+                .add(lokasi)
+        }
+        return lokasiList
+
+    }
+
+    fun mapLokasiEntitiesToListLokasi(input: List<LokasiEntity>): List<Lokasi> {
+        return input.map {
+            Lokasi(
+                namaLokasi = it.namaLokasi,
+                idLokasi = it.idLokasi,
+                lokasiSekarang = it.lokasiSekarang
+            )
+        }
+    }
+
+    fun mapLokasiEntityToLokasi(input: LokasiEntity): Lokasi {
+        return Lokasi(
+            idLokasi = input.idLokasi,
+            namaLokasi = input.namaLokasi,
+            lokasiSekarang = input.lokasiSekarang
+        )
+    }
+
+    fun mapDomainLokasiToLokasiEntity(input: Lokasi) = LokasiEntity(
+        idLokasi = input.idLokasi,
+        namaLokasi = input.namaLokasi,
+        lokasiSekarang = input.lokasiSekarang
+    )
 
 
 }

@@ -15,6 +15,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+
         <ImageView
             android:id="@+id/backgroundImageView"
             android:layout_width="match_parent"
@@ -337,8 +338,8 @@
 
         <RelativeLayout
             android:id="@+id/quran_feature"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
             android:layout_weight="1">
 
 
@@ -381,8 +382,8 @@
 
         <RelativeLayout
             android:id="@+id/sholat_feature"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
             android:layout_weight="1">
 
 
@@ -419,8 +420,8 @@
 
         <RelativeLayout
             android:id="@+id/donation_feature"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
             android:layout_weight="1">
 
 

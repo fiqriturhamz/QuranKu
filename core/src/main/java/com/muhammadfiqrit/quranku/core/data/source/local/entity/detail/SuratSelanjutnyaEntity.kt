@@ -5,7 +5,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
-import com.muhammadfiqrit.quranku.core.data.source.local.entity.SuratEntity
+import com.muhammadfiqrit.quranku.core.data.source.local.entity.surat.SuratEntity
 
 
 @Entity(
