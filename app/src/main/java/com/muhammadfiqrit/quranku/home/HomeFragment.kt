@@ -12,13 +12,11 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.muhammadfiqrit.quranku.core.data.Resource
 import com.muhammadfiqrit.quranku.core.domain.model.sholat.jadwal.JadwalDataHarian
-import com.muhammadfiqrit.quranku.databinding.FragmentHomeBinding
+import com.muhammadfiqrit.quranku.home.databinding.FragmentHomeBinding
 import com.muhammadfiqrit.quranku.lokasi.LokasiViewModel
-import com.muhammadfiqrit.quranku.utils.Utilities
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
 import java.util.Locale
-import java.util.TimeZone
 
 
 class HomeFragment : Fragment() {
@@ -39,6 +37,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
         val gregorianCalendar = GregorianCalendar()
         val calendarYear = gregorianCalendar.get(Calendar.YEAR)
         val calendarMonth = gregorianCalendar.get(Calendar.MONTH) + 1
@@ -46,17 +45,14 @@ class HomeFragment : Fragment() {
         Log.e("gregorian", calendarDay.toString())
         lokasiViewModel.lokasiSekarang.observe(viewLifecycleOwner) { lokasi ->
             if (lokasi != null) {
-                populateData("$calendarYear-$calendarMonth-$calendarDay", lokasi.idLokasi.toInt())
+                populateData("$calendarYear-$calendarMonth-$calendarDay", lokasi.idLokasi!!.toInt())
             }
-
-
-
         }
 
 
     }
 
-    fun populateData(tanggal: String, idKota: Int = 1301) {
+    fun populateData(tanggal: String, idKota: Int) {
         homeViewModel.setIdKota(idKota)
         homeViewModel.setTanggal(tanggal)
         homeViewModel.jadwalSholatHarian.observe(viewLifecycleOwner) {

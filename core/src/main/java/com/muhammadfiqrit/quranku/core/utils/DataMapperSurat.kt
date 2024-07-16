@@ -1,29 +1,22 @@
 package com.muhammadfiqrit.quranku.core.utils
 
-import androidx.annotation.Nullable
 import com.muhammadfiqrit.quranku.core.data.source.local.entity.surat.SuratEntity
 import com.muhammadfiqrit.quranku.core.data.source.local.entity.detail.AyatEntity
 import com.muhammadfiqrit.quranku.core.data.source.local.entity.detail.SuratSelanjutnyaEntity
-import com.muhammadfiqrit.quranku.core.data.source.local.entity.sholat.lokasi.LokasiEntity
 import com.muhammadfiqrit.quranku.core.data.source.local.entity.tafsir.TafsirEntity
 import com.muhammadfiqrit.quranku.core.data.source.remote.response.detail.AyatResponse
 import com.muhammadfiqrit.quranku.core.data.source.remote.response.detail.DataDetailSuratResponse
 import com.muhammadfiqrit.quranku.core.data.source.remote.response.detail.SuratSelanjutnyaResponse
-import com.muhammadfiqrit.quranku.core.data.source.remote.response.sholat.jadwal.ResponseJadwalDataHarian
-import com.muhammadfiqrit.quranku.core.data.source.remote.response.sholat.lokasi.ResponseSemuaLokasiItem
 import com.muhammadfiqrit.quranku.core.data.source.remote.response.surat.ResponseSurat
 import com.muhammadfiqrit.quranku.core.data.source.remote.response.tafsir.TafsirItemResponse
 import com.muhammadfiqrit.quranku.core.domain.model.detail.Ayat
 import com.muhammadfiqrit.quranku.core.domain.model.detail.DetailSurat
 import com.muhammadfiqrit.quranku.core.domain.model.detail.SuratSelanjutnya
-import com.muhammadfiqrit.quranku.core.domain.model.lokasi.Lokasi
-import com.muhammadfiqrit.quranku.core.domain.model.sholat.jadwal.JadwalDataHarian
 import com.muhammadfiqrit.quranku.core.domain.model.surat.Surat
 import com.muhammadfiqrit.quranku.core.domain.model.tafsir.TafsirItem
-import kotlinx.coroutines.flow.flowOf
 
 
-object DataMapper {
+object DataMapperSurat {
     fun mapSuratResponsesToSuratEntities(input: List<ResponseSurat>): List<SuratEntity> {
         val suratList = ArrayList<SuratEntity>()
         input.map {
@@ -53,33 +46,11 @@ object DataMapper {
                 deskripsi = it.deskripsi,
                 tempatTurun = it.tempatTurun,
                 namaLatin = it.namaLatin,
-
-                )
+                isFavorite = it.isFavorite
+            )
 
         }
 
-    /*
-            fun mapDataDetailSuratResponseToDetailSurat(input: DataDetailSuratResponse) =
-                flowOf(
-                    DetailSurat(
-                        nama = input.nama,
-                        nomor = input.nomor,
-                        jumlahAyat = input.jumlahAyat,
-                        tempatTurun = input.tempatTurun,
-                        arti = input.arti,
-                        deskripsi = input.deskripsi,
-                        namaLatin = input.namaLatin,
-                        ayat = input.ayat.map { ayatResponse ->
-                            Ayat(
-                                nomorAyat = ayatResponse.nomorAyat,
-                                teksArab = ayatResponse.teksArab,
-                                teksIndonesia = ayatResponse.teksIndonesia,
-                                teksLatin = ayatResponse.teksLatin
-                            )
-                        },
-                        isFavorite = false
-                    )
-                )*/
 
     fun mapDetailSuratToSuratEntity(input: DetailSurat) = SuratEntity(
 
@@ -90,19 +61,19 @@ object DataMapper {
         jumlahAyat = input.surat.jumlahAyat,
         tempatTurun = input.surat.tempatTurun,
         deskripsi = input.surat.deskripsi,
-        isFavorite = false
+        isFavorite = input.surat.isFavorite
     )
 
     fun mapSuratEntityToDetailSurat(input: SuratEntity) =
         Surat(
-
             nomor = input.nomor,
             nama = input.nama,
             jumlahAyat = input.jumlahAyat,
             arti = input.arti,
             namaLatin = input.namaLatin,
             deskripsi = input.deskripsi,
-            tempatTurun = input.tempatTurun
+            tempatTurun = input.tempatTurun,
+            isFavorite = input.isFavorite
 
 
         )
@@ -115,9 +86,32 @@ object DataMapper {
                 teksArab = it.teksArab,
                 teksLatin = it.teksLatin,
                 teksIndonesia = it.teksIndonesia,
-                nomorSurat = it.nomorSurat
+                nomorSurat = it.nomorSurat,
+                ayatTerakhirDibaca = it.isLastRead
             )
         }
+
+    fun mapAyatEntityToAyat(input: AyatEntity): Ayat {
+        return Ayat(
+            nomorAyat = input.nomorAyat,
+            teksArab = input.teksArab,
+            teksIndonesia = input.teksIndonesia,
+            teksLatin = input.teksLatin,
+            nomorSurat = input.nomorSurat,
+            ayatTerakhirDibaca = input.isLastRead
+        )
+    }
+
+    fun mapAyatToAyatEntity(input: Ayat): AyatEntity {
+        return AyatEntity(
+            nomorSurat = input.nomorSurat,
+            nomorAyat = input.nomorAyat,
+            teksLatin = input.teksLatin,
+            teksIndonesia = input.teksIndonesia,
+            teksArab = input.teksArab,
+            isLastRead = input.ayatTerakhirDibaca
+        )
+    }
 
 
     fun mapDataDetailSuratResponseToSuratEntity(input: DataDetailSuratResponse): SuratEntity {
@@ -129,9 +123,8 @@ object DataMapper {
             jumlahAyat = input.jumlahAyat,
             nomor = input.nomor,
             tempatTurun = input.tempatTurun,
-            isFavorite = false,
-
-            )
+            isFavorite = false
+        )
     }
 
     fun mapAyatResponsesToAyatEntities(
@@ -145,6 +138,8 @@ object DataMapper {
                 teksIndonesia = ayat.teksIndonesia,
                 teksArab = ayat.teksArab,
                 nomorSurat = nomorSurat,
+                isLastRead = false
+
             )
         }
 
@@ -187,74 +182,6 @@ object DataMapper {
 
     fun tafsirEntitiesToTafsir(input: List<TafsirEntity>) =
         input.map { TafsirItem(ayat = it.ayat, teks = it.teks) }
-
-    fun responseJadwalDataHarianToJadwalDataHarian(input: ResponseJadwalDataHarian) =
-        flowOf(
-            JadwalDataHarian(
-                id = input.id,
-                daerah = input.daerah,
-                lokasi = input.lokasi,
-                dhuha = input.jadwal.dhuha,
-                dzuhur = input.jadwal.dzuhur,
-                ashar = input.jadwal.ashar,
-                imsak = input.jadwal.imsak,
-                isya = input.jadwal.isya,
-                maghrib = input.jadwal.maghrib,
-                subuh = input.jadwal.subuh,
-                terbit = input.jadwal.terbit,
-                tanggal = input.jadwal.tanggal
-            )
-        )
-
-
-    fun mapLokasiResponsesToLokasiEntities(input: List<ResponseSemuaLokasiItem>): List<LokasiEntity> {
-        val lokasiList = ArrayList<LokasiEntity>()
-        input.map {
-            val lokasi = LokasiEntity(
-                idLokasi = it.id,
-                namaLokasi = it.lokasi
-            )
-            lokasiList
-                .add(lokasi)
-        }
-        return lokasiList
-
-    }
-
-    fun mapLokasiEntitiesToListLokasi(input: List<LokasiEntity>): List<Lokasi> {
-        return input.map {
-            Lokasi(
-                namaLokasi = it.namaLokasi,
-                idLokasi = it.idLokasi,
-                lokasiSekarang = it.lokasiSekarang
-            )
-        }
-    }
-
-    fun mapLokasiEntityToLokasi( input: LokasiEntity?): Lokasi {
-        /*      val nonNullInput = input ?: return Lokasi(idLokasi = "1301", namaLokasi = "", lokasiSekarang = false)
-              return Lokasi(
-                  idLokasi = nonNullInput.idLokasi,
-                  namaLokasi = nonNullInput.namaLokasi,
-                  lokasiSekarang = nonNullInput.lokasiSekarang
-              )*/
-        return if (input == null) {
-            Lokasi(idLokasi = "1301", namaLokasi = "Jakarta", lokasiSekarang = false)
-        } else {
-            Lokasi(
-                idLokasi = input.idLokasi,
-                namaLokasi = input.namaLokasi,
-                lokasiSekarang = input.lokasiSekarang
-            )
-        }
-    }
-
-
-    fun mapDomainLokasiToLokasiEntity(input: Lokasi) = LokasiEntity(
-        idLokasi = input.idLokasi,
-        namaLokasi = input.namaLokasi,
-        lokasiSekarang = input.lokasiSekarang
-    )
 
 
 }

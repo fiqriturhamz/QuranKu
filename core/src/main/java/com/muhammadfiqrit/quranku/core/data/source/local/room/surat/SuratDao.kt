@@ -9,6 +9,7 @@ import com.muhammadfiqrit.quranku.core.data.source.local.entity.surat.SuratEntit
 import com.muhammadfiqrit.quranku.core.data.source.local.entity.detail.AyatEntity
 import com.muhammadfiqrit.quranku.core.data.source.local.entity.detail.SuratSelanjutnyaEntity
 import com.muhammadfiqrit.quranku.core.data.source.local.entity.tafsir.TafsirEntity
+import com.muhammadfiqrit.quranku.core.domain.model.detail.Ayat
 import kotlinx.coroutines.flow.Flow
 
 
@@ -58,4 +59,10 @@ interface SuratDao {
     @Query("SELECT * FROM tafsir WHERE nomorSurat = :nomorSurat ")
     fun getTafsir(nomorSurat: Int): Flow<List<TafsirEntity>>
 
+
+    @Update
+    fun updateAyatTerakhirDibaca(Ayat: AyatEntity)
+
+    @Query("SELECT * FROM ayat WHERE isLastRead = 1")
+    fun getAyatTerakhirDibaca(): Flow<AyatEntity>
 }

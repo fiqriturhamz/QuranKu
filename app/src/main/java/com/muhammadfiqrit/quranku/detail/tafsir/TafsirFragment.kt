@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.muhammadfiqrit.quranku.core.data.Resource
-import com.muhammadfiqrit.quranku.core.ui.TafsirAdapter
+import com.muhammadfiqrit.quranku.TafsirAdapter
 import com.muhammadfiqrit.quranku.databinding.FragmentTafsirBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

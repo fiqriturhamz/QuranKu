@@ -6,4 +6,5 @@ data class Ayat(
     var teksLatin : String,
     var teksIndonesia : String,
     var nomorSurat : Int,
+    var ayatTerakhirDibaca : Boolean,
 )

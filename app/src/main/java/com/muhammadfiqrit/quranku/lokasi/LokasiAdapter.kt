@@ -1,4 +1,4 @@
-package com.muhammadfiqrit.quranku
+package com.muhammadfiqrit.quranku.lokasi
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.muhammadfiqrit.quranku.core.R
 import com.muhammadfiqrit.quranku.core.databinding.ItemListLokasiBinding
 import com.muhammadfiqrit.quranku.core.domain.model.lokasi.Lokasi
-import com.muhammadfiqrit.quranku.lokasi.LokasiViewModel
 
 class LokasiAdapter(private val context: Context, private val lokasiViewModel: LokasiViewModel) :
     RecyclerView.Adapter<LokasiAdapter.LokasiViewHolder>() {
@@ -42,25 +41,28 @@ class LokasiAdapter(private val context: Context, private val lokasiViewModel: L
                 lokasiViewModel.setLokasiSekarang(data, lokasiSekarang)
             }
 
-            if (lokasiSekarang) {
-                binding.ivLokasiSekarang.setImageDrawable(
-                    ContextCompat.getDrawable(
-                        context,
-                        R.drawable.ic_check
-                    )
-                )
-                binding.layoutListLokasi.setBackgroundResource(R.drawable.custom_card_current_location)
+            updateLokasiSekarang(lokasiSekarang, holder)
+        }
+    }
 
-
-            } else {
-                binding.ivLokasiSekarang.setImageDrawable(
-                    ContextCompat.getDrawable(
-                        context,
-                        R.drawable.ic_uncheck
-                    )
+    private fun updateLokasiSekarang(lokasiSekarang: Boolean, holder: LokasiViewHolder) {
+        if (lokasiSekarang) {
+            holder.binding.ivLokasiSekarang.setImageDrawable(
+                ContextCompat.getDrawable(
+                    context,
+                    R.drawable.ic_check
                 )
-                binding.layoutListLokasi.setBackgroundResource(R.drawable.custom_card_not_current_location)
-            }
+            )
+            holder.binding.layoutListLokasi.setBackgroundResource(R.drawable.custom_card_current_location)
+        } else {
+            holder.binding.ivLokasiSekarang.setImageDrawable(
+                ContextCompat.getDrawable(
+                    context,
+                    R.drawable.ic_uncheck
+                )
+            )
+            holder.binding.layoutListLokasi.setBackgroundResource(R.drawable.custom_card_not_current_location)
+
         }
     }
 
@@ -70,6 +72,7 @@ class LokasiAdapter(private val context: Context, private val lokasiViewModel: L
 
     inner class LokasiViewHolder(var binding: ItemListLokasiBinding) :
         RecyclerView.ViewHolder(binding.root)
+
 
 
 }

@@ -5,6 +5,7 @@ import com.muhammadfiqrit.quranku.core.data.source.local.entity.detail.AyatEntit
 import com.muhammadfiqrit.quranku.core.data.source.local.entity.detail.SuratSelanjutnyaEntity
 import com.muhammadfiqrit.quranku.core.data.source.local.entity.tafsir.TafsirEntity
 import com.muhammadfiqrit.quranku.core.data.source.local.room.surat.SuratDao
+import com.muhammadfiqrit.quranku.core.domain.model.detail.Ayat
 import kotlinx.coroutines.flow.Flow
 
 
@@ -19,12 +20,19 @@ class SuratLocalDataSource(private val suratDao: SuratDao) {
         surat.isFavorite = newState
         suratDao.updateFavoriteSurat(surat)
     }
+
     fun getSuratByNomor(nomorSurat: Int): Flow<SuratEntity> = suratDao.getSuratByNomor(nomorSurat)
 
     suspend fun insertDetailSurat(surat: SuratEntity) = suratDao.insertDetailSurat(surat)
 
     suspend fun insertAyat(ayat: List<AyatEntity>) = suratDao.insertAyat(ayat)
     fun getAyatBySurat(nomorSurat: Int) = suratDao.getAyatBySurat(nomorSurat)
+
+    fun getAyatTerakhirDibaca(): Flow<AyatEntity> = suratDao.getAyatTerakhirDibaca()
+    fun setAyatTerakhirDibaca(ayat: AyatEntity, newState: Boolean) {
+        ayat.isLastRead = newState
+        suratDao.updateAyatTerakhirDibaca(ayat)
+    }
 
     suspend fun insertSuratSelanjutnya(suratSelanjutnya: SuratSelanjutnyaEntity) =
         suratDao.insertSuratSelanjutnya(suratSelanjutnya)

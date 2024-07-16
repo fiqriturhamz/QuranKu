@@ -24,5 +24,5 @@ data class SuratEntity(
     @ColumnInfo(name = "deskripsi")
     val deskripsi: String,
     @ColumnInfo(name = "isFavorite")
-    var isFavorite: Boolean = false
+    var isFavorite: Boolean
 )

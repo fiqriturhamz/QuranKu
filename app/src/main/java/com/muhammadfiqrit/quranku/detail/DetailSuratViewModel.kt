@@ -9,8 +9,6 @@ import com.muhammadfiqrit.quranku.core.domain.usecase.surat.SuratUseCase
 
 class DetailSuratViewModel(private val suratUseCase: SuratUseCase) : ViewModel() {
     private val suratId = MutableLiveData<Int>()
-
-
     val suratDetail = Transformations.switchMap(suratId) {
         suratUseCase.getSuratByNomor(it).asLiveData()
 
@@ -21,7 +19,6 @@ class DetailSuratViewModel(private val suratUseCase: SuratUseCase) : ViewModel()
         suratId.value = id
     }
 
-    fun setFavoriteSurat(surat: DetailSurat, newStatus: Boolean) =
-        suratUseCase.setFavoriteSurat(surat, newStatus)
+
 
 }

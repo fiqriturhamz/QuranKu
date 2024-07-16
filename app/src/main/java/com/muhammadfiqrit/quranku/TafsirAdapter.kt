@@ -1,4 +1,4 @@
-package com.muhammadfiqrit.quranku.core.ui
+package com.muhammadfiqrit.quranku
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

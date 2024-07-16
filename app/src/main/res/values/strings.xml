@@ -16,4 +16,7 @@
     <string name="title_home">Home</string>
     <string name="surat">Surat</string>
     <string name="favorit">Favorit\n</string>
+    <string name="title_lokasi">lokasi</string>
+    <string name="title_bookmark">bookmark</string>
+    <string name="title_surat">surat</string>
 </resources>

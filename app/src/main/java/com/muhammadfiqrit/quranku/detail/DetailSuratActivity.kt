@@ -1,15 +1,18 @@
 package com.muhammadfiqrit.quranku.detail
 
 import android.os.Bundle
-import android.view.View
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.google.android.material.tabs.TabLayoutMediator
 import com.muhammadfiqrit.quranku.R
+import com.muhammadfiqrit.quranku.core.domain.model.surat.Surat
 import com.muhammadfiqrit.quranku.databinding.ActivityDetailSuratBinding
 import com.muhammadfiqrit.quranku.detail.ayat.AyatFragment
 import com.muhammadfiqrit.quranku.detail.tafsir.TafsirFragment
+import com.muhammadfiqrit.quranku.favorite.FavoriteViewModel
 import com.muhammadfiqrit.quranku.utils.Utilities
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -27,6 +30,7 @@ class DetailSuratActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailSuratBinding
     private val detailSuratViewModel: DetailSuratViewModel by viewModel()
+    private val favoriteViewModel: FavoriteViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,25 +42,29 @@ class DetailSuratActivity : AppCompatActivity() {
             tab.text = resources.getString(DETAIL_TAB_TITLES[position])
         }.attach()
 
-        val suratNomor = intent.getIntExtra(EXTRA_SURAT_NOMOR, 1)
+        val dataFromIntent = intent.getParcelableExtra<Surat>(EXTRA_SURAT_NOMOR)
 
-        AyatFragment.suratNomor = suratNomor
-        TafsirFragment.suratNomor = suratNomor
 
-        populateDataDetail(suratNomor)
+
+        AyatFragment.suratNomor = dataFromIntent!!.nomor
+        TafsirFragment.suratNomor = dataFromIntent.nomor
+
+        populateDataDetail(dataFromIntent.nomor, dataFromIntent.isFavorite)
+
 
         Utilities.setStatusBarGradiant(this)
 
     }
 
-    private fun populateDataDetail(suratNomor: Int) {
-        suratNomor.let { detailSuratViewModel.setId(it) }
+    private fun populateDataDetail(suratNomor: Int, isFavorite: Boolean) {
+        detailSuratViewModel.setId(suratNomor)
         detailSuratViewModel.suratDetail.observe(this) {
             if (it != null) {
                 when (it) {
-                    is com.muhammadfiqrit.quranku.core.data.Resource.Loading ->{}
+                    is com.muhammadfiqrit.quranku.core.data.Resource.Loading -> {}
 
                     is com.muhammadfiqrit.quranku.core.data.Resource.Success -> {
+
 
                         it.data?.let { detailSurat ->
                             binding.tvDetailArtiSurat.text = detailSurat.surat.arti
@@ -65,25 +73,18 @@ class DetailSuratActivity : AppCompatActivity() {
                             binding.tvDetailNamaSurat.text = detailSurat.surat.nama
                             binding.tvDetailNomorSurat.text = detailSurat.surat.nomor.toString()
 
-                            /*  val ayatAdapter = AyatAdapter(detailSurat.ayat)
-                              binding.rvAyat.layoutManager = LinearLayoutManager(this)
-                              binding.rvAyat.setHasFixedSize(true)
-                              binding.rvAyat.adapter = ayatAdapter*/
-                            /*
-                                                        var statusFavorite = false
-                                                        setStatusFavorite(statusFavorite)*/
+                            var statusFavorite = isFavorite
 
-                            /*           binding.fabFavorite.setOnClickListener {
-
-                                           Log.e("status_favorite", statusFavorite.toString())
-                                           statusFavorite = !statusFavorite
-                                           detailSuratViewModel.setFavoriteSurat(
-                                               detailSurat,
-                                               statusFavorite
-                                           )
-                                           setStatusFavorite(statusFavorite)
-                                       }*/
+                            binding.fabFavorite.setOnClickListener {
+                                statusFavorite = !statusFavorite
+                                favoriteViewModel.setFavoriteSurat(
+                                    detailSurat,
+                                    statusFavorite
+                                )
+                                setStatusFavorite(statusFavorite)
+                            }
                         }
+
                     }
 
                     is com.muhammadfiqrit.quranku.core.data.Resource.Error -> {
@@ -96,22 +97,22 @@ class DetailSuratActivity : AppCompatActivity() {
 
     }
 
-    /*    private fun setStatusFavorite(statusFavorite: Boolean) {
-            if (statusFavorite) {
-                binding.fabFavorite.setImageDrawable(
-                    ContextCompat.getDrawable(
-                        this,
-                        com.muhammadfiqrit.quranku.R.drawable.favorite_white
-                    )
+    private fun setStatusFavorite(statusFavorite: Boolean) {
+        if (statusFavorite) {
+            binding.fabFavorite.setImageDrawable(
+                ContextCompat.getDrawable(
+                    this,
+                    R.drawable.favorite_white
                 )
-            } else {
-                binding.fabFavorite.setImageDrawable(
-                    ContextCompat.getDrawable(
-                        this,
-                        com.muhammadfiqrit.quranku.R.drawable.not_favorite_white
-                    )
+            )
+        } else {
+            binding.fabFavorite.setImageDrawable(
+                ContextCompat.getDrawable(
+                    this,
+                    R.drawable.not_favorite_white
                 )
-            }
-        }*/
+            )
+        }
+    }
 
 }

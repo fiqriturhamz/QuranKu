@@ -1,5 +1,9 @@
 package com.muhammadfiqrit.quranku.di
 
+
+import com.muhammadfiqrit.quranku.AyatAdapter
+import com.muhammadfiqrit.quranku.AyatViewModel
+import com.muhammadfiqrit.quranku.SuratAdapter
 import com.muhammadfiqrit.quranku.core.domain.usecase.lokasi.LokasiInteractor
 import com.muhammadfiqrit.quranku.core.domain.usecase.lokasi.LokasiUseCase
 import com.muhammadfiqrit.quranku.core.domain.usecase.sholat.SholatInteractor
@@ -10,6 +14,7 @@ import com.muhammadfiqrit.quranku.detail.DetailSuratViewModel
 import com.muhammadfiqrit.quranku.detail.tafsir.TafsirViewModel
 import com.muhammadfiqrit.quranku.favorite.FavoriteViewModel
 import com.muhammadfiqrit.quranku.home.HomeViewModel
+import com.muhammadfiqrit.quranku.lokasi.LokasiAdapter
 import com.muhammadfiqrit.quranku.lokasi.LokasiViewModel
 import com.muhammadfiqrit.quranku.surat.SuratViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -25,8 +30,16 @@ val viewModelModule = module {
     viewModel { DetailSuratViewModel(get()) }
     viewModel { FavoriteViewModel(get()) }
     viewModel { TafsirViewModel(get()) }
-    viewModel { HomeViewModel(get()) }
+    viewModel { AyatViewModel(get()) }
     viewModel { LokasiViewModel(get()) }
+    viewModel { HomeViewModel(get()) }
 
 
+}
+val adapterModule = module {
+    factory { SuratAdapter() }
+
+    factory { LokasiAdapter(get(), get()) }
+
+    factory { AyatAdapter(get()) }
 }

@@ -30,6 +30,8 @@ data class AyatEntity(
     @ColumnInfo(name = "teksLatin")
     var teksLatin: String,
     @ColumnInfo(name = "teksIndonesia")
-    var teksIndonesia: String
+    var teksIndonesia: String,
+    @ColumnInfo("isLastRead")
+    var isLastRead : Boolean
 )
 

@@ -5,7 +5,7 @@ plugins {
 }
 
 
-
+apply {from("../shared_depedencies.gradle")}
 android {
     namespace 'com.muhammadfiqrit.quranku'
     compileSdk 33
@@ -39,25 +39,12 @@ android {
         viewBinding = true
     }
 
+
 }
 
 dependencies {
 
     implementation project(':core')
-    implementation "androidx.core:core-ktx:$core_ktx_version"
-    implementation "androidx.appcompat:appcompat:$appcompat_version"
-    implementation "com.google.android.material:material:$android_material_version"
-    implementation "androidx.constraintlayout:constraintlayout:$constraint_layout"
-    testImplementation "junit:junit:$junit_version"
-    androidTestImplementation "androidx.test.ext:junit:$androidx_junit_version"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
-    implementation "androidx.multidex:multidex:$multidex_version"
-    //koin
-    implementation "io.insert-koin:koin-android:$koin_version"
-
-    implementation "io.insert-koin:koin-core:$koin_version"
-    androidTestImplementation "io.insert-koin:koin-test-junit4:$koin_version"
-
 
     //viewpager2
     implementation "androidx.viewpager2:viewpager2:$viewPager2"

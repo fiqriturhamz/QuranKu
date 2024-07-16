@@ -2,15 +2,14 @@ package com.muhammadfiqrit.quranku.favorite
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.muhammadfiqrit.quranku.SuratAdapter
 import com.muhammadfiqrit.quranku.databinding.FragmentFavoriteBinding
-import com.muhammadfiqrit.quranku.core.domain.model.surat.Surat
 import com.muhammadfiqrit.quranku.detail.DetailSuratActivity
-import com.muhammadfiqrit.quranku.core.ui.SuratAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class FavoriteFragment : Fragment() {
@@ -30,16 +29,13 @@ class FavoriteFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         if (activity != null) {
             val suratAdapter = SuratAdapter()
-            suratAdapter.setOnItemClickCallback(object : SuratAdapter.OnItemClickCallback {
-                override fun onSuratClick(data: Surat) {
-                    val intent = Intent(requireActivity(), DetailSuratActivity::class.java)
-                    intent.putExtra(DetailSuratActivity.EXTRA_SURAT_NOMOR, data.nomor)
-                    startActivity(intent)
-                }
-
-            })
+            suratAdapter.onItemClick = { selectedData ->
+                val intent = Intent(activity, DetailSuratActivity::class.java)
+                startActivity(intent)
+            }
             favoriteViewModel.favoriteSurat.observe(viewLifecycleOwner) { dataSurat ->
                 suratAdapter.setData(dataSurat)
+
             }
 
             with(binding.rvFavoriteSurat) {

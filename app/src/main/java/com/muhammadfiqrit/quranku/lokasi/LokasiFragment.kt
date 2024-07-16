@@ -1,22 +1,25 @@
 package com.muhammadfiqrit.quranku.lokasi
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+
 import com.muhammadfiqrit.quranku.core.data.Resource
-import com.muhammadfiqrit.quranku.LokasiAdapter
 import com.muhammadfiqrit.quranku.databinding.FragmentLocationBinding
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.context.loadKoinModules
 
 class LokasiFragment : Fragment() {
 
     private var _binding: FragmentLocationBinding? = null
     private val binding get() = _binding!!
     private val lokasiViewModel: LokasiViewModel by viewModel()
+    private val lokasiAdapter: LokasiAdapter by inject()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -28,10 +31,10 @@ class LokasiFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         if (activity != null) {
 
 
-            val lokasiAdapter = LokasiAdapter(requireContext(), lokasiViewModel)
             lokasiViewModel.lokasi.observe(viewLifecycleOwner) { lokasi ->
                 if (lokasi != null) {
                     when (lokasi) {
