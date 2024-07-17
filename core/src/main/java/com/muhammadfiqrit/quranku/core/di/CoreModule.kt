@@ -1,9 +1,9 @@
 package com.muhammadfiqrit.quranku.core.di
 
 import androidx.room.Room
-import com.muhammadfiqrit.quranku.core.data.Repository.LokasiRepository
-import com.muhammadfiqrit.quranku.core.data.Repository.SholatRepository
-import com.muhammadfiqrit.quranku.core.data.Repository.SuratRepository
+import com.muhammadfiqrit.quranku.core.data.repository.LokasiRepository
+import com.muhammadfiqrit.quranku.core.data.repository.SholatRepository
+import com.muhammadfiqrit.quranku.core.data.repository.SuratRepository
 import com.muhammadfiqrit.quranku.core.data.source.local.LokasiLocalDataSource
 import com.muhammadfiqrit.quranku.core.data.source.local.SuratLocalDataSource
 import com.muhammadfiqrit.quranku.core.data.source.local.room.sholat.lokasi.LokasiDatabase
@@ -26,7 +26,6 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
 import java.util.concurrent.TimeUnit
 
 val databaseModule = module {

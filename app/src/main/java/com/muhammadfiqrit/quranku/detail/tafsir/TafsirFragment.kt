@@ -33,10 +33,10 @@ class TafsirFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        populateTafsir(suratNomor)
+    /*    populateTafsir(suratNomor)*/
     }
 
-    fun populateTafsir(nomorSurat: Int) {
+  /*  fun populateTafsir(nomorSurat: Int) {
         nomorSurat.let { tafsirViewModel.setId(it) }
         tafsirViewModel.suratDetail.observe(viewLifecycleOwner) {
             val result = it
@@ -64,7 +64,7 @@ class TafsirFragment : Fragment() {
                 }
             }
         }
-    }
+    }*/
 
 
 }

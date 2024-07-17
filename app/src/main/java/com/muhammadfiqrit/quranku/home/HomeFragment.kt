@@ -1,5 +1,6 @@
 package com.muhammadfiqrit.quranku.home
 
+import android.content.pm.ApplicationInfo
 import android.icu.util.Calendar
 import android.icu.util.GregorianCalendar
 import android.os.Bundle
@@ -12,7 +13,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.muhammadfiqrit.quranku.core.data.Resource
 import com.muhammadfiqrit.quranku.core.domain.model.sholat.jadwal.JadwalDataHarian
-import com.muhammadfiqrit.quranku.home.databinding.FragmentHomeBinding
+import com.muhammadfiqrit.quranku.databinding.FragmentHomeBinding
 import com.muhammadfiqrit.quranku.lokasi.LokasiViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
@@ -38,7 +39,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        val gregorianCalendar = GregorianCalendar()
+   /*     val gregorianCalendar = GregorianCalendar()
         val calendarYear = gregorianCalendar.get(Calendar.YEAR)
         val calendarMonth = gregorianCalendar.get(Calendar.MONTH) + 1
         val calendarDay = gregorianCalendar.get(Calendar.DAY_OF_MONTH)
@@ -48,11 +49,11 @@ class HomeFragment : Fragment() {
                 populateData("$calendarYear-$calendarMonth-$calendarDay", lokasi.idLokasi!!.toInt())
             }
         }
-
+*/
 
     }
 
-    fun populateData(tanggal: String, idKota: Int) {
+  /*  fun populateData(tanggal: String, idKota: Int) {
         homeViewModel.setIdKota(idKota)
         homeViewModel.setTanggal(tanggal)
         homeViewModel.jadwalSholatHarian.observe(viewLifecycleOwner) {
@@ -75,7 +76,7 @@ class HomeFragment : Fragment() {
                 }
             }
         }
-    }
+    }*/
 
     private fun bindingData(data: Resource.Success<JadwalDataHarian>) {
         binding.tvWaktuAsr.text = data.data?.ashar

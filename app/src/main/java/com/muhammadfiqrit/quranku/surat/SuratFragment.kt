@@ -35,7 +35,7 @@ class SuratFragment : Fragment() {
         if (activity != null) {
             suratAdapter.onItemClick = { selectedData ->
                 val intent = Intent(activity, DetailSuratActivity::class.java)
-                intent.putExtra(DetailSuratActivity.EXTRA_SURAT_NOMOR, selectedData)
+                intent.putExtra(DetailSuratActivity.EXTRA_SURAT_NOMOR, selectedData.nomor)
                 startActivity(intent)
             }
 

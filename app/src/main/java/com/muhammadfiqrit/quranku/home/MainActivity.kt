@@ -1,4 +1,4 @@
-package com.muhammadfiqrit.quranku.main
+package com.muhammadfiqrit.quranku.home
 
 import android.os.Bundle
 import android.view.View
@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction().setReorderingAllowed(true)
             .replace(
                 R.id.fragment_container_view,
-                , null
+                HomeFragment(), null
             )
             .commit()
         binding.homeLayout.setOnClickListener {

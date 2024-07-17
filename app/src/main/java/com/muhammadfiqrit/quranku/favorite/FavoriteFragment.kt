@@ -29,20 +29,21 @@ class FavoriteFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         if (activity != null) {
             val suratAdapter = SuratAdapter()
-            suratAdapter.onItemClick = { selectedData ->
+         /*   suratAdapter.onItemClick = { selectedData ->
                 val intent = Intent(activity, DetailSuratActivity::class.java)
+                intent.putExtra(DetailSuratActivity.EXTRA_SURAT_NOMOR, selectedData)
                 startActivity(intent)
-            }
-            favoriteViewModel.favoriteSurat.observe(viewLifecycleOwner) { dataSurat ->
+            }*/
+          /*  favoriteViewModel.favoriteSurat.observe(viewLifecycleOwner) { dataSurat ->
                 suratAdapter.setData(dataSurat)
 
             }
-
-            with(binding.rvFavoriteSurat) {
+*/
+          /*  with(binding.rvFavoriteSurat) {
                 layoutManager = LinearLayoutManager(context)
                 setHasFixedSize(true)
                 adapter = suratAdapter
-            }
+            }*/
         }
     }
 

@@ -4,6 +4,7 @@ package com.muhammadfiqrit.quranku.core.data.source.local.entity.surat
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.muhammadfiqrit.quranku.core.domain.model.detail.Ayat
 
 
 @Entity(tableName = "surat")
@@ -24,5 +25,5 @@ data class SuratEntity(
     @ColumnInfo(name = "deskripsi")
     val deskripsi: String,
     @ColumnInfo(name = "isFavorite")
-    var isFavorite: Boolean
+    var isFavorite: Boolean = false,
 )

@@ -40,11 +40,13 @@ android {
     }
 
 
+
 }
 
 dependencies {
 
     implementation project(':core')
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     //viewpager2
     implementation "androidx.viewpager2:viewpager2:$viewPager2"
@@ -55,5 +57,6 @@ dependencies {
 
     //status bar
     implementation 'com.readystatesoftware.systembartint:systembartint:1.0.3'
+
 
 }

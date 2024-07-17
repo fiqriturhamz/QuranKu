@@ -1,6 +1,7 @@
 package com.muhammadfiqrit.quranku.detail.ayat
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -55,11 +56,13 @@ class AyatFragment : Fragment() {
                     is Resource.Success -> {
                         binding.progressBarAyat.visibility = View.INVISIBLE
 
-                        result.data?.let {
+                        result.data?.let { data ->
                             binding.rvAyat.adapter = ayatAdapter
-                            ayatAdapter.setListAyat(it.ayat)
+                            ayatAdapter.setListAyat(data.ayat)
                             binding.rvAyat.layoutManager = LinearLayoutManager(requireActivity())
                             binding.rvAyat.setHasFixedSize(true)
+
+                            Log.e("ayat",data.ayat.toString())
 
                         }
 

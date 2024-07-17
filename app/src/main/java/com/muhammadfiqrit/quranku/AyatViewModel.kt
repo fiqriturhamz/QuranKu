@@ -6,8 +6,8 @@ import com.muhammadfiqrit.quranku.core.domain.usecase.surat.SuratUseCase
 
 class AyatViewModel(private val suratUseCase: SuratUseCase) : ViewModel() {
 
-    val ayatTerakhirDibaca = suratUseCase.getAyatTerakhirDibaca()
+ /*   val ayatTerakhirDibaca = suratUseCase.getAyatTerakhirDibaca()
     fun setAyatTerakhirDibaca(ayat: Ayat, state: Boolean) {
         suratUseCase.setAyatTerakhirDibaca(ayat, state)
-    }
+    }*/
 }

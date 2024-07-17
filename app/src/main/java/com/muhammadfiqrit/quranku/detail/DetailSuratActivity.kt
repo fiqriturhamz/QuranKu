@@ -1,6 +1,7 @@
 package com.muhammadfiqrit.quranku.detail
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.annotation.StringRes
@@ -42,21 +43,21 @@ class DetailSuratActivity : AppCompatActivity() {
             tab.text = resources.getString(DETAIL_TAB_TITLES[position])
         }.attach()
 
-        val dataFromIntent = intent.getParcelableExtra<Surat>(EXTRA_SURAT_NOMOR)
+        val dataFromIntent = intent.getIntExtra(EXTRA_SURAT_NOMOR, 1)
 
 
 
-        AyatFragment.suratNomor = dataFromIntent!!.nomor
-        TafsirFragment.suratNomor = dataFromIntent.nomor
+        AyatFragment.suratNomor = dataFromIntent
 
-        populateDataDetail(dataFromIntent.nomor, dataFromIntent.isFavorite)
+        TafsirFragment.suratNomor = dataFromIntent
+        populateDataDetail(dataFromIntent)
 
 
         Utilities.setStatusBarGradiant(this)
 
     }
 
-    private fun populateDataDetail(suratNomor: Int, isFavorite: Boolean) {
+    private fun populateDataDetail(suratNomor: Int) {
         detailSuratViewModel.setId(suratNomor)
         detailSuratViewModel.suratDetail.observe(this) {
             if (it != null) {
@@ -67,22 +68,23 @@ class DetailSuratActivity : AppCompatActivity() {
 
 
                         it.data?.let { detailSurat ->
+
                             binding.tvDetailArtiSurat.text = detailSurat.surat.arti
                             binding.tvDetailTempatTurun.text = detailSurat.surat.tempatTurun
                             binding.tvDetailNamaLatin.text = detailSurat.surat.namaLatin
                             binding.tvDetailNamaSurat.text = detailSurat.surat.nama
                             binding.tvDetailNomorSurat.text = detailSurat.surat.nomor.toString()
 
-                            var statusFavorite = isFavorite
+                            /*        var statusFavorite = isFavorite
 
-                            binding.fabFavorite.setOnClickListener {
-                                statusFavorite = !statusFavorite
-                                favoriteViewModel.setFavoriteSurat(
-                                    detailSurat,
-                                    statusFavorite
-                                )
-                                setStatusFavorite(statusFavorite)
-                            }
+                                    binding.fabFavorite.setOnClickListener {
+                                        statusFavorite = !statusFavorite
+                                        favoriteViewModel.setFavoriteSurat(
+                                            detailSurat,
+                                            statusFavorite
+                                        )
+                                        setStatusFavorite(statusFavorite)
+                                    }*/
                         }
 
                     }

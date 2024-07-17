@@ -37,19 +37,19 @@ class AyatAdapter(private val ayatViewModel: AyatViewModel) :
 
     override fun onBindViewHolder(holder: AyatViewHolder, position: Int) {
         val ayat = listAyat[position]
-        var ayatTerakhirDibaca = ayat.ayatTerakhirDibaca
-        Log.e("ayatTerakhir", ayatTerakhirDibaca.toString())
+      /*  var ayatTerakhirDibaca = ayat.ayatTerakhirDibaca
+        Log.e("ayatTerakhir", ayatTerakhirDibaca.toString())*/
         holder.apply {
             binding.nomorAyat.text = ayat.nomorAyat.toString()
             binding.teksArab.text = ayat.teksArab
             binding.teksIndonesia.text = ayat.teksIndonesia
             binding.teksLatin.text = ayat.teksLatin
-            binding.layoutAyat.setOnClickListener {
+          /*  binding.layoutAyat.setOnClickListener {
                 ayatTerakhirDibaca = true
                 Log.e("ayatTerakhir", ayat.ayatTerakhirDibaca.toString())
-                ayatViewModel.setAyatTerakhirDibaca(ayat, ayatTerakhirDibaca)
+*//*                ayatViewModel.setAyatTerakhirDibaca(ayat, ayatTerakhirDibaca)*//*
 
-            }
+            }*/
         }
     }
 

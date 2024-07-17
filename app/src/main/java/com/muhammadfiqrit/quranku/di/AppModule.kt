@@ -14,6 +14,7 @@ import com.muhammadfiqrit.quranku.detail.DetailSuratViewModel
 import com.muhammadfiqrit.quranku.detail.tafsir.TafsirViewModel
 import com.muhammadfiqrit.quranku.favorite.FavoriteViewModel
 import com.muhammadfiqrit.quranku.home.HomeViewModel
+
 import com.muhammadfiqrit.quranku.lokasi.LokasiAdapter
 import com.muhammadfiqrit.quranku.lokasi.LokasiViewModel
 import com.muhammadfiqrit.quranku.surat.SuratViewModel

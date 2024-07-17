@@ -1,4 +1,4 @@
-package com.muhammadfiqrit.quranku.core.data.Repository
+package com.muhammadfiqrit.quranku.core.data.repository
 
 import com.muhammadfiqrit.quranku.core.data.NetworkBoundResource
 import com.muhammadfiqrit.quranku.core.data.Resource
