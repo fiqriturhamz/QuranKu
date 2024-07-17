@@ -1,6 +1,7 @@
 package com.muhammadfiqrit.quranku.detail.tafsir
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -19,7 +20,7 @@ class TafsirFragment : Fragment() {
     private val binding get() = _binding!!
 
     companion object {
-        var suratNomor : Int = 1
+        var suratNomor: Int = 1
     }
 
     override fun onCreateView(
@@ -33,10 +34,10 @@ class TafsirFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-    /*    populateTafsir(suratNomor)*/
+        populateTafsir(suratNomor)
     }
 
-  /*  fun populateTafsir(nomorSurat: Int) {
+    fun populateTafsir(nomorSurat: Int) {
         nomorSurat.let { tafsirViewModel.setId(it) }
         tafsirViewModel.suratDetail.observe(viewLifecycleOwner) {
             val result = it
@@ -53,6 +54,8 @@ class TafsirFragment : Fragment() {
                                 rvTafsir.adapter = TafsirAdapter(tafsirData)
                                 rvTafsir.layoutManager = LinearLayoutManager(requireActivity())
                                 rvTafsir.setHasFixedSize(true)
+
+                                Log.e("tafsir", tafsirData.toString())
                             }
                         }
 
@@ -64,7 +67,7 @@ class TafsirFragment : Fragment() {
                 }
             }
         }
-    }*/
+    }
 
 
 }

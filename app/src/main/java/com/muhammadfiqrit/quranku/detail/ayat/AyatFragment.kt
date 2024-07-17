@@ -58,11 +58,11 @@ class AyatFragment : Fragment() {
 
                         result.data?.let { data ->
                             binding.rvAyat.adapter = ayatAdapter
-                            ayatAdapter.setListAyat(data.ayat)
+                            ayatAdapter.setListAyat(data.listAyat)
                             binding.rvAyat.layoutManager = LinearLayoutManager(requireActivity())
                             binding.rvAyat.setHasFixedSize(true)
 
-                            Log.e("ayat",data.ayat.toString())
+                            Log.e("ayat",data.listAyat.toString())
 
                         }
 

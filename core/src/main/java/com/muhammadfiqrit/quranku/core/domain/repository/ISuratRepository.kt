@@ -1,16 +1,18 @@
 package com.muhammadfiqrit.quranku.core.domain.repository
 
 import com.muhammadfiqrit.quranku.core.data.Resource
-import com.muhammadfiqrit.quranku.core.domain.model.detail.Ayat
+import com.muhammadfiqrit.quranku.core.data.source.local.entity.tafsir.TafsirEntity
 import com.muhammadfiqrit.quranku.core.domain.model.detail.DetailSurat
 import com.muhammadfiqrit.quranku.core.domain.model.surat.Surat
-import com.muhammadfiqrit.quranku.core.domain.model.tafsir.TafsirItem
+import com.muhammadfiqrit.quranku.core.domain.model.tafsir.Tafsir
 import kotlinx.coroutines.flow.Flow
 
 interface ISuratRepository {
     fun getAllSurat() : Flow<Resource<List<Surat>>>
 
     fun getSuratByNomor(nomorSurat : Int) : Flow<Resource<DetailSurat>>
+
+    fun getTafsir(nomorSurat: Int) : Flow<Resource<List<Tafsir>>>
 
    /* fun getFavoriteSurat() : Flow<List<Surat>>
 

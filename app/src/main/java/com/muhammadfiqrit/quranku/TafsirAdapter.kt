@@ -5,9 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.muhammadfiqrit.quranku.core.databinding.ItemListTafsirBinding
-import com.muhammadfiqrit.quranku.core.domain.model.tafsir.TafsirItem
+import com.muhammadfiqrit.quranku.core.domain.model.tafsir.Tafsir
 
-class TafsirAdapter(private val listTafsir: List<TafsirItem>) :
+class TafsirAdapter(private val listTafsir: List<Tafsir>) :
     RecyclerView.Adapter<TafsirAdapter.TafsirViewHolder>() {
 
 

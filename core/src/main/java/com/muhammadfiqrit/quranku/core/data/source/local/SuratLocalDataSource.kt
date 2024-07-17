@@ -2,10 +2,8 @@ package com.muhammadfiqrit.quranku.core.data.source.local
 
 import com.muhammadfiqrit.quranku.core.data.source.local.entity.surat.SuratEntity
 import com.muhammadfiqrit.quranku.core.data.source.local.entity.detail.AyatEntity
-import com.muhammadfiqrit.quranku.core.data.source.local.entity.detail.SuratSelanjutnyaEntity
 import com.muhammadfiqrit.quranku.core.data.source.local.entity.tafsir.TafsirEntity
 import com.muhammadfiqrit.quranku.core.data.source.local.room.surat.SuratDao
-import com.muhammadfiqrit.quranku.core.domain.model.detail.Ayat
 import kotlinx.coroutines.flow.Flow
 
 
@@ -15,8 +13,11 @@ class SuratLocalDataSource(private val suratDao: SuratDao) {
     suspend fun insertSurat(suratList: List<SuratEntity>) = suratDao.insertSurat(suratList)
     fun getAllSurat(): Flow<List<SuratEntity>> = suratDao.getAllSurat()
     fun getSuratByNomor(nomorSurat: Int): Flow<SuratEntity> = suratDao.getSuratByNomor(nomorSurat)
-    suspend fun insertAyat(ayat: List<AyatEntity>) = suratDao.insertAyat(ayat)
+    suspend fun insertAyat(listAyat: List<AyatEntity>) = suratDao.insertAyat(listAyat)
     fun getAyatBySurat(nomorSurat: Int) = suratDao.getAyatBySurat(nomorSurat)
+
+    suspend fun insertTafsir(listTafsir: List<TafsirEntity>) = suratDao.insertTafsir(listTafsir)
+    fun getTafsirBySurat(nomorSurat: Int): Flow<List<TafsirEntity>> = suratDao.getTafsir(nomorSurat)
 
 
     /* fun getFavoriteSurat(): Flow<List<SuratEntity>> = suratDao.getFavoriteSurat()
@@ -43,8 +44,7 @@ class SuratLocalDataSource(private val suratDao: SuratDao) {
         fun getSuratSelanjutnya(nomorSurat: Int) = suratDao.getSuratSelanjutnya(nomorSurat)
 
 
-        suspend fun insertTafsir(listTafsir: List<TafsirEntity>) = suratDao.insertTafsir(listTafsir)
-        fun getTafsir(nomorSurat: Int): Flow<List<TafsirEntity>> = suratDao.getTafsir(nomorSurat)
+
     */
 
 

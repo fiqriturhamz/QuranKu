@@ -6,6 +6,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.muhammadfiqrit.quranku.core.data.source.local.entity.detail.AyatEntity
 import com.muhammadfiqrit.quranku.core.data.source.local.entity.surat.SuratEntity
+import com.muhammadfiqrit.quranku.core.data.source.local.entity.tafsir.TafsirEntity
 import kotlinx.coroutines.flow.Flow
 
 
@@ -31,7 +32,12 @@ interface SuratDao {
     fun getAyatBySurat(nomorSurat: Int): Flow<List<AyatEntity>>
 
 
+    //TAFSIR
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertTafsir(tafsir: List<TafsirEntity>)
 
+    @Query("SELECT * FROM tafsir WHERE nomorSurat = :nomorSurat ")
+    fun getTafsir(nomorSurat: Int): Flow<List<TafsirEntity>>
 
 
     /*    //DETAIL SURAT

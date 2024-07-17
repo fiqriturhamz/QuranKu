@@ -2,10 +2,13 @@ package com.muhammadfiqrit.quranku.core.utils
 
 import com.muhammadfiqrit.quranku.core.data.source.local.entity.detail.AyatEntity
 import com.muhammadfiqrit.quranku.core.data.source.local.entity.surat.SuratEntity
+import com.muhammadfiqrit.quranku.core.data.source.local.entity.tafsir.TafsirEntity
 import com.muhammadfiqrit.quranku.core.data.source.remote.response.detail.DataDetailSuratResponse
 import com.muhammadfiqrit.quranku.core.data.source.remote.response.surat.ResponseSurat
+import com.muhammadfiqrit.quranku.core.data.source.remote.response.tafsir.TafsirItemResponse
 import com.muhammadfiqrit.quranku.core.domain.model.detail.Ayat
 import com.muhammadfiqrit.quranku.core.domain.model.surat.Surat
+import com.muhammadfiqrit.quranku.core.domain.model.tafsir.Tafsir
 
 
 object DataMapperSurat {
@@ -95,6 +98,35 @@ object DataMapperSurat {
         return listAyat
     }
 
+
+    fun mapTafsirResponsesToTafsirEntities(
+        input: List<TafsirItemResponse>,
+        nomorSurat: Int
+    ): List<TafsirEntity> {
+        val listTafsir = ArrayList<TafsirEntity>()
+        val tafsir = input
+        tafsir.map { TafsirEntity(ayat = it.ayat, nomorSurat = nomorSurat, teks = it.teks) }
+        return listTafsir
+
+    }
+
+    fun tafsirResponsesToTafsirEntities(tafsir: List<TafsirItemResponse>, nomorSurat: Int) =
+        tafsir.map { TafsirEntity(ayat = it.ayat, teks = it.teks, nomorSurat = nomorSurat) }
+
+
+    fun tafsirEntitiesToTafsir(input: List<TafsirEntity>) =
+        input.map { Tafsir(ayat = it.ayat, teks = it.teks) }
+
+
+    /*    fun mapTafsirEntitiesToTafsirs(input: List<TafsirEntity>, nomorSurat: Int): List<Tafsir> {
+            val listTafsir = ArrayList<Tafsir>()
+            input.map {
+                val tafsir = Tafsir(ayat = it.ayat, teks = it.teks, nomorSurat = nomorSurat)
+
+                listTafsir.add(tafsir)
+            }
+            return listTafsir
+        }*/
     /*  fun mapDetailSuratToSuratEntity(input: DetailSurat) = SuratEntity(
 
           nomor = input.surat.nomor,

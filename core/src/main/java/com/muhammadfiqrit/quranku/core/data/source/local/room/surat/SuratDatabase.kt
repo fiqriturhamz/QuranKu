@@ -8,7 +8,7 @@ import com.muhammadfiqrit.quranku.core.data.source.local.entity.detail.SuratSela
 import com.muhammadfiqrit.quranku.core.data.source.local.entity.tafsir.TafsirEntity
 
 @Database(
-    entities = [SuratEntity::class, AyatEntity::class],
+    entities = [SuratEntity::class, AyatEntity::class, TafsirEntity::class],
     version = 1,
     exportSchema = false
 )
