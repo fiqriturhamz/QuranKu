@@ -10,12 +10,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.muhammadfiqrit.quranku.SuratAdapter
 import com.muhammadfiqrit.quranku.databinding.FragmentFavoriteBinding
 import com.muhammadfiqrit.quranku.detail.DetailSuratActivity
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class FavoriteFragment : Fragment() {
 
     private val favoriteViewModel: FavoriteViewModel by viewModel()
     private var _binding: FragmentFavoriteBinding? = null
+    private val suratAdapter : SuratAdapter by inject()
     private val binding get() = _binding!!
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,22 +30,21 @@ class FavoriteFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         if (activity != null) {
-            val suratAdapter = SuratAdapter()
-         /*   suratAdapter.onItemClick = { selectedData ->
+
+            suratAdapter.onItemClick = { selectedData ->
                 val intent = Intent(activity, DetailSuratActivity::class.java)
-                intent.putExtra(DetailSuratActivity.EXTRA_SURAT_NOMOR, selectedData)
+                intent.putExtra(DetailSuratActivity.EXTRA_SURAT_NOMOR, selectedData.nomor)
                 startActivity(intent)
-            }*/
-          /*  favoriteViewModel.favoriteSurat.observe(viewLifecycleOwner) { dataSurat ->
+            }
+            favoriteViewModel.favoriteSurat.observe(viewLifecycleOwner) { dataSurat ->
                 suratAdapter.setData(dataSurat)
 
             }
-*/
-          /*  with(binding.rvFavoriteSurat) {
+            with(binding.rvFavoriteSurat) {
                 layoutManager = LinearLayoutManager(context)
                 setHasFixedSize(true)
                 adapter = suratAdapter
-            }*/
+            }
         }
     }
 

@@ -8,21 +8,23 @@ import com.muhammadfiqrit.quranku.core.domain.model.tafsir.Tafsir
 import kotlinx.coroutines.flow.Flow
 
 interface ISuratRepository {
-    fun getAllSurat() : Flow<Resource<List<Surat>>>
+    fun getAllSurat(): Flow<Resource<List<Surat>>>
 
-    fun getSuratByNomor(nomorSurat : Int) : Flow<Resource<DetailSurat>>
+    fun getSuratByNomor(nomorSurat: Int): Flow<Resource<DetailSurat>>
 
-    fun getTafsir(nomorSurat: Int) : Flow<Resource<List<Tafsir>>>
+    fun getTafsir(nomorSurat: Int): Flow<Resource<DetailSurat>>
 
-   /* fun getFavoriteSurat() : Flow<List<Surat>>
+    fun getFavoriteSurat() : Flow<List<Surat>>
 
     fun setFavoriteSurat(surat : DetailSurat, newState:Boolean)
 
-    fun getAyatTerakhirDibaca() : Flow<Ayat>
-    fun setAyatTerakhirDibaca(ayat : Ayat, newState: Boolean)
+    /*
 
-    fun getTafsir(nomorSurat : Int) : Flow<Resource<List<TafsirItem>>>
-*/
+     fun getAyatTerakhirDibaca() : Flow<Ayat>
+     fun setAyatTerakhirDibaca(ayat : Ayat, newState: Boolean)
+
+     fun getTafsir(nomorSurat : Int) : Flow<Resource<List<TafsirItem>>>
+ */
 
 
 }

@@ -17,15 +17,15 @@ class SuratInteractor(private val suratRepository: ISuratRepository) : SuratUseC
         return suratRepository.getSuratByNomor(nomorSurat)
     }
 
-    override fun getTafsir(nomorSurat: Int): Flow<Resource<List<Tafsir>>> {
+    override fun getTafsir(nomorSurat: Int): Flow<Resource<DetailSurat>> {
         return suratRepository.getTafsir(nomorSurat)
     }
+    override fun getFavoriteSurat(): Flow<List<Surat>> = suratRepository.getFavoriteSurat()
+    override fun setFavoriteSurat(surat: DetailSurat, state: Boolean) =
+        suratRepository.setFavoriteSurat(surat, state)
+    /*
 
 
-    /*       override fun getFavoriteSurat(): Flow<List<Surat>> = suratRepository.getFavoriteSurat()
-
-           override fun setFavoriteSurat(surat: DetailSurat, state: Boolean) =
-               suratRepository.setFavoriteSurat(surat, state)
 
            override fun getAyatTerakhirDibaca(): Flow<Ayat> {
              return  suratRepository.getAyatTerakhirDibaca()

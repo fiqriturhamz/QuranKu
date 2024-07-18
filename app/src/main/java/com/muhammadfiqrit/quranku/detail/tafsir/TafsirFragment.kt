@@ -51,7 +51,7 @@ class TafsirFragment : Fragment() {
                         binding.progressBarTafsir.visibility = View.INVISIBLE
                         result.data?.let { tafsirData ->
                             binding.apply {
-                                rvTafsir.adapter = TafsirAdapter(tafsirData)
+                                rvTafsir.adapter = TafsirAdapter(tafsirData.listTafsir!!)
                                 rvTafsir.layoutManager = LinearLayoutManager(requireActivity())
                                 rvTafsir.setHasFixedSize(true)
 

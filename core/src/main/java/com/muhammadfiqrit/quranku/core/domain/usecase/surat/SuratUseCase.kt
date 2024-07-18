@@ -10,11 +10,13 @@ interface SuratUseCase {
     fun getAllSurat() : Flow<Resource<List<Surat>>>
     fun getSuratByNomor(nomorSurat :Int) : Flow<Resource<DetailSurat>>
 
-    fun getTafsir(nomorSurat: Int) : Flow<Resource<List<Tafsir>>>
+    fun getTafsir(nomorSurat: Int) : Flow<Resource<DetailSurat>>
 
-/*    fun getFavoriteSurat() : Flow<List<Surat>>
+    fun getFavoriteSurat() : Flow<List<Surat>>
 
     fun setFavoriteSurat(surat: DetailSurat, state:Boolean)
+
+/*
 
     fun getAyatTerakhirDibaca() : Flow<Ayat>
 

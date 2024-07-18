@@ -7,6 +7,7 @@ import com.muhammadfiqrit.quranku.core.data.source.remote.response.detail.DataDe
 import com.muhammadfiqrit.quranku.core.data.source.remote.response.surat.ResponseSurat
 import com.muhammadfiqrit.quranku.core.data.source.remote.response.tafsir.TafsirItemResponse
 import com.muhammadfiqrit.quranku.core.domain.model.detail.Ayat
+import com.muhammadfiqrit.quranku.core.domain.model.detail.DetailSurat
 import com.muhammadfiqrit.quranku.core.domain.model.surat.Surat
 import com.muhammadfiqrit.quranku.core.domain.model.tafsir.Tafsir
 
@@ -23,8 +24,10 @@ object DataMapperSurat {
                 nama = it.nama,
                 tempatTurun = it.tempatTurun,
                 namaLatin = it.namaLatin,
+                isFavorite = false
 
-                )
+
+            )
             suratList.add(surat)
         }
         return suratList
@@ -99,16 +102,16 @@ object DataMapperSurat {
     }
 
 
-    fun mapTafsirResponsesToTafsirEntities(
-        input: List<TafsirItemResponse>,
-        nomorSurat: Int
-    ): List<TafsirEntity> {
-        val listTafsir = ArrayList<TafsirEntity>()
-        val tafsir = input
-        tafsir.map { TafsirEntity(ayat = it.ayat, nomorSurat = nomorSurat, teks = it.teks) }
-        return listTafsir
+    /*  fun mapTafsirResponsesToTafsirEntities(
+          input: List<TafsirItemResponse>,
+          nomorSurat: Int
+      ): List<TafsirEntity> {
+          val listTafsir = ArrayList<TafsirEntity>()
+          val tafsir = input
+          tafsir.map { TafsirEntity(ayat = it.ayat, nomorSurat = nomorSurat, teks = it.teks) }
+          return listTafsir
 
-    }
+      }*/
 
     fun tafsirResponsesToTafsirEntities(tafsir: List<TafsirItemResponse>, nomorSurat: Int) =
         tafsir.map { TafsirEntity(ayat = it.ayat, teks = it.teks, nomorSurat = nomorSurat) }
@@ -127,17 +130,17 @@ object DataMapperSurat {
             }
             return listTafsir
         }*/
-    /*  fun mapDetailSuratToSuratEntity(input: DetailSurat) = SuratEntity(
+    fun mapDetailSuratToSuratEntity(input: DetailSurat) = SuratEntity(
 
-          nomor = input.surat.nomor,
-          nama = input.surat.nama,
-          namaLatin = input.surat.namaLatin,
-          arti = input.surat.arti,
-          jumlahAyat = input.surat.jumlahAyat,
-          tempatTurun = input.surat.tempatTurun,
-          deskripsi = input.surat.deskripsi,
-          isFavorite = input.surat.isFavorite
-      )*/
+        nomor = input.surat.nomor,
+        nama = input.surat.nama,
+        namaLatin = input.surat.namaLatin,
+        arti = input.surat.arti,
+        jumlahAyat = input.surat.jumlahAyat,
+        tempatTurun = input.surat.tempatTurun,
+        deskripsi = input.surat.deskripsi,
+        isFavorite = input.surat.isFavorite
+    )
 
     /*   fun mapDataDetailSuratResponseTo*/
 

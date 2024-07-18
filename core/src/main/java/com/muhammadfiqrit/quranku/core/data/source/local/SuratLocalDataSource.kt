@@ -20,12 +20,11 @@ class SuratLocalDataSource(private val suratDao: SuratDao) {
     fun getTafsirBySurat(nomorSurat: Int): Flow<List<TafsirEntity>> = suratDao.getTafsir(nomorSurat)
 
 
-    /* fun getFavoriteSurat(): Flow<List<SuratEntity>> = suratDao.getFavoriteSurat()
+     fun getFavoriteSurat(): Flow<List<SuratEntity>> = suratDao.getFavoriteSurat()
      fun setFavoriteSurat(surat: SuratEntity, newState: Boolean) {
          surat.isFavorite = newState
          suratDao.updateFavoriteSurat(surat)
      }
- */
 
 
     /*  suspend fun insertDetailSurat(surat: SuratEntity) = suratDao.insertDetailSurat(surat)*/

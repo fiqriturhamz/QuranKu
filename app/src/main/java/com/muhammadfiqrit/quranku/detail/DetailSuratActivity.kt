@@ -24,10 +24,13 @@ class DetailSuratActivity : AppCompatActivity() {
         const val EXTRA_SURAT_NOMOR = "extra_surat_nomor"
         const val EXTRA_SURAT_NOMOR_FOR_FRAGMENT = "extra_surat_nomor_for_fragment"
 
+
         @StringRes
         private val DETAIL_TAB_TITLES =
             intArrayOf(R.string.detail_tab_text_1, R.string.detail_tab_text_2)
     }
+
+    private var statusFavorite: Boolean = false
 
     private lateinit var binding: ActivityDetailSuratBinding
     private val detailSuratViewModel: DetailSuratViewModel by viewModel()
@@ -54,8 +57,15 @@ class DetailSuratActivity : AppCompatActivity() {
 
 
         Utilities.setStatusBarGradiant(this)
-
+        detailSuratViewModel.suratDetail.observe(this) {
+            val surat = it.data?.surat
+            if (surat != null) {
+                statusFavorite = surat.isFavorite
+                setStatusFavorite(statusFavorite)
+            }
+        }
     }
+
 
     private fun populateDataDetail(suratNomor: Int) {
         detailSuratViewModel.setId(suratNomor)
@@ -75,16 +85,18 @@ class DetailSuratActivity : AppCompatActivity() {
                             binding.tvDetailNamaSurat.text = detailSurat.surat.nama
                             binding.tvDetailNomorSurat.text = detailSurat.surat.nomor.toString()
 
-                            /*        var statusFavorite = isFavorite
+                            statusFavorite = detailSurat.surat.isFavorite
 
-                                    binding.fabFavorite.setOnClickListener {
-                                        statusFavorite = !statusFavorite
-                                        favoriteViewModel.setFavoriteSurat(
-                                            detailSurat,
-                                            statusFavorite
-                                        )
-                                        setStatusFavorite(statusFavorite)
-                                    }*/
+                            binding.fabFavorite.setOnClickListener {
+                                statusFavorite = !statusFavorite
+                                favoriteViewModel.setFavoriteSurat(
+                                    detailSurat,
+                                    statusFavorite
+                                )
+                                setStatusFavorite(statusFavorite)
+
+                                Log.e("statusFavorite", statusFavorite.toString())
+                            }
                         }
 
                     }
@@ -107,6 +119,7 @@ class DetailSuratActivity : AppCompatActivity() {
                     R.drawable.favorite_white
                 )
             )
+
         } else {
             binding.fabFavorite.setImageDrawable(
                 ContextCompat.getDrawable(

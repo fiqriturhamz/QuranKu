@@ -40,6 +40,7 @@ val viewModelModule = module {
 val adapterModule = module {
     factory { SuratAdapter() }
 
+
     factory { LokasiAdapter(get(), get()) }
 
     factory { AyatAdapter(get()) }
