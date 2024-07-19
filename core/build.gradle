@@ -9,13 +9,13 @@ apply { from("../shared_depedencies.gradle") }
 
 android {
     namespace 'com.muhammadfiqrit.quranku.core'
-    compileSdk 33
+    compileSdk 34
     buildFeatures {
         viewBinding = true
     }
     defaultConfig {
         minSdk 27
-        targetSdk 33
+        targetSdk 34
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
