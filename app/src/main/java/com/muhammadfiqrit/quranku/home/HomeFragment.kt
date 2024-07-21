@@ -1,6 +1,6 @@
 package com.muhammadfiqrit.quranku.home
 
-import android.content.pm.ApplicationInfo
+import android.content.Intent
 import android.icu.util.Calendar
 import android.icu.util.GregorianCalendar
 import android.os.Bundle
@@ -14,6 +14,8 @@ import androidx.fragment.app.Fragment
 import com.muhammadfiqrit.quranku.core.data.Resource
 import com.muhammadfiqrit.quranku.core.domain.model.sholat.jadwal.JadwalDataHarian
 import com.muhammadfiqrit.quranku.databinding.FragmentHomeBinding
+import com.muhammadfiqrit.quranku.doa.activity.DoaActivity
+import com.muhammadfiqrit.quranku.husna.HusnaActivity
 import com.muhammadfiqrit.quranku.lokasi.LokasiViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
@@ -38,6 +40,15 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.asmahulHusna.setOnClickListener {
+            val intent = Intent(requireContext(), HusnaActivity::class.java)
+            startActivity(intent)
+
+        }
+        binding.doa.setOnClickListener {
+            val intent = Intent(requireContext(), DoaActivity::class.java)
+            startActivity(intent)
+        }
 
         val gregorianCalendar = GregorianCalendar()
         val calendarYear = gregorianCalendar.get(Calendar.YEAR)

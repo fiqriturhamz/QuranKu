@@ -58,7 +58,7 @@ class DetailSuratActivity : AppCompatActivity() {
 
         Utilities.setStatusBarGradiant(this)
         detailSuratViewModel.suratDetail.observe(this) {
-            val surat = it.data?.surat
+            val surat = it?.data?.surat
             if (surat != null) {
                 statusFavorite = surat.isFavorite
                 setStatusFavorite(statusFavorite)

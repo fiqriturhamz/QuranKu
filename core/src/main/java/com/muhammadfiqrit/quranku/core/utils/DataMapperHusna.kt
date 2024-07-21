@@ -1,8 +1,7 @@
 package com.muhammadfiqrit.quranku.core.utils
 
-import com.muhammadfiqrit.quranku.core.data.source.local.entity.husna.HusnaEntity
+import com.muhammadfiqrit.quranku.core.data.source.local.entity.HusnaEntity
 import com.muhammadfiqrit.quranku.core.data.source.remote.response.husna.ResponseHusna
-import com.muhammadfiqrit.quranku.core.data.source.remote.response.husna.ResponseListHusna
 import com.muhammadfiqrit.quranku.core.domain.model.husna.Husna
 
 object DataMapperHusna {

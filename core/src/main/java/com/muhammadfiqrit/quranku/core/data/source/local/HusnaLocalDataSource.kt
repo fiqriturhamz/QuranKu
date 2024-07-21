@@ -1,6 +1,6 @@
 package com.muhammadfiqrit.quranku.core.data.source.local
 
-import com.muhammadfiqrit.quranku.core.data.source.local.entity.husna.HusnaEntity
+import com.muhammadfiqrit.quranku.core.data.source.local.entity.HusnaEntity
 import com.muhammadfiqrit.quranku.core.data.source.local.room.husna.HusnaDao
 import kotlinx.coroutines.flow.Flow
 

@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.muhammadfiqrit.quranku.SuratAdapter
+import com.muhammadfiqrit.quranku.surat.SuratAdapter
 import com.muhammadfiqrit.quranku.databinding.FragmentFavoriteBinding
 import com.muhammadfiqrit.quranku.detail.DetailSuratActivity
 import org.koin.android.ext.android.inject

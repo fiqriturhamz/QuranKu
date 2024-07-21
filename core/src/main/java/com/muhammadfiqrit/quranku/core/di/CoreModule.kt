@@ -1,24 +1,30 @@
 package com.muhammadfiqrit.quranku.core.di
 
 import androidx.room.Room
+import com.muhammadfiqrit.quranku.core.data.repository.DoaRepository
 import com.muhammadfiqrit.quranku.core.data.repository.HusnaRepository
 import com.muhammadfiqrit.quranku.core.data.repository.LokasiRepository
 import com.muhammadfiqrit.quranku.core.data.repository.SholatRepository
 import com.muhammadfiqrit.quranku.core.data.repository.SuratRepository
+import com.muhammadfiqrit.quranku.core.data.source.local.DoaLocalDataSource
 import com.muhammadfiqrit.quranku.core.data.source.local.HusnaLocalDataSource
 import com.muhammadfiqrit.quranku.core.data.source.local.LokasiLocalDataSource
 import com.muhammadfiqrit.quranku.core.data.source.local.SuratLocalDataSource
+import com.muhammadfiqrit.quranku.core.data.source.local.room.doa.DoaDatabase
 import com.muhammadfiqrit.quranku.core.data.source.local.room.husna.HusnaDatabase
 import com.muhammadfiqrit.quranku.core.data.source.local.room.sholat.lokasi.LokasiDatabase
 import com.muhammadfiqrit.quranku.core.data.source.local.room.surat.SuratDatabase
+import com.muhammadfiqrit.quranku.core.data.source.remote.DoaRemoteDataSource
 import com.muhammadfiqrit.quranku.core.data.source.remote.HusnaRemoteDataSource
 import com.muhammadfiqrit.quranku.core.data.source.remote.LokasiRemoteDataSource
 import com.muhammadfiqrit.quranku.core.data.source.remote.SholatRemoteDataSource
 import com.muhammadfiqrit.quranku.core.data.source.remote.SuratRemoteDataSource
 import com.muhammadfiqrit.quranku.core.data.source.remote.network.AsmaulHusnaService
+import com.muhammadfiqrit.quranku.core.data.source.remote.network.DoaService
 import com.muhammadfiqrit.quranku.core.data.source.remote.network.LokasiService
 import com.muhammadfiqrit.quranku.core.data.source.remote.network.SholatService
 import com.muhammadfiqrit.quranku.core.data.source.remote.network.SuratService
+import com.muhammadfiqrit.quranku.core.domain.repository.IDoaRepository
 import com.muhammadfiqrit.quranku.core.domain.repository.IHusnaRepository
 import com.muhammadfiqrit.quranku.core.domain.repository.ILokasiRepository
 import com.muhammadfiqrit.quranku.core.domain.repository.ISholatRepository
@@ -55,11 +61,17 @@ val databaseModule = module {
         get<HusnaDatabase>().asmaulHusnaDao()
     }
     single {
-        Room.databaseBuilder(androidContext(), HusnaDatabase::class.java, "husna.db")
+        Room.databaseBuilder(androidContext(), HusnaDatabase::class.java, "Husna.db")
+            .fallbackToDestructiveMigration().build()
+    }
+    factory { get<DoaDatabase>().doaDao() }
+    single {
+        Room.databaseBuilder(androidContext(), DoaDatabase::class.java, "doa.db")
             .fallbackToDestructiveMigration().build()
     }
 }
 val networkModule = module {
+
     single {
         OkHttpClient.Builder()
             .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
@@ -68,6 +80,8 @@ val networkModule = module {
             .writeTimeout(30, TimeUnit.SECONDS)
             .build()
     }
+
+    //surat
     single {
         val retrofitSurat = Retrofit.Builder()
             .baseUrl(BASE_URL_SURAT)
@@ -77,6 +91,7 @@ val networkModule = module {
         retrofitSurat.create(SuratService::class.java)
     }
 
+    //sholat
     single {
         val retrofitSolat = Retrofit.Builder()
             .baseUrl(BASE_URL_SHOLAT)
@@ -85,6 +100,8 @@ val networkModule = module {
             .build()
         retrofitSolat.create(SholatService::class.java)
     }
+
+    //lokasi
     single {
         val retrofitLokasi = Retrofit.Builder()
             .baseUrl(BASE_URL_SHOLAT)
@@ -94,6 +111,7 @@ val networkModule = module {
         retrofitLokasi.create(LokasiService::class.java)
     }
 
+    //asmaul husna
     single {
         val retrofitAsmaulHusna = Retrofit.Builder()
             .baseUrl(BASE_URL_SHOLAT)
@@ -101,6 +119,16 @@ val networkModule = module {
             .client(get())
             .build()
         retrofitAsmaulHusna.create(AsmaulHusnaService::class.java)
+    }
+
+    //Doa
+    single {
+        val retrofitDoa = Retrofit.Builder()
+            .baseUrl(BASE_URL_SHOLAT)
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(get())
+            .build()
+        retrofitDoa.create(DoaService::class.java)
     }
 }
 
@@ -120,6 +148,7 @@ val repositoryModule = module {
     }
     single<ISholatRepository> { SholatRepository(get(), get()) }
     single<IHusnaRepository> { HusnaRepository(get(), get(), get()) }
+    factory <IDoaRepository> { DoaRepository(get(), get(), get()) }
 
     single { SuratLocalDataSource(get()) }
     single { LokasiRemoteDataSource(get()) }
@@ -128,6 +157,8 @@ val repositoryModule = module {
     single { SuratRemoteDataSource(get()) }
     single { HusnaRemoteDataSource(get()) }
     single { HusnaLocalDataSource(get()) }
+    single { DoaRemoteDataSource(get()) }
+    single { DoaLocalDataSource(get()) }
 
 
 }

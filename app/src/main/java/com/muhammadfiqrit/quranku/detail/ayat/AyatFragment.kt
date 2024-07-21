@@ -9,7 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.muhammadfiqrit.quranku.core.data.Resource
-import com.muhammadfiqrit.quranku.AyatAdapter
+import com.muhammadfiqrit.quranku.detail.AyatAdapter
 import com.muhammadfiqrit.quranku.databinding.FragmentAyatBinding
 import com.muhammadfiqrit.quranku.detail.DetailSuratViewModel
 import org.koin.android.ext.android.inject

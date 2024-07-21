@@ -19,5 +19,15 @@
     <string name="title_lokasi">lokasi</string>
     <string name="title_bookmark">bookmark</string>
     <string name="title_surat">surat</string>
+    <string name="teks_latin_husna">Ar-Rahmânu</string>
+    <string name="teks_indo_husna">Yang Maha Pengasih</string>
+    <string name="teks_arab_husna">الرَّحْمـٰنُ</string>
     <string name="title_main">main</string>
+    <string name="doa_tab_text_0">Quran</string>
+    <string name="doa_tab_text_1">Hadits</string>
+    <string name="doa_tab_text_2">Pilihan</string>
+    <string name="doa_tab_text_3">Harian</string>
+    <string name="doa_tab_text_4">Ibadah</string>
+    <string name="doa_tab_text_5">Haji</string>
+    <string name="doa_tab_text_6">Lainnya</string>
 </resources>

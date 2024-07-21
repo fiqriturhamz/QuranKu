@@ -8,9 +8,9 @@ import kotlinx.coroutines.flow.Flow
 
 interface SuratUseCase {
     fun getAllSurat() : Flow<Resource<List<Surat>>>
-    fun getSuratByNomor(nomorSurat :Int) : Flow<Resource<DetailSurat>>
+    fun getSuratByNomor(nomorSurat :Int) : Flow<Resource<DetailSurat>?>
 
-    fun getTafsir(nomorSurat: Int) : Flow<Resource<DetailSurat>>
+    fun getTafsir(nomorSurat: Int) : Flow<Resource<DetailSurat>?>
 
     fun getFavoriteSurat() : Flow<List<Surat>>
 

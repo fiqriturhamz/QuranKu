@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.muhammadfiqrit.quranku.SuratAdapter
 import com.muhammadfiqrit.quranku.databinding.FragmentSuratBinding
 import com.muhammadfiqrit.quranku.detail.DetailSuratActivity
 import org.koin.android.ext.android.inject

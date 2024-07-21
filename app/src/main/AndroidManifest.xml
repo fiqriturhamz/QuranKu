@@ -17,6 +17,12 @@
         android:theme="@style/Theme.Quranku"
         tools:targetApi="31">
         <activity
+            android:name=".doa.activity.DoaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".hadits.HaditsActivity"
+            android:exported="false" />
+        <activity
             android:name=".husna.HusnaActivity"
             android:exported="false" />
         <activity
