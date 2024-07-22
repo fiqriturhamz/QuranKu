@@ -36,7 +36,7 @@ class DoaRepository(
             }
 
             override fun shouldFetch(data: List<Doa>?): Boolean {
-                return data.isNullOrEmpty()
+                return true
             }
 
         }.asFlow()

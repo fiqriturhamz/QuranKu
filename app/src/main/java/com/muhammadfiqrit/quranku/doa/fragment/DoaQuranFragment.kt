@@ -12,6 +12,7 @@ import com.muhammadfiqrit.quranku.core.data.Resource
 import com.muhammadfiqrit.quranku.databinding.FragmentDoaQuranBinding
 import com.muhammadfiqrit.quranku.doa.DoaAdapter
 import com.muhammadfiqrit.quranku.doa.DoaViewModel
+import com.muhammadfiqrit.quranku.utils.Utilities
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -21,7 +22,7 @@ class DoaQuranFragment : Fragment() {
     private var _binding: FragmentDoaQuranBinding? = null
     private val binding get() = _binding!!
     private val doaViewModel: DoaViewModel by viewModel()
-    private val rvDoaQuran: DoaAdapter by inject()
+    private val doaAdapter: DoaAdapter by inject()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -33,35 +34,43 @@ class DoaQuranFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        populateData("quran")
+        Utilities.populateData(
+            "quran",
+            doaViewModel,
+            viewLifecycleOwner,
+            binding.rvDoaQuran,
+            doaAdapter,
+            requireContext(),
+
+        )
 
     }
 
-    fun populateData(keyword: String) {
-        doaViewModel.setKeyword(keyword)
-        doaViewModel.doa.observe(viewLifecycleOwner) {
-            if (it != null) {
-                when (it) {
-                    is Resource.Loading -> {
+    /*    fun populateData(keyword: String) {
+            doaViewModel.setKeyword(keyword)
+            doaViewModel.doa.observe(viewLifecycleOwner) {
+                if (it != null) {
+                    when (it) {
+                        is Resource.Loading -> {
 
-                    }
+                        }
 
-                    is Resource.Success -> {
-                        binding.rvDoaQuran.adapter = rvDoaQuran
-                        rvDoaQuran.setDataDoa(it.data)
-                        Log.e("doaQuran", it.data.toString())
-                        binding.rvDoaQuran.layoutManager = LinearLayoutManager(requireContext())
-                        binding.rvDoaQuran.setHasFixedSize(true)
-                    }
+                        is Resource.Success -> {
+                            binding.rvDoaQuran.adapter = rvDoaQuran
+                            rvDoaQuran.setDataDoa(it.data)
+                            Log.e("doaQuran", it.data.toString())
+                            binding.rvDoaQuran.layoutManager = LinearLayoutManager(requireContext())
+                            binding.rvDoaQuran.setHasFixedSize(true)
+                        }
 
-                    is Resource.Error -> {
-                        Log.e("error", "${it.message}")
-                        Toast.makeText(requireActivity(), "${it.message}", Toast.LENGTH_SHORT)
-                            .show()
+                        is Resource.Error -> {
+                            Log.e("error", "${it.message}")
+                            Toast.makeText(requireActivity(), "${it.message}", Toast.LENGTH_SHORT)
+                                .show()
+                        }
                     }
                 }
             }
-        }
-    }
+        }*/
 
 }

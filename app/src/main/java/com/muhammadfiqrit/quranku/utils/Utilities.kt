@@ -2,12 +2,23 @@ package com.muhammadfiqrit.quranku.utils
 
 import android.annotation.TargetApi
 import android.app.Activity
+import android.content.Context
 import android.icu.util.GregorianCalendar
 import android.icu.util.IslamicCalendar
 import android.os.Build
+import android.util.Log
 import android.view.Window
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.LifecycleOwner
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.Adapter
+import com.muhammadfiqrit.quranku.core.data.Resource
+import com.muhammadfiqrit.quranku.doa.DoaAdapter
+import com.muhammadfiqrit.quranku.doa.DoaViewModel
 import com.readystatesoftware.systembartint.SystemBarTintManager
 
 object Utilities {
@@ -63,5 +74,39 @@ object Utilities {
             val hijriDate = "$gregorianDay $hijriMonth $gregorianYear"
             return hijriDate
         }
+
+    fun populateData(
+        keyword: String,
+        doaViewModel: DoaViewModel,
+        lifecycleOwner: LifecycleOwner,
+        recyclerView: RecyclerView,
+        doaAdapter: DoaAdapter,
+        context: Context,
+
+        ) {
+        doaViewModel.setKeyword(keyword)
+        doaViewModel.doa.observe(lifecycleOwner) {
+            if (it != null) {
+                when (it) {
+                    is Resource.Loading -> {}
+                    is Resource.Success -> {
+                        val doaKeyword =
+                            it.data?.filter { it.source.contains(keyword, ignoreCase = true) }
+                        doaAdapter.setDataDoa(doaKeyword)
+
+                        recyclerView.adapter = doaAdapter
+                        recyclerView.layoutManager = LinearLayoutManager(context)
+                        recyclerView.setHasFixedSize(true)
+                    }
+
+                    is Resource.Error -> {
+                        Log.e("error", "${it.message}")
+                        Toast.makeText(context, "${it.message}", Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                }
+            }
+        }
+    }
 
 }
