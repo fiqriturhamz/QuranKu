@@ -36,7 +36,10 @@ class DoaRepository(
             }
 
             override fun shouldFetch(data: List<Doa>?): Boolean {
-                return true
+                val exists = data?.any { it.source.contains(keyword, ignoreCase = true) } == true
+                return data.isNullOrEmpty() || !exists
+
+
             }
 
         }.asFlow()
