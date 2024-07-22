@@ -34,7 +34,7 @@ val useCaseModule = module {
     factory<SholatUseCase> { SholatInteractor(get()) }
     factory<LokasiUseCase> { LokasiInteractor(get()) }
     factory<HusnaUseCase> { HusnaInteractor(get()) }
-    factory<DoaUseCase> { DoaInteractor(get()) }
+    factory<DoaUseCase> { DoaInteractor(get())}
 }
 val viewModelModule = module {
     viewModel { SuratViewModel(get()) }

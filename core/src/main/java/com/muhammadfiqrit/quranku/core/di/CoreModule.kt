@@ -148,7 +148,7 @@ val repositoryModule = module {
     }
     single<ISholatRepository> { SholatRepository(get(), get()) }
     single<IHusnaRepository> { HusnaRepository(get(), get(), get()) }
-    factory <IDoaRepository> { DoaRepository(get(), get(), get()) }
+    single <IDoaRepository> { DoaRepository(get(), get(), get()) }
 
     single { SuratLocalDataSource(get()) }
     single { LokasiRemoteDataSource(get()) }

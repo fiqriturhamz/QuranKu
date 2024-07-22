@@ -8,7 +8,7 @@ import com.muhammadfiqrit.quranku.core.data.source.local.room.husna.HusnaDao
 import com.muhammadfiqrit.quranku.core.domain.model.doa.Doa
 import kotlinx.coroutines.flow.Flow
 
-@Database(entities = [DoaEntity::class, HusnaEntity::class], version = 1, exportSchema = false)
+@Database(entities = [DoaEntity::class], version = 1, exportSchema = false)
 abstract class DoaDatabase : RoomDatabase() {
-    abstract fun doaDao(): HusnaDao
+    abstract fun doaDao(): DoaDao
 }
