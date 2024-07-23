@@ -1,20 +1,25 @@
 package com.muhammadfiqrit.quranku.core.di
 
 import androidx.room.Room
+import com.muhammadfiqrit.quranku.core.data.HaditsService
 import com.muhammadfiqrit.quranku.core.data.repository.DoaRepository
+import com.muhammadfiqrit.quranku.core.data.repository.HaditsRepository
 import com.muhammadfiqrit.quranku.core.data.repository.HusnaRepository
 import com.muhammadfiqrit.quranku.core.data.repository.LokasiRepository
 import com.muhammadfiqrit.quranku.core.data.repository.SholatRepository
 import com.muhammadfiqrit.quranku.core.data.repository.SuratRepository
 import com.muhammadfiqrit.quranku.core.data.source.local.DoaLocalDataSource
+import com.muhammadfiqrit.quranku.core.data.source.local.HaditsLocalDataSource
 import com.muhammadfiqrit.quranku.core.data.source.local.HusnaLocalDataSource
 import com.muhammadfiqrit.quranku.core.data.source.local.LokasiLocalDataSource
 import com.muhammadfiqrit.quranku.core.data.source.local.SuratLocalDataSource
 import com.muhammadfiqrit.quranku.core.data.source.local.room.doa.DoaDatabase
+import com.muhammadfiqrit.quranku.core.data.source.local.room.hadits.HaditsDatabase
 import com.muhammadfiqrit.quranku.core.data.source.local.room.husna.HusnaDatabase
 import com.muhammadfiqrit.quranku.core.data.source.local.room.sholat.lokasi.LokasiDatabase
 import com.muhammadfiqrit.quranku.core.data.source.local.room.surat.SuratDatabase
 import com.muhammadfiqrit.quranku.core.data.source.remote.DoaRemoteDataSource
+import com.muhammadfiqrit.quranku.core.data.source.remote.HaditsRemoteDataSource
 import com.muhammadfiqrit.quranku.core.data.source.remote.HusnaRemoteDataSource
 import com.muhammadfiqrit.quranku.core.data.source.remote.LokasiRemoteDataSource
 import com.muhammadfiqrit.quranku.core.data.source.remote.SholatRemoteDataSource
@@ -25,6 +30,7 @@ import com.muhammadfiqrit.quranku.core.data.source.remote.network.LokasiService
 import com.muhammadfiqrit.quranku.core.data.source.remote.network.SholatService
 import com.muhammadfiqrit.quranku.core.data.source.remote.network.SuratService
 import com.muhammadfiqrit.quranku.core.domain.repository.IDoaRepository
+import com.muhammadfiqrit.quranku.core.domain.repository.IHaditsRepository
 import com.muhammadfiqrit.quranku.core.domain.repository.IHusnaRepository
 import com.muhammadfiqrit.quranku.core.domain.repository.ILokasiRepository
 import com.muhammadfiqrit.quranku.core.domain.repository.ISholatRepository
@@ -67,6 +73,11 @@ val databaseModule = module {
     factory { get<DoaDatabase>().doaDao() }
     single {
         Room.databaseBuilder(androidContext(), DoaDatabase::class.java, "doa.db")
+            .fallbackToDestructiveMigration().build()
+    }
+    factory { get<HaditsDatabase>().haditsDao() }
+    single {
+        Room.databaseBuilder(androidContext(), HaditsDatabase::class.java, "hadits.db")
             .fallbackToDestructiveMigration().build()
     }
 }
@@ -130,6 +141,16 @@ val networkModule = module {
             .build()
         retrofitDoa.create(DoaService::class.java)
     }
+
+    //hadits
+    single {
+        val retrofitHadits = Retrofit.Builder()
+            .baseUrl(BASE_URL_SHOLAT)
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(get())
+            .build()
+        retrofitHadits.create(HaditsService::class.java)
+    }
 }
 
 val repositoryModule = module {
@@ -148,7 +169,8 @@ val repositoryModule = module {
     }
     single<ISholatRepository> { SholatRepository(get(), get()) }
     single<IHusnaRepository> { HusnaRepository(get(), get(), get()) }
-    single <IDoaRepository> { DoaRepository(get(), get(), get()) }
+    single<IDoaRepository> { DoaRepository(get(), get(), get()) }
+    single<IHaditsRepository> { HaditsRepository(get(), get(), get()) }
 
     single { SuratLocalDataSource(get()) }
     single { LokasiRemoteDataSource(get()) }
@@ -159,6 +181,8 @@ val repositoryModule = module {
     single { HusnaLocalDataSource(get()) }
     single { DoaRemoteDataSource(get()) }
     single { DoaLocalDataSource(get()) }
+    single { HaditsRemoteDataSource(get()) }
+    single { HaditsLocalDataSource(get()) }
 
 
 }

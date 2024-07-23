@@ -6,5 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".hadits.HaditsActivity">
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_hadits"
+        android:layout_width="match_parent"
+        tools:listitem="@layout/item_list_hadits"
+        android:layout_height="match_parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
