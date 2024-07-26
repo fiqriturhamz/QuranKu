@@ -7,6 +7,15 @@
 
     <style name="Theme.Quranku.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"></style>
     <style name="Theme.Quranku.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"></style>
-
     <style name="Theme.Quranku" parent="Base.Theme.Quranku" />
+
+<!--    <style name="Theme.Quranku.AppBarOverlay" parent="Theme.Material3.Light.NoActionBar"></style>
+
+    <style name="Theme.Quranku.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"></style>
+
+    <style name="Theme.Menu" parent="Base.Theme.Quranku"></style>
+
+    <style name="Theme.Navigation" parent="Base.Theme.Quranku">
+        <item name="colorControlHighlight">@android:color/transparent</item>
+    </style>-->
 </resources>

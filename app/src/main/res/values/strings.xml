@@ -30,4 +30,7 @@
     <string name="doa_tab_text_4">Ibadah</string>
     <string name="doa_tab_text_5">Haji</string>
     <string name="doa_tab_text_6">Lainnya</string>
+
+    <string name="open">Open</string>
+    <string name="close">Close</string>
 </resources>

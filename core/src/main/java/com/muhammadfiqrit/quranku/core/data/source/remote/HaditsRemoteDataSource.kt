@@ -4,7 +4,6 @@ import android.util.Log
 import com.muhammadfiqrit.quranku.core.data.HaditsService
 import com.muhammadfiqrit.quranku.core.data.source.remote.network.ApiResponse
 import com.muhammadfiqrit.quranku.core.data.source.remote.response.hadits.ResponseHaditsArbain
-import com.muhammadfiqrit.quranku.core.data.source.remote.response.hadits.ResponseListHaditsArbain
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
