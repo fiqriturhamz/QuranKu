@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.muhammadfiqrit.quranku.R
 import com.muhammadfiqrit.quranku.databinding.ActivityMainBinding
 import com.muhammadfiqrit.quranku.favorite.FavoriteFragment
-import com.muhammadfiqrit.quranku.home.HomeFragment
 
 import com.muhammadfiqrit.quranku.lokasi.LokasiFragment
 import com.muhammadfiqrit.quranku.surat.SuratFragment
@@ -22,6 +21,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
 
         supportActionBar?.elevation = 0f
 

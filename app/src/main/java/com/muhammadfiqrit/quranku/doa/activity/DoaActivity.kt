@@ -16,7 +16,12 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.muhammadfiqrit.quranku.R
 import com.muhammadfiqrit.quranku.databinding.ActivityDoaBinding
+import com.muhammadfiqrit.quranku.doa.fragment.DoaHaditsFragment
 import com.muhammadfiqrit.quranku.doa.fragment.DoaHajiFragment
+import com.muhammadfiqrit.quranku.doa.fragment.DoaHarianFragment
+import com.muhammadfiqrit.quranku.doa.fragment.DoaIbadahFragment
+import com.muhammadfiqrit.quranku.doa.fragment.DoaLainnyaFragment
+import com.muhammadfiqrit.quranku.doa.fragment.DoaPilihanFragment
 import com.muhammadfiqrit.quranku.doa.fragment.DoaQuranFragment
 import com.muhammadfiqrit.quranku.doa.fragment.TabDoaAdapter
 
@@ -121,6 +126,22 @@ class DoaActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelected
                 .commit()
         } else if (item.itemId == R.id.haji) {
             supportFragmentManager.beginTransaction().replace(R.id.frameLayout, DoaHajiFragment())
+                .commit()
+        } else if (item.itemId == R.id.harian) {
+            supportFragmentManager.beginTransaction().replace(R.id.frameLayout, DoaHarianFragment())
+                .commit()
+        } else if (item.itemId == R.id.ibadah) {
+            supportFragmentManager.beginTransaction().replace(R.id.frameLayout, DoaIbadahFragment())
+                .commit()
+        } else if (item.itemId == R.id.pilihan) {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.frameLayout, DoaPilihanFragment()).commit()
+        } else if (item.itemId == R.id.hadits) {
+            supportFragmentManager.beginTransaction().replace(R.id.frameLayout, DoaHaditsFragment())
+                .commit()
+        } else if (item.itemId == R.id.lainnya) {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.frameLayout, DoaLainnyaFragment())
                 .commit()
         }
         binding.drawerLayout.closeDrawer(GravityCompat.START)
