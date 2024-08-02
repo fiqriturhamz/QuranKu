@@ -6,6 +6,7 @@ import com.muhammadfiqrit.quranku.core.data.repository.DoaRepository
 import com.muhammadfiqrit.quranku.core.data.repository.HaditsRepository
 import com.muhammadfiqrit.quranku.core.data.repository.HusnaRepository
 import com.muhammadfiqrit.quranku.core.data.repository.LokasiRepository
+import com.muhammadfiqrit.quranku.core.data.repository.QuoteRepository
 import com.muhammadfiqrit.quranku.core.data.repository.SholatRepository
 import com.muhammadfiqrit.quranku.core.data.repository.SuratRepository
 import com.muhammadfiqrit.quranku.core.data.source.local.DoaLocalDataSource
@@ -33,6 +34,7 @@ import com.muhammadfiqrit.quranku.core.domain.repository.IDoaRepository
 import com.muhammadfiqrit.quranku.core.domain.repository.IHaditsRepository
 import com.muhammadfiqrit.quranku.core.domain.repository.IHusnaRepository
 import com.muhammadfiqrit.quranku.core.domain.repository.ILokasiRepository
+import com.muhammadfiqrit.quranku.core.domain.repository.IQuoteRepository
 import com.muhammadfiqrit.quranku.core.domain.repository.ISholatRepository
 import com.muhammadfiqrit.quranku.core.domain.repository.ISuratRepository
 import com.muhammadfiqrit.quranku.core.utils.AppExecutors
@@ -171,6 +173,7 @@ val repositoryModule = module {
     single<IHusnaRepository> { HusnaRepository(get(), get(), get()) }
     single<IDoaRepository> { DoaRepository(get(), get(), get()) }
     single<IHaditsRepository> { HaditsRepository(get(), get(), get()) }
+    single<IQuoteRepository> { QuoteRepository() }
 
     single { SuratLocalDataSource(get()) }
     single { LokasiRemoteDataSource(get()) }

@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.muhammadfiqrit.quranku.core.data.Resource
 import com.muhammadfiqrit.quranku.core.domain.model.sholat.jadwal.JadwalDataHarian
 import com.muhammadfiqrit.quranku.databinding.FragmentHomeBinding
@@ -18,6 +19,7 @@ import com.muhammadfiqrit.quranku.doa.activity.DoaActivity
 import com.muhammadfiqrit.quranku.hadits.HaditsActivity
 import com.muhammadfiqrit.quranku.husna.HusnaActivity
 import com.muhammadfiqrit.quranku.lokasi.LokasiViewModel
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
 import java.util.Locale
@@ -26,8 +28,10 @@ import java.util.Locale
 class HomeFragment : Fragment() {
 
     private val homeViewModel: HomeViewModel by viewModel()
+    private val quoteViewModel: QuoteViewModel by viewModel()
     private var _binding: FragmentHomeBinding? = null
     private val lokasiViewModel: LokasiViewModel by viewModel()
+    private val quoteAdapter: QuoteAdapter by inject()
     private val binding get() = _binding!!
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -65,6 +69,7 @@ class HomeFragment : Fragment() {
                 populateData("$calendarYear-$calendarMonth-$calendarDay", lokasi.idLokasi!!.toInt())
             }
         }
+        populateDataQuote()
 
     }
 
@@ -88,6 +93,31 @@ class HomeFragment : Fragment() {
                         Toast.makeText(requireActivity(), "${it.message}", Toast.LENGTH_SHORT)
                             .show()
                     }
+                }
+            }
+        }
+    }
+
+    private fun populateDataQuote() {
+        quoteViewModel.getSemuaQuotes.observe(viewLifecycleOwner) {
+            if (it != null) {
+                when (it) {
+                    is Resource.Loading -> {
+
+                    }
+
+                    is Resource.Success -> {
+                        quoteAdapter.setDataQuote(it.data)
+                        binding.rvQuotes.adapter = quoteAdapter
+                        binding.rvQuotes.layoutManager = LinearLayoutManager(
+                            requireContext(),
+                            LinearLayoutManager.HORIZONTAL,
+                            false
+                        )
+                        binding.rvQuotes.setHasFixedSize(true)
+                    }
+
+                    is Resource.Error -> {}
                 }
             }
         }

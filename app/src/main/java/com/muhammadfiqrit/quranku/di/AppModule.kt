@@ -13,6 +13,8 @@ import com.muhammadfiqrit.quranku.core.domain.usecase.husna.HusnaInteractor
 import com.muhammadfiqrit.quranku.core.domain.usecase.husna.HusnaUseCase
 import com.muhammadfiqrit.quranku.core.domain.usecase.lokasi.LokasiInteractor
 import com.muhammadfiqrit.quranku.core.domain.usecase.lokasi.LokasiUseCase
+import com.muhammadfiqrit.quranku.core.domain.usecase.quote.QuoteInteractor
+import com.muhammadfiqrit.quranku.core.domain.usecase.quote.QuoteUseCase
 import com.muhammadfiqrit.quranku.core.domain.usecase.sholat.SholatInteractor
 import com.muhammadfiqrit.quranku.core.domain.usecase.sholat.SholatUseCase
 import com.muhammadfiqrit.quranku.core.domain.usecase.surat.SuratInteractor
@@ -25,6 +27,8 @@ import com.muhammadfiqrit.quranku.favorite.FavoriteViewModel
 import com.muhammadfiqrit.quranku.hadits.HaditsAdapter
 import com.muhammadfiqrit.quranku.hadits.HaditsViewModel
 import com.muhammadfiqrit.quranku.home.HomeViewModel
+import com.muhammadfiqrit.quranku.home.QuoteAdapter
+import com.muhammadfiqrit.quranku.home.QuoteViewModel
 import com.muhammadfiqrit.quranku.husna.HusnaViewModel
 
 import com.muhammadfiqrit.quranku.lokasi.LokasiAdapter
@@ -40,6 +44,7 @@ val useCaseModule = module {
     factory<HusnaUseCase> { HusnaInteractor(get()) }
     factory<DoaUseCase> { DoaInteractor(get()) }
     factory<HaditsUseCase> { HaditsInteractor(get()) }
+    factory<QuoteUseCase> { QuoteInteractor(get()) }
 }
 val viewModelModule = module {
     viewModel { SuratViewModel(get()) }
@@ -52,6 +57,7 @@ val viewModelModule = module {
     viewModel { HusnaViewModel(get()) }
     viewModel { DoaViewModel(get()) }
     viewModel { HaditsViewModel(get()) }
+    viewModel { QuoteViewModel(get()) }
 
 
 }
@@ -62,4 +68,5 @@ val adapterModule = module {
     factory { LokasiAdapter(get(), get()) }
     factory { AyatAdapter(get()) }
     factory { HaditsAdapter() }
+    factory { QuoteAdapter() }
 }
