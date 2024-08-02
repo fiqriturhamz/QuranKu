@@ -19,6 +19,8 @@ class LokasiAdapter(private val context: Context, private val lokasiViewModel: L
         notifyDataSetChanged()
     }
 
+    fun getData(): ArrayList<Lokasi> = listDataLokasi
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -72,7 +74,6 @@ class LokasiAdapter(private val context: Context, private val lokasiViewModel: L
 
     inner class LokasiViewHolder(var binding: ItemListLokasiBinding) :
         RecyclerView.ViewHolder(binding.root)
-
 
 
 }

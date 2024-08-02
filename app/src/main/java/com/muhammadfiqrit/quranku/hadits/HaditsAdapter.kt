@@ -16,6 +16,8 @@ class HaditsAdapter : RecyclerView.Adapter<HaditsAdapter.HaditsViewHolder>() {
 
     }
 
+    fun getData(): List<Hadits> = listHadits
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int

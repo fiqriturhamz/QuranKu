@@ -21,7 +21,10 @@
             android:exported="false" />
         <activity
             android:name=".hadits.HaditsActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/HaditsActivity"
+            android:label="Hadits Arbain"
+           />
         <activity
             android:name=".husna.HusnaActivity"
             android:exported="false" />

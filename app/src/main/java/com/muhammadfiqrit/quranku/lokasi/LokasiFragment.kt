@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -34,6 +35,16 @@ class LokasiFragment : Fragment() {
 
         if (activity != null) {
 
+            binding.svLokasi.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    return filterData(query as String)
+                }
+
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    return filterData(newText as String)
+                }
+
+            } )
 
             lokasiViewModel.lokasi.observe(viewLifecycleOwner) { lokasi ->
                 if (lokasi != null) {
@@ -63,6 +74,19 @@ class LokasiFragment : Fragment() {
 
     }
 
+    private fun filterData(query: String): Boolean {
+        val filterData =
+            lokasiAdapter.getData().filter { it.namaLokasi.contains(query, ignoreCase = true) }
+         if (filterData.isNotEmpty()) {
+            lokasiAdapter.setData(filterData)
+            lokasiAdapter.notifyDataSetChanged()
+           return true
+        } else {
+            lokasiAdapter.setData(filterData)
+            lokasiAdapter.notifyDataSetChanged()
+            return true
+        }
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()
