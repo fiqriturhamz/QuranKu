@@ -15,4 +15,3 @@ dependencyResolutionManagement {
 rootProject.name = "Quranku"
 include ':app'
 include ':core'
-include ':sholat'

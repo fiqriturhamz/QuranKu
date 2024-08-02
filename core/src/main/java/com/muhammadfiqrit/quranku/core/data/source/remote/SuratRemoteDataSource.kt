@@ -19,11 +19,11 @@ class SuratRemoteDataSource(private val suratService: SuratService) {
         return flow {
             try {
                 val response = suratService.getSurat()
-                val dataArray = response.data
-                if (dataArray.isNotEmpty()) {
-                    emit(ApiResponse.Success(response.data))
+                val data = response.data
+                if (data.isNotEmpty()) {
+                    emit(ApiResponse.Success(data))
                 } else {
-                    emit(ApiResponse.Empty)
+                  Log.e("error", "error")
                 }
             } catch (e: Exception) {
                 emit(ApiResponse.Error(e.toString()))

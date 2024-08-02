@@ -1,6 +1,7 @@
 package com.muhammadfiqrit.quranku.detail.ayat
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,9 +9,10 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.muhammadfiqrit.quranku.core.data.Resource
-import com.muhammadfiqrit.quranku.core.ui.AyatAdapter
+import com.muhammadfiqrit.quranku.detail.AyatAdapter
 import com.muhammadfiqrit.quranku.databinding.FragmentAyatBinding
 import com.muhammadfiqrit.quranku.detail.DetailSuratViewModel
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -18,6 +20,8 @@ class AyatFragment : Fragment() {
     private var _binding: FragmentAyatBinding? = null
     private val binding get() = _binding!!
     private val detailSuratViewModel: DetailSuratViewModel by viewModel()
+
+    private val ayatAdapter: AyatAdapter by inject()
 
     companion object {
         var suratNomor: Int = 0
@@ -52,10 +56,13 @@ class AyatFragment : Fragment() {
                     is Resource.Success -> {
                         binding.progressBarAyat.visibility = View.INVISIBLE
 
-                        result.data?.let {
-                            binding.rvAyat.adapter = AyatAdapter(it.ayat)
+                        result.data?.let { data ->
+                            binding.rvAyat.adapter = ayatAdapter
+                            ayatAdapter.setListAyat(data.listAyat)
                             binding.rvAyat.layoutManager = LinearLayoutManager(requireActivity())
                             binding.rvAyat.setHasFixedSize(true)
+
+                            Log.e("ayat",data.listAyat.toString())
 
                         }
 

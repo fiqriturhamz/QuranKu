@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/quran"
+            android:checked="true"
+            android:icon="@drawable/ic_quran"
+            android:title="Quran" />
+
+        <item
+            android:id="@+id/haji"
+            android:checked="true"
+            android:icon="@drawable/ic_hajj"
+            android:title="Haji" />
+
+        <item
+            android:id="@+id/harian"
+            android:checked="true"
+            android:icon="@drawable/ic_calendar"
+            android:title="Harian" />
+
+        <item
+            android:id="@+id/ibadah"
+            android:checked="true"
+            android:icon="@drawable/ic_doa"
+            android:title="Ibadah" />
+        <item
+            android:id="@+id/pilihan"
+            android:checked="true"
+            android:icon="@drawable/ic_pilihan"
+            android:title="Pilihan" />
+        <item
+            android:id="@+id/hadits"
+            android:checked="true"
+            android:icon="@drawable/ic_hadits"
+            android:title="Hadits" />
+        <item
+            android:id="@+id/lainnya"
+            android:checked="true"
+            android:icon="@drawable/lainnya"
+            android:title="Lainnya" />
+    </group>
+</menu>

@@ -1,13 +1,14 @@
 package com.muhammadfiqrit.quranku.detail.tafsir
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.muhammadfiqrit.quranku.core.data.Resource
-import com.muhammadfiqrit.quranku.core.ui.TafsirAdapter
+import com.muhammadfiqrit.quranku.detail.TafsirAdapter
 import com.muhammadfiqrit.quranku.databinding.FragmentTafsirBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -19,7 +20,7 @@ class TafsirFragment : Fragment() {
     private val binding get() = _binding!!
 
     companion object {
-        var suratNomor : Int = 1
+        var suratNomor: Int = 1
     }
 
     override fun onCreateView(
@@ -50,9 +51,11 @@ class TafsirFragment : Fragment() {
                         binding.progressBarTafsir.visibility = View.INVISIBLE
                         result.data?.let { tafsirData ->
                             binding.apply {
-                                rvTafsir.adapter = TafsirAdapter(tafsirData)
+                                rvTafsir.adapter = TafsirAdapter(tafsirData.listTafsir!!)
                                 rvTafsir.layoutManager = LinearLayoutManager(requireActivity())
                                 rvTafsir.setHasFixedSize(true)
+
+                                Log.e("tafsir", tafsirData.toString())
                             }
                         }
 

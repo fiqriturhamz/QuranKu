@@ -18,31 +18,12 @@ class SholatRemoteDataSource(private val sholatService: SholatService) {
             val response = sholatService.getJadwalSholatPerHari(hari, idKota)
             val data = response.data
             if(response.status){
-                if (data != null) {
-                    emit(ApiResponse.Success(data))
-                } else {
-                    emit(ApiResponse.Empty)
-                }
+                emit(ApiResponse.Success(data))
 
             }else {
-
-
+                Log.e("error","error")
             }
-           /* try {
-                val response = sholatService.getJadwalSholatPerHari(hari, idKota)
-                val data = response.data
-                if (data != null) {
-                    emit(ApiResponse.Success(data))
-                } else {
-                    emit(ApiResponse.Empty)
-                }
-            } catch (e: Exception) {
 
-                emit(ApiResponse.Error(e.toString()))
-                Log.e("Remote.getSholat", e.toString())
-
-
-            }*/
         }.flowOn(Dispatchers.IO)
     }
 }

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".home.HomeFragment">
+    >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
@@ -14,6 +14,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
 
         <ImageView
             android:id="@+id/backgroundImageView"
@@ -336,9 +337,9 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_all_features">
 
         <RelativeLayout
-            android:id="@+id/quran_feature"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:id="@+id/hadits_feature"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
             android:layout_weight="1">
 
 
@@ -365,7 +366,7 @@
 
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_selected_quran"
+                        android:src="@drawable/ic_hadits"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -381,8 +382,8 @@
 
         <RelativeLayout
             android:id="@+id/sholat_feature"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
             android:layout_weight="1">
 
 
@@ -419,8 +420,8 @@
 
         <RelativeLayout
             android:id="@+id/donation_feature"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
             android:layout_weight="1">
 
 
@@ -453,6 +454,74 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.cardview.widget.CardView>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/asmahul_husna"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_weight="1">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:layout_margin="10dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="10dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/custom_cv_all_feature"
+                    android:layout_gravity="center">
+
+                    <ImageView
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:src="@drawable/ic_asmaul_husna"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/doa"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_weight="1">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:layout_margin="10dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="10dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/custom_cv_all_feature"
+                    android:layout_gravity="center">
+
+                    <ImageView
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:src="@drawable/ic_doa"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
         </RelativeLayout>
     </LinearLayout>
 
