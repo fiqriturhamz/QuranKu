@@ -42,17 +42,23 @@ class SuratFragment : Fragment() {
                 if (surat != null) {
 
                     when (surat) {
-                        is com.muhammadfiqrit.quranku.core.data.Resource.Loading -> binding.suratProgressBar.visibility =
-                            View.VISIBLE
+                        is com.muhammadfiqrit.quranku.core.data.Resource.Loading -> {
+                            binding.suratProgressBar.visibility =
+                                View.VISIBLE
+                            binding.lottie404SuratFragment.visibility = View.GONE
+                        }
 
                         is com.muhammadfiqrit.quranku.core.data.Resource.Success -> {
                             binding.suratProgressBar.visibility = View.GONE
+                            binding.lottie404SuratFragment.visibility = View.GONE
                             suratAdapter.setData(surat.data)
 
                         }
 
                         is com.muhammadfiqrit.quranku.core.data.Resource.Error -> {
                             binding.suratProgressBar.visibility = View.GONE
+                            binding.lottie404SuratFragment.visibility = View.VISIBLE
+
                             Toast.makeText(requireContext(), surat.message, Toast.LENGTH_SHORT)
                                 .show()
                         }

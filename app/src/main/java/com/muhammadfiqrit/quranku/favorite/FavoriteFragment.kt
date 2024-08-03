@@ -17,7 +17,7 @@ class FavoriteFragment : Fragment() {
 
     private val favoriteViewModel: FavoriteViewModel by viewModel()
     private var _binding: FragmentFavoriteBinding? = null
-    private val suratAdapter : SuratAdapter by inject()
+    private val suratAdapter: SuratAdapter by inject()
     private val binding get() = _binding!!
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,7 +37,14 @@ class FavoriteFragment : Fragment() {
                 startActivity(intent)
             }
             favoriteViewModel.favoriteSurat.observe(viewLifecycleOwner) { dataSurat ->
-                suratAdapter.setData(dataSurat)
+                if (dataSurat.isNotEmpty()) {
+                    suratAdapter.setData(dataSurat)
+                    binding.ivEmpty.visibility = View.GONE
+                    binding.rvFavoriteSurat.visibility = View.VISIBLE
+                }else {
+                    binding.ivEmpty.visibility = View.VISIBLE
+                    binding.rvFavoriteSurat.visibility = View.GONE
+                }
 
             }
             with(binding.rvFavoriteSurat) {
