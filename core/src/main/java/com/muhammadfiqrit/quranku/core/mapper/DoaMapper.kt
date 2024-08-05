@@ -1,10 +1,10 @@
-package com.muhammadfiqrit.quranku.core.utils
+package com.muhammadfiqrit.quranku.core.mapper
 
 import com.muhammadfiqrit.quranku.core.data.source.local.entity.doa.DoaEntity
 import com.muhammadfiqrit.quranku.core.data.source.remote.response.doa.ResponseDoa
 import com.muhammadfiqrit.quranku.core.domain.model.doa.Doa
 
-object DataMapperDoa {
+object DoaMapper {
     fun mapDataDoaResponsesToDoaEntities(input: List<ResponseDoa>): List<DoaEntity> {
         val listDoa = ArrayList<DoaEntity>()
         input.map {

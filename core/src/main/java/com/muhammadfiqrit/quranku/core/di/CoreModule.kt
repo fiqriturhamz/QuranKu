@@ -53,7 +53,7 @@ val databaseModule = module {
         get<SuratDatabase>().suratDao()
     }
     single {
-        Room.databaseBuilder(androidContext(), SuratDatabase::class.java, "Surat.db")
+        Room.databaseBuilder(androidContext(), SuratDatabase::class.java, "surat.db")
             .fallbackToDestructiveMigration().build()
     }
 
@@ -69,7 +69,7 @@ val databaseModule = module {
         get<HusnaDatabase>().asmaulHusnaDao()
     }
     single {
-        Room.databaseBuilder(androidContext(), HusnaDatabase::class.java, "Husna.db")
+        Room.databaseBuilder(androidContext(), HusnaDatabase::class.java, "husna.db")
             .fallbackToDestructiveMigration().build()
     }
     factory { get<DoaDatabase>().doaDao() }

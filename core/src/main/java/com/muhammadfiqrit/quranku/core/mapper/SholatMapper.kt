@@ -1,11 +1,11 @@
-package com.muhammadfiqrit.quranku.core.utils
+package com.muhammadfiqrit.quranku.core.mapper
 
 import com.muhammadfiqrit.quranku.core.data.source.remote.response.sholat.jadwal.ResponseJadwalDataHarian
 import com.muhammadfiqrit.quranku.core.domain.model.sholat.jadwal.JadwalDataHarian
 import kotlinx.coroutines.flow.flowOf
 
-object DataMapperSholat {
-    fun responseJadwalDataHarianToJadwalDataHarian(input: ResponseJadwalDataHarian) =
+object SholatMapper {
+    fun responseToDomain(input: ResponseJadwalDataHarian) =
         flowOf(
             JadwalDataHarian(
                 id = input.id,

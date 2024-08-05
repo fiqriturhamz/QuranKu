@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.muhammadfiqrit.quranku.core.data.Resource
 import com.muhammadfiqrit.quranku.core.domain.model.sholat.jadwal.JadwalDataHarian
 import com.muhammadfiqrit.quranku.databinding.FragmentHomeBinding
+import com.muhammadfiqrit.quranku.detail.DetailSuratViewModel
 import com.muhammadfiqrit.quranku.doa.activity.DoaActivity
 import com.muhammadfiqrit.quranku.hadits.HaditsActivity
 import com.muhammadfiqrit.quranku.husna.HusnaActivity
@@ -32,6 +33,7 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val lokasiViewModel: LokasiViewModel by viewModel()
     private val quoteAdapter: QuoteAdapter by inject()
+    private val detailSuratViewModel: DetailSuratViewModel by inject()
     private val binding get() = _binding!!
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -66,10 +68,16 @@ class HomeFragment : Fragment() {
         Log.e("gregorian", calendarDay.toString())
         lokasiViewModel.lokasiSekarang.observe(viewLifecycleOwner) { lokasi ->
             if (lokasi != null) {
-                populateData("$calendarYear-$calendarMonth-$calendarDay", lokasi.idLokasi!!.toInt())
+                populateData("$calendarYear-$calendarMonth-$calendarDay", lokasi.idLokasi.toInt())
             }
         }
+      /*  detailSuratViewModel.ayatWithSurat.observe(viewLifecycleOwner) { ayat ->
+            if (ayat != null) {
+                populateDataAyatTerakhirDibaca()
+            }
+        }*/
         populateDataQuote()
+        populateDataAyatTerakhirDibaca()
 
     }
 
@@ -94,6 +102,17 @@ class HomeFragment : Fragment() {
                             .show()
                     }
                 }
+            }
+        }
+    }
+
+    fun populateDataAyatTerakhirDibaca() {
+        detailSuratViewModel.ayatWithSurat.observe(viewLifecycleOwner) { ayat ->
+            if (ayat != null) {
+                binding.tvNomorAyatTerakhir.text = ayat.ayat.nomorAyat.toString()
+                binding.tvTitle.text = ayat.surat.nama
+                binding.tvArti.text = ayat.surat.arti
+                binding.tvNamaLatin.text = ayat.surat.namaLatin
             }
         }
     }

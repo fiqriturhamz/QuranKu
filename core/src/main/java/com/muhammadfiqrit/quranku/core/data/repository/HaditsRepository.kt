@@ -9,7 +9,7 @@ import com.muhammadfiqrit.quranku.core.data.source.remote.response.hadits.Respon
 import com.muhammadfiqrit.quranku.core.domain.model.hadits.Hadits
 import com.muhammadfiqrit.quranku.core.domain.repository.IHaditsRepository
 import com.muhammadfiqrit.quranku.core.utils.AppExecutors
-import com.muhammadfiqrit.quranku.core.utils.DataMapperHadits
+import com.muhammadfiqrit.quranku.core.mapper.HaditsMapper
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
@@ -22,7 +22,7 @@ class HaditsRepository(
         return object : NetworkBoundResource<List<Hadits>, List<ResponseHaditsArbain>>() {
             override fun loadFromDB(): Flow<List<Hadits>> {
                 return haditsLocalDataSource.getAllHaditsArbain()
-                    .map { DataMapperHadits.mapHaditsEntitiesToHadits(it) }
+                    .map { HaditsMapper.mapHaditsEntitiesToHadits(it) }
             }
 
             override suspend fun createCall(): Flow<ApiResponse<List<ResponseHaditsArbain>>> {
@@ -30,7 +30,7 @@ class HaditsRepository(
             }
 
             override suspend fun saveCallResult(data: List<ResponseHaditsArbain>) {
-                val data = DataMapperHadits.mapHaditsResponsesToHaditsEntities(data)
+                val data = HaditsMapper.mapHaditsResponsesToHaditsEntities(data)
                 haditsLocalDataSource.insertAllHaditsArbain(data)
 
             }

@@ -1,10 +1,10 @@
-package com.muhammadfiqrit.quranku.core.utils
+package com.muhammadfiqrit.quranku.core.mapper
 
 import com.muhammadfiqrit.quranku.core.data.source.local.entity.sholat.lokasi.LokasiEntity
 import com.muhammadfiqrit.quranku.core.data.source.remote.response.sholat.lokasi.ResponseSemuaLokasiItem
 import com.muhammadfiqrit.quranku.core.domain.model.lokasi.Lokasi
 
-object DataMapperLokasi {
+object LokasiMapper {
     fun mapLokasiResponsesToLokasiEntities(input: List<ResponseSemuaLokasiItem>): List<LokasiEntity> {
         val lokasiList = ArrayList<LokasiEntity>()
         input.map {

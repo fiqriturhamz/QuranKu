@@ -4,8 +4,10 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Transaction
 import androidx.room.Update
 import com.muhammadfiqrit.quranku.core.data.source.local.entity.detail.AyatEntity
+import com.muhammadfiqrit.quranku.core.data.source.local.entity.detail.AyatWithSuratEntity
 import com.muhammadfiqrit.quranku.core.data.source.local.entity.surat.SuratEntity
 import com.muhammadfiqrit.quranku.core.data.source.local.entity.tafsir.TafsirEntity
 import kotlinx.coroutines.flow.Flow
@@ -41,35 +43,24 @@ interface SuratDao {
     fun getTafsir(nomorSurat: Int): Flow<List<TafsirEntity>>
 
 
-
     @Query("SELECT * FROM surat where isFavorite = 1")
     fun getFavoriteSurat(): Flow<List<SuratEntity>>
 
     @Update
     fun updateFavoriteSurat(surat: SuratEntity)
 
+    @Query("UPDATE ayat SET isLastRead = :isLastRead WHERE id = :id")
+    fun updateAyatTerakhirDibaca(id: Long, isLastRead: Boolean)
 
-    /*    //DETAIL SURAT
-      @Insert(onConflict = OnConflictStrategy.REPLACE)
-      suspend fun insertDetailSurat(surat: SuratEntity)*/
+    @Query("SELECT * FROM ayat where isLastRead = 1")
+    fun getAyatTerakhirDibaca(): Flow<AyatEntity>
 
-    /*  //
+    @Query("UPDATE ayat set isLastRead =0 WHERE isLastRead = 1")
+    fun resetAllAyatTerakhirDibaca()
 
-
-
-      //SURAT SELANJUTNYA
-      @Insert(onConflict = OnConflictStrategy.REPLACE)
-      suspend fun insertSuratSelanjutnya(suratSelanjutnya: SuratSelanjutnyaEntity)
-
-      @Query("SELECT * FROM surat_selanjutnya WHERE nomorSurat = :nomorSurat ")
-      fun getSuratSelanjutnya(nomorSurat: Int): Flow<SuratSelanjutnyaEntity>
+    @Transaction
+    @Query("SELECT * FROM ayat WHERE isLastRead = 1")
+    fun getAyatWithSurat(): Flow<AyatWithSuratEntity>
 
 
-
-
-      @Update
-      fun updateAyatTerakhirDibaca(Ayat: AyatEntity)
-
-      @Query("SELECT * FROM ayat WHERE isLastRead = 1")
-      fun getAyatTerakhirDibaca(): Flow<AyatEntity>*/
 }

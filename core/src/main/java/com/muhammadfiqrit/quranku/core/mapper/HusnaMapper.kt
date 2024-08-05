@@ -1,11 +1,11 @@
-package com.muhammadfiqrit.quranku.core.utils
+package com.muhammadfiqrit.quranku.core.mapper
 
 import com.muhammadfiqrit.quranku.core.data.source.local.entity.HusnaEntity
 import com.muhammadfiqrit.quranku.core.data.source.remote.response.husna.ResponseHusna
 import com.muhammadfiqrit.quranku.core.domain.model.husna.Husna
 
-object DataMapperHusna {
-    fun mapHusnaResponsesToHusnaEntities(input: List<ResponseHusna>): List<HusnaEntity> {
+object HusnaMapper {
+    fun responsesToEntities(input: List<ResponseHusna>): List<HusnaEntity> {
         val listHusna = ArrayList<HusnaEntity>()
         input.map {
             val husnaEntity = HusnaEntity(
@@ -19,7 +19,7 @@ object DataMapperHusna {
         return listHusna
     }
 
-    fun mapHusnaEntitiesToHusnas(input: List<HusnaEntity>): List<Husna> {
+    fun entitiesToDomain(input: List<HusnaEntity>): List<Husna> {
         val listHusna = ArrayList<Husna>()
         input.map {
             val husna = Husna(

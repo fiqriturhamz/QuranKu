@@ -5,6 +5,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
+import com.muhammadfiqrit.quranku.core.data.source.local.entity.sholat.lokasi.LokasiEntity
 import com.muhammadfiqrit.quranku.core.data.source.local.entity.surat.SuratEntity
 
 
@@ -20,6 +21,7 @@ import com.muhammadfiqrit.quranku.core.data.source.local.entity.surat.SuratEntit
 data class AyatEntity(
     @PrimaryKey(autoGenerate = true)
     @NonNull
+    @ColumnInfo(name = "id")
     val id: Long = 0,
     @ColumnInfo(name = "nomorAyat")
     val nomorAyat: Int,
@@ -32,6 +34,6 @@ data class AyatEntity(
     @ColumnInfo(name = "teksIndonesia")
     var teksIndonesia: String,
     @ColumnInfo("isLastRead")
-    var isLastRead : Boolean
+    var isLastRead: Boolean = false
 )
 

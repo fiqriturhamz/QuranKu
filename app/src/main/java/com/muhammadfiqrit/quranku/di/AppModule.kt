@@ -6,7 +6,6 @@ import com.muhammadfiqrit.quranku.core.domain.usecase.doa.DoaUseCase
 import com.muhammadfiqrit.quranku.core.domain.usecase.hadits.HaditsInteractor
 import com.muhammadfiqrit.quranku.core.domain.usecase.hadits.HaditsUseCase
 import com.muhammadfiqrit.quranku.detail.AyatAdapter
-import com.muhammadfiqrit.quranku.detail.AyatViewModel
 import com.muhammadfiqrit.quranku.husna.HusnaAdapter
 import com.muhammadfiqrit.quranku.surat.SuratAdapter
 import com.muhammadfiqrit.quranku.core.domain.usecase.husna.HusnaInteractor
@@ -51,7 +50,6 @@ val viewModelModule = module {
     viewModel { DetailSuratViewModel(get()) }
     viewModel { FavoriteViewModel(get()) }
     viewModel { TafsirViewModel(get()) }
-    viewModel { AyatViewModel(get()) }
     viewModel { LokasiViewModel(get()) }
     viewModel { HomeViewModel(get()) }
     viewModel { HusnaViewModel(get()) }

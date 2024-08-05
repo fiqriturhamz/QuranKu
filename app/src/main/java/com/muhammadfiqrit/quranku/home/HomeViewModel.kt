@@ -19,6 +19,7 @@ class HomeViewModel(private val sholatUseCase: SholatUseCase) : ViewModel() {
                }
            }*/
 
+
     val jadwalSholatHarian = combine(_tanggal, _idKota) { tanggal, idKota ->
         Pair(tanggal, idKota)
     }.flatMapLatest { (tanggal, idKota) ->

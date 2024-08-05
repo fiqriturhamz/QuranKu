@@ -9,7 +9,7 @@ import com.muhammadfiqrit.quranku.core.data.source.remote.response.sholat.lokasi
 import com.muhammadfiqrit.quranku.core.domain.model.lokasi.Lokasi
 import com.muhammadfiqrit.quranku.core.domain.repository.ILokasiRepository
 import com.muhammadfiqrit.quranku.core.utils.AppExecutors
-import com.muhammadfiqrit.quranku.core.utils.DataMapperLokasi
+import com.muhammadfiqrit.quranku.core.mapper.LokasiMapper
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
@@ -22,7 +22,7 @@ class LokasiRepository(
         return object : NetworkBoundResource<List<Lokasi>, List<ResponseSemuaLokasiItem>>() {
             override fun loadFromDB(): Flow<List<Lokasi>> {
                 return lokasiLocalDataSource.getAllLokasi()
-                    .map { DataMapperLokasi.mapLokasiEntitiesToListLokasi(it) }
+                    .map { LokasiMapper.mapLokasiEntitiesToListLokasi(it) }
             }
 
             override suspend fun createCall(): Flow<ApiResponse<List<ResponseSemuaLokasiItem>>> {
@@ -30,7 +30,7 @@ class LokasiRepository(
             }
 
             override suspend fun saveCallResult(data: List<ResponseSemuaLokasiItem>) {
-                val lokasiList = DataMapperLokasi.mapLokasiResponsesToLokasiEntities(data)
+                val lokasiList = LokasiMapper.mapLokasiResponsesToLokasiEntities(data)
                 lokasiLocalDataSource.insertLokasi(lokasiList)
             }
 
@@ -43,11 +43,11 @@ class LokasiRepository(
 
     override fun getLokasiSekarang(): Flow<Lokasi> {
         return lokasiLocalDataSource.getLokasiSekarang()
-            .map { DataMapperLokasi.mapLokasiEntityToLokasi(it) }
+            .map { LokasiMapper.mapLokasiEntityToLokasi(it) }
     }
 
     override fun setLokasiSekarang(lokasi: Lokasi, state: Boolean) {
-        val lokasiEntity = DataMapperLokasi.mapDomainLokasiToLokasiEntity(lokasi)
+        val lokasiEntity = LokasiMapper.mapDomainLokasiToLokasiEntity(lokasi)
         appExecutors.diskIO()
             .execute { lokasiLocalDataSource.setLokasiSekarang(lokasiEntity, state) }
     }

@@ -1,10 +1,10 @@
-package com.muhammadfiqrit.quranku.core.utils
+package com.muhammadfiqrit.quranku.core.mapper
 
 import com.muhammadfiqrit.quranku.core.data.source.local.entity.hadits.HaditsEntity
 import com.muhammadfiqrit.quranku.core.data.source.remote.response.hadits.ResponseHaditsArbain
 import com.muhammadfiqrit.quranku.core.domain.model.hadits.Hadits
 
-object DataMapperHadits {
+object HaditsMapper {
     fun mapHaditsResponsesToHaditsEntities(input: List<ResponseHaditsArbain>): List<HaditsEntity> {
         val listHadits = ArrayList<HaditsEntity>()
         input.map {

@@ -6,11 +6,10 @@ import com.muhammadfiqrit.quranku.core.data.source.local.HusnaLocalDataSource
 import com.muhammadfiqrit.quranku.core.data.source.remote.HusnaRemoteDataSource
 import com.muhammadfiqrit.quranku.core.data.source.remote.network.ApiResponse
 import com.muhammadfiqrit.quranku.core.data.source.remote.response.husna.ResponseHusna
-import com.muhammadfiqrit.quranku.core.data.source.remote.response.husna.ResponseListHusna
 import com.muhammadfiqrit.quranku.core.domain.model.husna.Husna
 import com.muhammadfiqrit.quranku.core.domain.repository.IHusnaRepository
 import com.muhammadfiqrit.quranku.core.utils.AppExecutors
-import com.muhammadfiqrit.quranku.core.utils.DataMapperHusna
+import com.muhammadfiqrit.quranku.core.mapper.HusnaMapper
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
@@ -23,7 +22,7 @@ class HusnaRepository(
         return object : NetworkBoundResource<List<Husna>, List<ResponseHusna>>() {
             override fun loadFromDB(): Flow<List<Husna>> {
                 return husnaLocalDataSource.getAllAsmaulHusna()
-                    .map { DataMapperHusna.mapHusnaEntitiesToHusnas(it) }
+                    .map { HusnaMapper.entitiesToDomain(it) }
             }
 
             override suspend fun createCall(): Flow<ApiResponse<List<ResponseHusna>>> {
@@ -31,7 +30,7 @@ class HusnaRepository(
             }
 
             override suspend fun saveCallResult(data: List<ResponseHusna>) {
-                val husna = DataMapperHusna.mapHusnaResponsesToHusnaEntities(data)
+                val husna = HusnaMapper.responsesToEntities(data)
                 husnaLocalDataSource.insertHusna(husna)
             }
 
