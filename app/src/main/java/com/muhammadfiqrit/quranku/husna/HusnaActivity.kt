@@ -1,6 +1,7 @@
 package com.muhammadfiqrit.quranku.husna
 
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -18,6 +19,21 @@ class HusnaActivity : AppCompatActivity() {
         binding = ActivityHusnaBinding.inflate(layoutInflater)
         setContentView(binding.root)
         getAllHusna()
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                onBackPressed()
+                true
+            }
+
+            else -> {
+                super.onOptionsItemSelected(item)
+            }
+        }
+
     }
 
     private fun getAllHusna() {

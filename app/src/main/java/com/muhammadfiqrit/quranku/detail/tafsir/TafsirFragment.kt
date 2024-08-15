@@ -54,6 +54,7 @@ class TafsirFragment : Fragment() {
                                 rvTafsir.adapter = TafsirAdapter(tafsirData.listTafsir!!)
                                 rvTafsir.layoutManager = LinearLayoutManager(requireActivity())
                                 rvTafsir.setHasFixedSize(true)
+                                rvTafsir.isNestedScrollingEnabled = false
 
                                 Log.e("tafsir", tafsirData.toString())
                             }

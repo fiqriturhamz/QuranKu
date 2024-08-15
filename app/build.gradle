@@ -5,7 +5,7 @@ plugins {
 }
 
 
-apply {from("../shared_depedencies.gradle")}
+apply { from("../shared_depedencies.gradle") }
 android {
     namespace 'com.muhammadfiqrit.quranku'
     compileSdk 34
@@ -38,7 +38,7 @@ android {
     buildFeatures {
         viewBinding = true
     }
-
+    dynamicFeatures = []
 
 
 }
@@ -46,7 +46,6 @@ android {
 dependencies {
 
     implementation project(':core')
-
 
     //viewpager2
     implementation "androidx.viewpager2:viewpager2:$viewPager2"
@@ -63,7 +62,6 @@ dependencies {
 
     implementation 'androidx.lifecycle:lifecycle-livedata:2.8.3@aar'
     implementation "com.airbnb.android:lottie:$lottie_version"
-
 
 
 }

@@ -5,9 +5,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.muhammadfiqrit.quranku.core.R
-import com.muhammadfiqrit.quranku.core.databinding.ItemListLokasiBinding
+import com.muhammadfiqrit.quranku.R
+
 import com.muhammadfiqrit.quranku.core.domain.model.lokasi.Lokasi
+import com.muhammadfiqrit.quranku.databinding.ItemListLokasiBinding
 
 class LokasiAdapter(private val context: Context, private val lokasiViewModel: LokasiViewModel) :
     RecyclerView.Adapter<LokasiAdapter.LokasiViewHolder>() {

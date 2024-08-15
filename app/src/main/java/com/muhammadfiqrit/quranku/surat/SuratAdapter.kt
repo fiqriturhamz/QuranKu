@@ -4,9 +4,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.muhammadfiqrit.quranku.core.R
-import com.muhammadfiqrit.quranku.core.databinding.ItemListSuratBinding
+import com.muhammadfiqrit.quranku.R
 import com.muhammadfiqrit.quranku.core.domain.model.surat.Surat
+import com.muhammadfiqrit.quranku.databinding.ItemListSuratBinding
 
 class SuratAdapter() : RecyclerView.Adapter<SuratAdapter.SuratViewHolder>() {
     private var listData = ArrayList<Surat>()

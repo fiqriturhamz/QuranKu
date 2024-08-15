@@ -1,19 +1,12 @@
 package com.muhammadfiqrit.quranku.doa.activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.LayoutInflater
 import android.view.MenuItem
-import android.view.View
-import android.widget.TextView
 import androidx.annotation.StringRes
 import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.core.content.ContextCompat
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import com.google.android.material.navigation.NavigationView
-import com.google.android.material.tabs.TabLayout
-import com.google.android.material.tabs.TabLayoutMediator
 import com.muhammadfiqrit.quranku.R
 import com.muhammadfiqrit.quranku.databinding.ActivityDoaBinding
 import com.muhammadfiqrit.quranku.doa.fragment.DoaHaditsFragment
@@ -23,7 +16,6 @@ import com.muhammadfiqrit.quranku.doa.fragment.DoaIbadahFragment
 import com.muhammadfiqrit.quranku.doa.fragment.DoaLainnyaFragment
 import com.muhammadfiqrit.quranku.doa.fragment.DoaPilihanFragment
 import com.muhammadfiqrit.quranku.doa.fragment.DoaQuranFragment
-import com.muhammadfiqrit.quranku.doa.fragment.TabDoaAdapter
 
 class DoaActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 

@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.muhammadfiqrit.quranku.core.domain.model.husna.Husna
 import com.muhammadfiqrit.quranku.databinding.ItemListHusnaBinding
 
+
 class HusnaAdapter() :
     RecyclerView.Adapter<HusnaAdapter.HusnaViewHolder>() {
 

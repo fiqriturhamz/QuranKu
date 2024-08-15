@@ -22,15 +22,22 @@
         <activity
             android:name=".hadits.HaditsActivity"
             android:exported="false"
-            android:theme="@style/HaditsActivity"
             android:label="Hadits Arbain"
-           />
+            android:theme="@style/HaditsActivity" />
+
         <activity
             android:name=".husna.HusnaActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:label="Asmaul Husna"
+            android:theme="@style/HaditsActivity" />
+
         <activity
             android:name=".detail.DetailSuratActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:label="Detail Surat"
+            android:theme="@style/HaditsActivity"
+
+            />
         <activity
             android:name=".home.MainActivity"
             android:exported="true">

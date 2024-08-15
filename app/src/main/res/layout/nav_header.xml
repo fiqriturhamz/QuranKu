@@ -12,12 +12,6 @@
         android:orientation="horizontal"
         android:padding="10dp">
 
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/ic_back">
-
-        </ImageView>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -41,9 +35,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:text="Apa aja boleh"
+                android:text="kumpulan doa-doa dari berbagai jenisnya."
                 android:textColor="@color/white"
-                android:textSize="18sp"
+                android:textSize="12sp"
                 android:textStyle="bold">
 
             </TextView>

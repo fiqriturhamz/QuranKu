@@ -19,6 +19,7 @@ import com.muhammadfiqrit.quranku.detail.DetailSuratViewModel
 import com.muhammadfiqrit.quranku.doa.activity.DoaActivity
 import com.muhammadfiqrit.quranku.hadits.HaditsActivity
 import com.muhammadfiqrit.quranku.husna.HusnaActivity
+
 import com.muhammadfiqrit.quranku.lokasi.LokasiViewModel
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -71,11 +72,11 @@ class HomeFragment : Fragment() {
                 populateData("$calendarYear-$calendarMonth-$calendarDay", lokasi.idLokasi.toInt())
             }
         }
-      /*  detailSuratViewModel.ayatWithSurat.observe(viewLifecycleOwner) { ayat ->
-            if (ayat != null) {
-                populateDataAyatTerakhirDibaca()
-            }
-        }*/
+        /*  detailSuratViewModel.ayatWithSurat.observe(viewLifecycleOwner) { ayat ->
+              if (ayat != null) {
+                  populateDataAyatTerakhirDibaca()
+              }
+          }*/
         populateDataQuote()
         populateDataAyatTerakhirDibaca()
 
@@ -126,14 +127,17 @@ class HomeFragment : Fragment() {
                     }
 
                     is Resource.Success -> {
-                        quoteAdapter.setDataQuote(it.data)
-                        binding.rvQuotes.adapter = quoteAdapter
-                        binding.rvQuotes.layoutManager = LinearLayoutManager(
-                            requireContext(),
-                            LinearLayoutManager.HORIZONTAL,
-                            false
-                        )
-                        binding.rvQuotes.setHasFixedSize(true)
+
+                            quoteAdapter.setDataQuote(it.data?.shuffled())
+                            binding.rvQuotes.adapter = quoteAdapter
+                            binding.rvQuotes.layoutManager = LinearLayoutManager(
+                                requireContext(),
+                                LinearLayoutManager.HORIZONTAL,
+                                false
+                            )
+                            binding.rvQuotes.setHasFixedSize(true)
+
+
                     }
 
                     is Resource.Error -> {}

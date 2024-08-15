@@ -1,4 +1,4 @@
-package com.muhammadfiqrit.quranku.core.data
+package com.muhammadfiqrit.quranku.core.data.source.remote.network
 
 import com.muhammadfiqrit.quranku.core.data.source.remote.network.ApiResponse
 import com.muhammadfiqrit.quranku.core.data.source.remote.response.hadits.ResponseListHaditsArbain

@@ -1,9 +1,14 @@
 package com.muhammadfiqrit.quranku.detail
 
+import android.app.Notification.Action
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.muhammadfiqrit.quranku.R
 
 import com.muhammadfiqrit.quranku.core.domain.model.detail.Ayat
 import com.muhammadfiqrit.quranku.databinding.ItemListAyatBinding
@@ -25,6 +30,8 @@ class AyatAdapter(private val detailSuratViewModel: DetailSuratViewModel) :
     inner class AyatViewHolder(var binding: ItemListAyatBinding) :
         RecyclerView.ViewHolder(binding.root) {
         init {
+
+
             binding.ivLastRead.setOnClickListener {
                 val position = adapterPosition
                 if (position != RecyclerView.NO_POSITION) {
@@ -55,14 +62,40 @@ class AyatAdapter(private val detailSuratViewModel: DetailSuratViewModel) :
         val ayat = listAyat[position]
 
         holder.apply {
+
             binding.nomorAyat.text = ayat.nomorAyat.toString()
             binding.teksArab.text = ayat.teksArab
             binding.teksIndonesia.text = ayat.teksIndonesia
             binding.teksLatin.text = ayat.teksLatin
-            binding.ivLastRead.isSelected = ayat.isLastRead
+            if (ayat.isLastRead) {
+                binding.ivLastRead.setImageResource(R.drawable.ic_tag_light)
+            } else {
+                binding.ivLastRead.setImageResource(R.drawable.ic_tag_dark)
+            }
+
+            binding.ivShare.setOnClickListener {
+                val intent = Intent().apply {
+                    action = Intent.ACTION_SEND
+                    putExtra(Intent.EXTRA_TEXT, ayat.teksIndonesia)
+                    type = "text/plain"
+                    setPackage("com.whatsapp")
+                }
+                try {
+                    holder.itemView.context.startActivity(intent)
+                } catch (e: Exception) {
+                    Toast.makeText(
+                        holder.itemView.context,
+                        "Whatsapp tidak terpasang",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+
         }
     }
 
 
     override fun getItemCount(): Int = listAyat.size
+
+
 }

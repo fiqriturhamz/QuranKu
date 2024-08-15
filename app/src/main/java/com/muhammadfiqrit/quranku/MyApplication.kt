@@ -26,8 +26,6 @@ class MyApplication : Application() {
                     useCaseModule,
                     viewModelModule,
                     adapterModule,
-
-
                 )
             )
         }

@@ -1,7 +1,7 @@
 package com.muhammadfiqrit.quranku.core.di
 
 import androidx.room.Room
-import com.muhammadfiqrit.quranku.core.data.HaditsService
+import com.muhammadfiqrit.quranku.core.data.source.remote.network.HaditsService
 import com.muhammadfiqrit.quranku.core.data.repository.DoaRepository
 import com.muhammadfiqrit.quranku.core.data.repository.HaditsRepository
 import com.muhammadfiqrit.quranku.core.data.repository.HusnaRepository

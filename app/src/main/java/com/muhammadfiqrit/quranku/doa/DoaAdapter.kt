@@ -8,6 +8,7 @@ import com.muhammadfiqrit.quranku.databinding.ItemListDoaBinding
 
 class DoaAdapter : RecyclerView.Adapter<DoaAdapter.DoaViewHolder>() {
     private val listDoa = ArrayList<Doa>()
+
     fun setDataDoa(newListData: List<Doa>?) {
         if (newListData == null) return
         listDoa.clear()

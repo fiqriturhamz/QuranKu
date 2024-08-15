@@ -61,8 +61,9 @@ class AyatFragment : Fragment() {
                             ayatAdapter.setListAyat(data.listAyat)
                             binding.rvAyat.layoutManager = LinearLayoutManager(requireActivity())
                             binding.rvAyat.setHasFixedSize(true)
+                            binding.rvAyat.isNestedScrollingEnabled = false
 
-                            Log.e("ayat",data.listAyat.toString())
+                            Log.e("ayat", data.listAyat.toString())
 
                         }
 

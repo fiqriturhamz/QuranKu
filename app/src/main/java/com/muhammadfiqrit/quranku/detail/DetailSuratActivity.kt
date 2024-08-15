@@ -2,6 +2,7 @@ package com.muhammadfiqrit.quranku.detail
 
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.annotation.StringRes
@@ -48,7 +49,7 @@ class DetailSuratActivity : AppCompatActivity() {
 
         val dataFromIntent = intent.getIntExtra(EXTRA_SURAT_NOMOR, 1)
 
-
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         AyatFragment.suratNomor = dataFromIntent
 
@@ -66,6 +67,18 @@ class DetailSuratActivity : AppCompatActivity() {
         }
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                onBackPressed()
+                true
+            }
+
+            else -> {
+                super.onOptionsItemSelected(item)
+            }
+        }
+    }
 
     private fun populateDataDetail(suratNomor: Int) {
         detailSuratViewModel.setId(suratNomor)

@@ -1,4 +1,4 @@
-package com.muhammadfiqrit.quranku.core.utils
+package com.muhammadfiqrit.quranku.core.data.source.local
 
 import com.muhammadfiqrit.quranku.core.data.Resource
 import com.muhammadfiqrit.quranku.core.domain.model.quote.Quote

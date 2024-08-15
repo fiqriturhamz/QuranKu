@@ -1,7 +1,7 @@
 package com.muhammadfiqrit.quranku.core.data.source.remote
 
 import android.util.Log
-import com.muhammadfiqrit.quranku.core.data.HaditsService
+import com.muhammadfiqrit.quranku.core.data.source.remote.network.HaditsService
 import com.muhammadfiqrit.quranku.core.data.source.remote.network.ApiResponse
 import com.muhammadfiqrit.quranku.core.data.source.remote.response.hadits.ResponseHaditsArbain
 import kotlinx.coroutines.Dispatchers
