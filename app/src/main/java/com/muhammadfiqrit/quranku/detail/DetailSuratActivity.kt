@@ -8,6 +8,7 @@ import androidx.activity.viewModels
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.lifecycleScope
 import com.google.android.material.tabs.TabLayoutMediator
 import com.muhammadfiqrit.quranku.R
 import com.muhammadfiqrit.quranku.core.domain.model.surat.Surat
@@ -16,6 +17,8 @@ import com.muhammadfiqrit.quranku.detail.ayat.AyatFragment
 import com.muhammadfiqrit.quranku.detail.tafsir.TafsirFragment
 import com.muhammadfiqrit.quranku.favorite.FavoriteViewModel
 import com.muhammadfiqrit.quranku.utils.Utilities
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -41,7 +44,8 @@ class DetailSuratActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailSuratBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val tabTafsirAyatAdapter = TabTafsirAyatAdapter(this)
+
+        val tabTafsirAyatAdapter = TabTafsirAyatAdapter(this@DetailSuratActivity)
         binding.viewpagerAyatTafsir.adapter = tabTafsirAyatAdapter
         TabLayoutMediator(binding.tabLayout, binding.viewpagerAyatTafsir) { tab, position ->
             tab.text = resources.getString(DETAIL_TAB_TITLES[position])
@@ -58,12 +62,15 @@ class DetailSuratActivity : AppCompatActivity() {
 
 
         Utilities.setStatusBarGradiant(this)
-        detailSuratViewModel.suratDetail.observe(this) {
-            val surat = it?.data?.surat
-            if (surat != null) {
-                statusFavorite = surat.isFavorite
-                setStatusFavorite(statusFavorite)
-            }
+
+
+            detailSuratViewModel.suratDetail.observe(this@DetailSuratActivity) {
+                val surat = it?.data?.surat
+                if (surat != null) {
+                    statusFavorite = surat.isFavorite
+                    setStatusFavorite(statusFavorite)
+                }
+
         }
     }
 
@@ -81,42 +88,44 @@ class DetailSuratActivity : AppCompatActivity() {
     }
 
     private fun populateDataDetail(suratNomor: Int) {
-        detailSuratViewModel.setId(suratNomor)
-        detailSuratViewModel.suratDetail.observe(this) {
-            if (it != null) {
-                when (it) {
-                    is com.muhammadfiqrit.quranku.core.data.Resource.Loading -> {}
+        lifecycleScope.launch {
+            detailSuratViewModel.setId(suratNomor)
+            detailSuratViewModel.suratDetail.observe(this@DetailSuratActivity) {
+                if (it != null) {
+                    when (it) {
+                        is com.muhammadfiqrit.quranku.core.data.Resource.Loading -> {}
 
-                    is com.muhammadfiqrit.quranku.core.data.Resource.Success -> {
+                        is com.muhammadfiqrit.quranku.core.data.Resource.Success -> {
 
 
-                        it.data?.let { detailSurat ->
+                            it.data?.let { detailSurat ->
 
-                            binding.tvDetailArtiSurat.text = detailSurat.surat.arti
-                            binding.tvDetailTempatTurun.text = detailSurat.surat.tempatTurun
-                            binding.tvDetailNamaLatin.text = detailSurat.surat.namaLatin
-                            binding.tvDetailNamaSurat.text = detailSurat.surat.nama
-                            binding.tvDetailNomorSurat.text = detailSurat.surat.nomor.toString()
+                                binding.tvDetailArtiSurat.text = detailSurat.surat.arti
+                                binding.tvDetailTempatTurun.text = detailSurat.surat.tempatTurun
+                                binding.tvDetailNamaLatin.text = detailSurat.surat.namaLatin
+                                binding.tvDetailNamaSurat.text = detailSurat.surat.nama
+                                binding.tvDetailNomorSurat.text = detailSurat.surat.nomor.toString()
 
-                            statusFavorite = detailSurat.surat.isFavorite
+                                statusFavorite = detailSurat.surat.isFavorite
 
-                            binding.fabFavorite.setOnClickListener {
-                                statusFavorite = !statusFavorite
-                                favoriteViewModel.setFavoriteSurat(
-                                    detailSurat,
-                                    statusFavorite
-                                )
-                                setStatusFavorite(statusFavorite)
+                                binding.fabFavorite.setOnClickListener {
+                                    statusFavorite = !statusFavorite
+                                    favoriteViewModel.setFavoriteSurat(
+                                        detailSurat,
+                                        statusFavorite
+                                    )
+                                    setStatusFavorite(statusFavorite)
 
-                                Log.e("statusFavorite", statusFavorite.toString())
+                                    Log.e("statusFavorite", statusFavorite.toString())
+                                }
                             }
+
                         }
 
-                    }
+                        is com.muhammadfiqrit.quranku.core.data.Resource.Error -> {
+                            Toast.makeText(this@DetailSuratActivity, it.message, Toast.LENGTH_SHORT).show()
 
-                    is com.muhammadfiqrit.quranku.core.data.Resource.Error -> {
-                        Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
-
+                        }
                     }
                 }
             }

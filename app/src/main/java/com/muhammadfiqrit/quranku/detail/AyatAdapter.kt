@@ -1,50 +1,41 @@
 package com.muhammadfiqrit.quranku.detail
 
-import android.app.Notification.Action
 import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.muhammadfiqrit.quranku.R
-
 import com.muhammadfiqrit.quranku.core.domain.model.detail.Ayat
 import com.muhammadfiqrit.quranku.databinding.ItemListAyatBinding
-import com.muhammadfiqrit.quranku.di.adapterModule
+import com.muhammadfiqrit.quranku.detail.ayat.GenericDiffCallback
 
 
 class AyatAdapter(private val detailSuratViewModel: DetailSuratViewModel) :
     RecyclerView.Adapter<AyatAdapter.AyatViewHolder>() {
     var listAyat: ArrayList<Ayat> = ArrayList()
-    private var statusFavorite: Boolean = false
     fun setListAyat(newListData: List<Ayat>?) {
+
+
         if (newListData == null) return
+        val diffCallback = GenericDiffCallback(
+            oldList = listAyat,
+            newListData,
+            compareItems = { oldItem, newItem -> oldItem.id == newItem.id },
+            compareContents = { oldItem, newItem -> oldItem == newItem }
+        )
+        val diffResult = DiffUtil.calculateDiff(diffCallback)
         listAyat.clear()
         listAyat.addAll(newListData)
-        notifyDataSetChanged()
+        diffResult.dispatchUpdatesTo(this)
 
     }
 
     inner class AyatViewHolder(var binding: ItemListAyatBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        init {
 
-
-            binding.ivLastRead.setOnClickListener {
-                val position = adapterPosition
-                if (position != RecyclerView.NO_POSITION) {
-                    val ayat = listAyat[position]
-                    val newState = !ayat.isLastRead
-                    detailSuratViewModel.setAyatTerakhirDibaca(
-                        ayat.copy(isLastRead = newState),
-                        newState
-                    )
-                    Log.d("AyatAdapter", "Clicked ayat: $ayat, new state: $newState")
-                }
-            }
-        }
 
     }
 
@@ -72,7 +63,14 @@ class AyatAdapter(private val detailSuratViewModel: DetailSuratViewModel) :
             } else {
                 binding.ivLastRead.setImageResource(R.drawable.ic_tag_dark)
             }
-
+            binding.ivLastRead.setOnClickListener {
+                val newState = !ayat.isLastRead
+                detailSuratViewModel.setAyatTerakhirDibaca(
+                    ayat.copy(isLastRead = newState),
+                    newState
+                )
+                notifyItemChanged(position)
+            }
             binding.ivShare.setOnClickListener {
                 val intent = Intent().apply {
                     action = Intent.ACTION_SEND

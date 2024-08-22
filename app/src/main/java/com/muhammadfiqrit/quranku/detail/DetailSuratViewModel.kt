@@ -23,12 +23,13 @@ class DetailSuratViewModel(private val suratUseCase: SuratUseCase) : ViewModel()
     val ayatTerakhirDibaca = suratUseCase.getAyatTerakhirDibaca().asLiveData()
     fun setAyatTerakhirDibaca(ayat: Ayat, state: Boolean) {
         viewModelScope.launch {
-            withContext(Dispatchers.IO) {
+            try {
                 Log.d("AyatViewModel", "Setting Ayat: $ayat, newState: $state")
                 suratUseCase.setAyatTerakhirDibaca(ayat, state)
+            } catch (e: Exception) {
+                Log.e("AyatViewModel", "Error setting Ayat", e)
             }
         }
-
     }
 
     val ayatWithSurat = suratUseCase.getAyatWithSurat().asLiveData()
@@ -41,7 +42,10 @@ class DetailSuratViewModel(private val suratUseCase: SuratUseCase) : ViewModel()
 
     fun setId(id: Int) {
         if (suratId.value == id) return
-        suratId.value = id
+        viewModelScope.launch {
+            suratId.value = id
+            // Jika ada operasi tambahan, letakkan di sini
+        }
     }
 
 

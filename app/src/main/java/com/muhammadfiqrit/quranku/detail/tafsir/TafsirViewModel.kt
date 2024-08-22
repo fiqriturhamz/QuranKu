@@ -17,10 +17,6 @@ class TafsirViewModel(private val suratUsecase: SuratUseCase) : ViewModel() {
         id?.let { suratUsecase.getTafsir(it) } ?: flow { emit(null) }
     }.asLiveData()
 
-    /*  val suratDetail = Transformations.switchMap(suratId) {
-          suratUsecase.getTafsir(it).asLiveData()
-      }
-  */
     fun setId(nomorSurat: Int) {
         if (suratId.value == nomorSurat) return
         suratId.value = nomorSurat
