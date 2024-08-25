@@ -28,8 +28,7 @@
 
 ## 📱 Screenshots
 
-<img src="https://drive.google.com/uc?export=view&id=1SgjSCBTEzidWbNW83IvF3VFcP5tLMjOx" align="center" width="30%" height="30%" />
-
+[![Video Dokumentasi](https://drive.google.com/file/d/1SgjSCBTEzidWbNW83IvF3VFcP5tLMjOx/view?usp=sharing)
 <!-- Add screenshots when available -->
 <!-- <img src="assets/screenshots/surah_list.jpg" alt="Surah List" width="200"/> <img src="assets/screenshots/ayat_detail.jpg" alt="Ayat Detail" width="200"/> <img src="assets/screenshots/last_read.jpg" alt="Last Read Ayat" width="200"/>  -->
 
