@@ -11,7 +11,8 @@
 - **Prayer Time**: Reminder user to pray.
 - **Location**: User can choose any locations he wants.
 - **Doa & Hadith**: Additional Islamic resources for prayers and Hadith.
-- **Modularized Codebase**: Organized in multiple modules for better scalability and maintainability.
+- **Modularized Codebase**: Organized in multiple modules for better scalability and
+  maintainability.
 
 ---
 
@@ -28,7 +29,7 @@
 
 ## 📱 Screenshots
 
-[![Video Dokumentasi](https://drive.google.com/file/d/1SgjSCBTEzidWbNW83IvF3VFcP5tLMjOx/view?usp=sharing)
+<img src="preview/quranku-small.gif" align="center" width="30%" height="30%"/>
 <!-- Add screenshots when available -->
 <!-- <img src="assets/screenshots/surah_list.jpg" alt="Surah List" width="200"/> <img src="assets/screenshots/ayat_detail.jpg" alt="Ayat Detail" width="200"/> <img src="assets/screenshots/last_read.jpg" alt="Last Read Ayat" width="200"/>  -->
 
@@ -36,7 +37,8 @@
 
 ## 🚀 Free Contribution
 
-You can join to built this app be better, dont be shy to clone this repo and contributions with you're beautiful feature, i really happy if you guys participate for this repository.
+You can join to built this app be better, dont be shy to clone this repo and contributions with
+you're beautiful feature, i really happy if you guys participate for this repository.
 
 ### Prerequisites
 
