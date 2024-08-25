@@ -10,8 +10,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
-
-
 class SuratRemoteDataSource(private val suratService: SuratService) {
 
     suspend fun getAllSurat(): Flow<ApiResponse<List<ResponseSurat>>> {
@@ -56,11 +54,7 @@ class SuratRemoteDataSource(private val suratService: SuratService) {
             try {
                 val response = suratService.getTafsir(nomorSurat)
                 val data = response.data
-                if (data != null) {
-                    emit(ApiResponse.Success(data))
-                } else {
-                    emit(ApiResponse.Empty)
-                }
+                emit(ApiResponse.Success(data))
             } catch (e: Exception) {
                 emit(ApiResponse.Error(e.toString()))
                 Log.e("Remote.getTafsir", e.toString())

@@ -109,4 +109,9 @@ object Utilities {
         }
     }
 
+    fun capitalizeFirstLetter(text: String): String {
+        return text.take(1).toUpperCase() + text.drop(1)
+    }
+
+
 }

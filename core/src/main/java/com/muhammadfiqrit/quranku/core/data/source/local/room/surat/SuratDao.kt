@@ -10,6 +10,7 @@ import com.muhammadfiqrit.quranku.core.data.source.local.entity.detail.AyatEntit
 import com.muhammadfiqrit.quranku.core.data.source.local.entity.detail.AyatWithSuratEntity
 import com.muhammadfiqrit.quranku.core.data.source.local.entity.surat.SuratEntity
 import com.muhammadfiqrit.quranku.core.data.source.local.entity.tafsir.TafsirEntity
+import com.muhammadfiqrit.quranku.core.data.source.local.entity.tafsir.TafsirWithSuratEntity
 import kotlinx.coroutines.flow.Flow
 
 
@@ -52,15 +53,25 @@ interface SuratDao {
     @Query("UPDATE ayat SET isLastRead = :isLastRead WHERE id = :id")
     fun updateAyatTerakhirDibaca(id: Long, isLastRead: Boolean)
 
-    @Query("SELECT * FROM ayat where isLastRead = 1")
-    fun getAyatTerakhirDibaca(): Flow<AyatEntity>
-
     @Query("UPDATE ayat set isLastRead =0 WHERE isLastRead = 1")
     fun resetAllAyatTerakhirDibaca()
 
     @Transaction
     @Query("SELECT * FROM ayat WHERE isLastRead = 1")
     fun getAyatWithSurat(): Flow<AyatWithSuratEntity>
+
+    @Query("SELECT * FROM tafsir WHERE isLastRead = 1")
+    fun getTafsirTerakhirDibaca(): Flow<TafsirEntity>
+
+    @Query("UPDATE tafsir SET isLastRead = :isLastRead WHERE id = :id ")
+    fun updateTafsirTerakhirDibaca(id: Long, isLastRead: Boolean)
+
+    @Query("UPDATE tafsir set isLastRead =0 WHERE isLastRead = 1")
+    fun resetAllTafsirTerakhirDibaca()
+
+    @Transaction
+    @Query("SELECT * FROM tafsir WHERE isLastRead = 1")
+    fun getTafsirWithSurat(): Flow<TafsirWithSuratEntity>
 
 
 }

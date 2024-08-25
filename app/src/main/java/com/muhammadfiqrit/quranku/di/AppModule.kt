@@ -17,6 +17,7 @@ import com.muhammadfiqrit.quranku.core.domain.usecase.surat.SuratInteractor
 import com.muhammadfiqrit.quranku.core.domain.usecase.surat.SuratUseCase
 import com.muhammadfiqrit.quranku.detail.AyatAdapter
 import com.muhammadfiqrit.quranku.detail.DetailSuratViewModel
+import com.muhammadfiqrit.quranku.detail.TafsirAdapter
 import com.muhammadfiqrit.quranku.detail.tafsir.TafsirViewModel
 import com.muhammadfiqrit.quranku.doa.DoaAdapter
 import com.muhammadfiqrit.quranku.doa.DoaViewModel
@@ -67,4 +68,5 @@ val adapterModule = module {
     factory { HaditsAdapter() }
     factory { HusnaAdapter() }
     factory { QuoteAdapter() }
+    factory { TafsirAdapter(get()) }
 }
