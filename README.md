@@ -29,7 +29,10 @@
 
 ## 📱 Screenshots
 
-<img src="preview/quranku-small.gif" align="center" width="30%" height="30%"/>
+          Home Fragment         | Lokasi Fragment |
+
+|:-----------------------------------------------------------:| :---------------: |
+| <img src="preview/home-fragment.png" align="center" width="70%"/> | <img src="preview/lokasi-fragment.png" align="center" width="70%"/> |
 <!-- Add screenshots when available -->
 <!-- <img src="assets/screenshots/surah_list.jpg" alt="Surah List" width="200"/> <img src="assets/screenshots/ayat_detail.jpg" alt="Ayat Detail" width="200"/> <img src="assets/screenshots/last_read.jpg" alt="Last Read Ayat" width="200"/>  -->
 
