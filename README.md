@@ -28,7 +28,7 @@
 
 ## 📱 Screenshots
 
-[![Video Dokumentasi](https://drive.google.com/file/d/16MecLs33queyfcbHMfvrpWLyt3v3HzFh/view?usp=sharing)](https://drive.google.com/file/d/1WqojYbfRIL6SIvTJVg8isuLHFubVXxR4/view?usp=sharing)
+<img src="preview/quranku-gif.gif" align="center" width="70%"/> 
 <!-- Add screenshots when available -->
 <!-- <img src="assets/screenshots/surah_list.jpg" alt="Surah List" width="200"/> <img src="assets/screenshots/ayat_detail.jpg" alt="Ayat Detail" width="200"/> <img src="assets/screenshots/last_read.jpg" alt="Last Read Ayat" width="200"/>  -->
 
