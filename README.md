@@ -28,6 +28,7 @@
 
 ## 📱 Screenshots
 
+[![Video Dokumentasi](https://your-thumbnail-image-url)](https://drive.google.com/drive/u/0/folders/1t0BX5t83Yivcb6B2kNk0OlX5A9wBKN9e)
 <!-- Add screenshots when available -->
 <!-- <img src="assets/screenshots/surah_list.jpg" alt="Surah List" width="200"/> <img src="assets/screenshots/ayat_detail.jpg" alt="Ayat Detail" width="200"/> <img src="assets/screenshots/last_read.jpg" alt="Last Read Ayat" width="200"/>  -->
 

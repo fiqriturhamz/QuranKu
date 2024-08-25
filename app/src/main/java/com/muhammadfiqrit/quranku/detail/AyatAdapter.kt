@@ -1,7 +1,6 @@
 package com.muhammadfiqrit.quranku.detail
 
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
@@ -11,8 +10,6 @@ import com.muhammadfiqrit.quranku.R
 import com.muhammadfiqrit.quranku.core.domain.model.detail.Ayat
 import com.muhammadfiqrit.quranku.databinding.ItemListAyatBinding
 import com.muhammadfiqrit.quranku.detail.ayat.GenericDiffCallback
-
-
 class AyatAdapter(private val detailSuratViewModel: DetailSuratViewModel) :
     RecyclerView.Adapter<AyatAdapter.AyatViewHolder>() {
     var listAyat: ArrayList<Ayat> = ArrayList()
@@ -63,6 +60,7 @@ class AyatAdapter(private val detailSuratViewModel: DetailSuratViewModel) :
             } else {
                 binding.ivLastRead.setImageResource(R.drawable.ic_tag_dark)
             }
+
             binding.ivLastRead.setOnClickListener {
                 val newState = !ayat.isLastRead
                 detailSuratViewModel.setAyatTerakhirDibaca(

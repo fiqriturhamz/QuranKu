@@ -7,10 +7,7 @@ import com.muhammadfiqrit.quranku.core.domain.model.detail.Ayat
 import com.muhammadfiqrit.quranku.core.domain.model.detail.AyatWithSurat
 import com.muhammadfiqrit.quranku.core.domain.model.detail.DetailSurat
 import com.muhammadfiqrit.quranku.core.domain.model.surat.Surat
-
-
 object SuratMapper {
-
     fun responsesToEntities(input: List<ResponseSurat>): List<SuratEntity> {
         val suratList = ArrayList<SuratEntity>()
         input.map {
@@ -23,8 +20,6 @@ object SuratMapper {
                 tempatTurun = it.tempatTurun,
                 namaLatin = it.namaLatin,
                 isFavorite = false
-
-
             )
             suratList.add(surat)
         }
@@ -42,15 +37,12 @@ object SuratMapper {
                 tempatTurun = it.tempatTurun,
                 namaLatin = it.namaLatin,
                 isFavorite = it.isFavorite,
-
-                )
-
+            )
         }
     }
 
-
     fun entityToDomain(input: SuratEntity): Surat {
-        val surat = Surat(
+        return Surat(
             nomor = input.nomor,
             nama = input.nama,
             namaLatin = input.namaLatin,
@@ -59,14 +51,9 @@ object SuratMapper {
             deskripsi = input.deskripsi,
             tempatTurun = input.tempatTurun,
             isFavorite = input.isFavorite,
-
-            )
-        return surat
+        )
     }
-
-
     fun domainToEntity(input: DetailSurat) = SuratEntity(
-
         nomor = input.surat.nomor,
         nama = input.surat.nama,
         namaLatin = input.surat.namaLatin,
@@ -124,8 +111,6 @@ object SuratMapper {
             )
         }
     }
-
-
 }
 
 

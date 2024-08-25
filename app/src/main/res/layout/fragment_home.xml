@@ -19,7 +19,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-
             <ImageView
                 android:id="@+id/backgroundImageView"
                 android:layout_width="match_parent"
@@ -337,13 +336,14 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:orientation="horizontal"
-            app:layout_constraintStart_toStartOf="@+id/tv_all_features"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_all_features">
 
             <RelativeLayout
                 android:id="@+id/hadits_feature"
-                android:layout_width="65dp"
-                android:layout_height="65dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_weight="1">
 
 
@@ -386,8 +386,8 @@
 
             <RelativeLayout
                 android:id="@+id/sholat_feature"
-                android:layout_width="65dp"
-                android:layout_height="65dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_weight="1">
 
 
@@ -424,10 +424,9 @@
 
             <RelativeLayout
                 android:id="@+id/donation_feature"
-                android:layout_width="65dp"
-                android:layout_height="65dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_weight="1">
-
 
                 <androidx.cardview.widget.CardView
 
@@ -462,8 +461,8 @@
 
             <RelativeLayout
                 android:id="@+id/asmahul_husna"
-                android:layout_width="65dp"
-                android:layout_height="65dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_weight="1">
 
                 <androidx.cardview.widget.CardView
@@ -496,8 +495,8 @@
 
             <RelativeLayout
                 android:id="@+id/doa"
-                android:layout_width="65dp"
-                android:layout_height="65dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_weight="1">
 
                 <androidx.cardview.widget.CardView
@@ -538,7 +537,7 @@
             android:textColor="@color/black"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/linearLayout"
-            app:layout_constraintTop_toBottomOf="@+id/cv_terakhir_dibaca">
+            app:layout_constraintTop_toBottomOf="@+id/layout_terakhir_dibaca">
 
         </TextView>
 
@@ -546,7 +545,9 @@
             android:id="@+id/rv_quotes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="32dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -569,111 +570,197 @@
             app:layout_constraintStart_toStartOf="@+id/tv_random_quotes"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
-        <!-- <include
-             layout="@layout/layout_terakhir_dibaca"
-             app:layout_constraintBottom_toBottomOf="parent"
-             app:layout_constraintEnd_toEndOf="@+id/tv_terakhir_dibaca"
-             app:layout_constraintStart_toStartOf="@+id/tv_terakhir_dibaca"
-             app:layout_constraintTop_toBottomOf="@+id/tv_terakhir_dibaca">
-
-         </include>-->
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cv_terakhir_dibaca"
+        <LinearLayout
+            android:id="@+id/layout_terakhir_dibaca"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            app:cardCornerRadius="10dp"
-            app:cardElevation="3dp"
+            android:weightSum="2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_terakhir_dibaca">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_ayat_terakhir_dibaca"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/custom_random_quotes">
+                android:layout_height="120dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginBottom="4dp"
+                android:layout_weight="1"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="3dp"
+                app:layout_constraintEnd_toStartOf="@+id/cv_tafsir_terakhir"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_terakhir_dibaca">
 
-                <TextView
-                    android:id="@+id/tv_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:text="Al - Fatihah"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toEndOf="@+id/tv_nomor_ayat_terakhir"
-                    app:layout_constraintTop_toTopOf="parent">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/custom_random_quotes">
 
-                </TextView>
+                    <TextView
+                        android:id="@+id/tv_ayat_terakhir"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Ayat"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/iv_pinned">
 
-                <TextView
-                    android:id="@+id/tv_nomor_ayat_terakhir"
-                    android:layout_width="40dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:background="@drawable/ic_bg_row"
-                    android:gravity="center"
-                    android:padding="10dp"
-                    android:text="@string/nomor_surat"
-                    android:textColor="@color/black"
-                    android:textSize="20sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    </TextView>
 
-                </TextView>
+                    <TextView
+                        android:id="@+id/tv_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:text="Al - Fatihah"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/tv_nomor_ayat_terakhir"
+                        app:layout_constraintStart_toEndOf="@+id/tv_nomor_ayat_terakhir"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_nama_latin">
 
-                <TextView
-                    android:id="@+id/tv_arti"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="20dp"
-                    android:textAlignment="center"
-                    android:text="Pembuka"
-                    app:layout_constraintEnd_toStartOf="@+id/iv_pinned"
-                    app:layout_constraintStart_toEndOf="@+id/tv_title"
-                    app:layout_constraintTop_toTopOf="@+id/tv_title">
+                    </TextView>
 
-                </TextView>
+                    <TextView
+                        android:id="@+id/tv_nomor_ayat_terakhir"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:background="@drawable/ic_bg_row"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="@string/nomor_surat"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_ayat_terakhir">
 
-                <TextView
-                    android:id="@+id/tv_nama_latin"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="16dp"
-                    android:text="@string/nama_latin"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/tv_arti"
-                    app:layout_constraintHorizontal_bias="0.524"
-                    app:layout_constraintStart_toStartOf="@+id/tv_title"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_title"
-                    app:layout_constraintVertical_bias="0.0">
+                    </TextView>
 
-                </TextView>
+                    <TextView
+                        android:id="@+id/tv_nama_latin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:text="@string/nama_latin"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toEndOf="@+id/tv_nomor_ayat_terakhir"
+                        app:layout_constraintTop_toTopOf="@+id/tv_nomor_ayat_terakhir">
 
-                <ImageView
-                    android:id="@+id/iv_pinned"
-                    android:layout_width="40dp"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="8dp"
-                    android:src="@drawable/ic_pin"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    </TextView>
 
-                </ImageView>
+                    <ImageView
+                        android:id="@+id/iv_pinned"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="8dp"
+                        android:src="@drawable/ic_pin"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                    </ImageView>
 
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_tafsir_terakhir_dibaca"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginBottom="4dp"
+                android:layout_weight="1"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="3dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/custom_random_quotes">
+
+                    <TextView
+                        android:id="@+id/tv_tafsir_terakhir"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tafsir"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/iv_pinned_tafsir_terakhir">
+
+                    </TextView>
+
+                    <TextView
+                        android:id="@+id/tv_title_tafsir_terakhir"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:text="Al - Fatihah"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/tv_nomor_tafsir_terakhir"
+                        app:layout_constraintStart_toEndOf="@+id/tv_nomor_tafsir_terakhir"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_nama_latin_tafsir_terakhir">
+
+                    </TextView>
+
+                    <TextView
+                        android:id="@+id/tv_nomor_tafsir_terakhir"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:background="@drawable/ic_bg_row"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="@string/nomor_surat"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_tafsir_terakhir">
+
+                    </TextView>
+
+                    <TextView
+                        android:id="@+id/tv_nama_latin_tafsir_terakhir"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:text="@string/nama_latin"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toEndOf="@+id/tv_nomor_tafsir_terakhir"
+                        app:layout_constraintTop_toTopOf="@+id/tv_nomor_tafsir_terakhir">
+
+                    </TextView>
+
+                    <ImageView
+                        android:id="@+id/iv_pinned_tafsir_terakhir"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="8dp"
+                        android:src="@drawable/ic_pin"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                    </ImageView>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+
+        </LinearLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

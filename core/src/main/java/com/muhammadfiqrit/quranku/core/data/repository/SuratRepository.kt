@@ -12,7 +12,9 @@ import com.muhammadfiqrit.quranku.core.data.source.remote.response.tafsir.ListTa
 import com.muhammadfiqrit.quranku.core.domain.model.detail.Ayat
 import com.muhammadfiqrit.quranku.core.domain.model.detail.AyatWithSurat
 import com.muhammadfiqrit.quranku.core.domain.model.detail.DetailSurat
+import com.muhammadfiqrit.quranku.core.domain.model.detail.TafsirWithSurat
 import com.muhammadfiqrit.quranku.core.domain.model.surat.Surat
+import com.muhammadfiqrit.quranku.core.domain.model.tafsir.Tafsir
 import com.muhammadfiqrit.quranku.core.domain.repository.ISuratRepository
 import com.muhammadfiqrit.quranku.core.mapper.AyatMapper
 import com.muhammadfiqrit.quranku.core.mapper.SuratMapper
@@ -52,12 +54,8 @@ class SuratRepository(
             }
 
             override fun shouldFetch(data: List<Surat>?): Boolean {
-                val conditions = data.isNullOrEmpty()
-
-                return conditions
+                return data.isNullOrEmpty()
             }
-
-
         }.asFlow()
     }
 
@@ -84,8 +82,6 @@ class SuratRepository(
                 val ayatResponseToAyatEntities =
                     AyatMapper.responsesToEntities(data.ayat, nomorSurat)
                 suratLocalDataSource.insertAyat(ayatResponseToAyatEntities)
-
-
             }
 
             override fun shouldFetch(data: DetailSurat?): Boolean {
@@ -96,30 +92,6 @@ class SuratRepository(
         }.asFlow()
     }
 
-
-    /*   override fun getTafsir(nomorSurat: Int): Flow<Resource<List<Tafsir>>> {
-           return object : NetworkBoundResource<List<Tafsir>, ListTafsirResponse>() {
-               override fun loadFromDB(): Flow<List<Tafsir>> {
-                   return suratLocalDataSource.getTafsirBySurat(nomorSurat)
-                       .map { DataMapperSurat.tafsirEntitiesToTafsir(it) }
-               }
-
-               override suspend fun createCall(): Flow<ApiResponse<ListTafsirResponse>> {
-                   return suratRemoteDataSource.getTafsir(nomorSurat)
-               }
-
-               override suspend fun saveCallResult(data: ListTafsirResponse) {
-                   val tafsir = DataMapperSurat.tafsirResponsesToTafsirEntities(data.tafsir, nomorSurat)
-                   suratLocalDataSource.insertTafsir(tafsir)
-               }
-
-               override fun shouldFetch(data: List<Tafsir>?): Boolean {
-                   val conditions =  data.isNullOrEmpty()
-                   return conditions
-               }
-
-           }.asFlow()
-       }*/
     override fun getTafsir(nomorSurat: Int): Flow<Resource<DetailSurat>> {
         return object : NetworkBoundResource<DetailSurat, ListTafsirResponse>() {
             override fun loadFromDB(): Flow<DetailSurat> {
@@ -165,11 +137,6 @@ class SuratRepository(
             .execute { suratLocalDataSource.setFavoriteSurat(suratEntity, newState) }
     }
 
-    override fun getAyatTerakhirDibaca(): Flow<Ayat> {
-        return suratLocalDataSource.getAyatTerakhirDibaca()
-            .map { AyatMapper.entityToDomain(it) }
-    }
-
     override fun setAyatTerakhirDibaca(ayat: Ayat, newState: Boolean) {
         val ayatEntity = AyatMapper.domainToEntity(ayat.copy(isLastRead = newState))
         appExecutors.diskIO()
@@ -186,127 +153,16 @@ class SuratRepository(
         return suratLocalDataSource.getAyatWithSurat().map { ayatWithSuratEntity ->
             SuratMapper.entityToDomain(ayatWithSuratEntity)
         }
-
-
     }
-
-
-    /*    override fun getSuratByNomor(nomorSurat: Int): Flow<Resource<DetailSurat>> {
-
-
-            return object : NetworkBoundResource<DetailSurat, DataDetailSuratResponse>() {
-                override fun loadFromDB(): Flow<DetailSurat> {
-                    val suratFlow = suratLocalDataSource.getSuratByNomor(nomorSurat)
-                        .map {
-                            DataMapperSurat.mapSuratEntityToDetailSurat(it)
-                        }
-
-                    val ayatFlow = suratLocalDataSource.getAyatBySurat(nomorSurat)
-                        .map {
-                            DataMapperSurat.mapAyatEntitiesToAyat(it)
-                        }
-                    val suratSelanjutnyaFlow =
-                        suratLocalDataSource.getSuratSelanjutnya(nomorSurat).map {
-                            DataMapperSurat.suratSelanjutnyaEntityToSuratSelanjutnya(
-                                it,
-                            )
-
-                        }
-
-
-                    return combine(
-                        suratFlow,
-                        ayatFlow,
-                        suratSelanjutnyaFlow,
-
-                        ) { surat, ayat, suratSelanjutnya ->
-                        // Now you have all three data types you need
-                        DetailSurat(surat, ayat, suratSelanjutnya)
-                    }
-                }
-
-                override suspend fun createCall(): Flow<ApiResponse<DataDetailSuratResponse>> {
-                    return suratRemoteDataSource.getDetailSurat(nomorSurat)
-                }
-
-                override suspend fun saveCallResult(data: DataDetailSuratResponse) {
-                    val surat = DataMapperSurat.mapDataDetailSuratResponseToSuratEntity(data)
-                    val ayat = DataMapperSurat.mapAyatResponsesToAyatEntities(data.ayat, nomorSurat)
-                    val suratSelanjutnya =
-                        DataMapperSurat.suratSelanjutnyaResponseToSuratSelanjutnyaEntities(
-                            data.suratSelanjutnyaResponse,
-                            nomorSurat
-                        )
-
-                    suratLocalDataSource.insertDetailSurat(surat)
-
-                    suratLocalDataSource.insertAyat(ayat)
-
-                    suratLocalDataSource.insertSuratSelanjutnya(suratSelanjutnya)
-                }
-
-                override fun shouldFetch(data: DetailSurat?): Boolean {
-
-                    //sama kaya data?.ayat != null
-                    //pengambilan data di internet terus
-                    val conditions = data == null
-                    return conditions
-
-                }
-
-            }.asFlow()
-        }*/
-
-
-    /*        override fun getFavoriteSurat(): Flow<List<Surat>> {
-         return suratLocalDataSource.getFavoriteSurat().map {
-             DataMapperSurat.mapSuratEntitiesToSurats(it)
-         }
-     }
-
-     override fun setFavoriteSurat(surat: DetailSurat, newState: Boolean) {
-         val suratEntity = DataMapperSurat.mapDetailSuratToSuratEntity(surat)
-         appExecutors.diskIO().execute {
-             suratLocalDataSource.setFavoriteSurat(suratEntity, newState)
-         }
-     }
-
-     override fun getAyatTerakhirDibaca(): Flow<Ayat> {
-         return suratLocalDataSource.getAyatTerakhirDibaca().map {
-             DataMapperSurat.mapAyatEntityToAyat(it)
-         }
-     }
-
-     override fun setAyatTerakhirDibaca(ayat: Ayat, newState: Boolean) {
-         val ayatEntity = DataMapperSurat.mapAyatToAyatEntity(ayat)
-         appExecutors.diskIO().execute {
-             suratLocalDataSource.setAyatTerakhirDibaca(ayatEntity, newState)
-         }
-     }
-
-     override fun getTafsir(nomorSurat: Int): Flow<Resource<List<TafsirItem>>> {
-         return object : NetworkBoundResource<List<TafsirItem>, ListTafsirResponse>() {
-             override fun loadFromDB(): Flow<List<TafsirItem>> {
-                 return suratLocalDataSource.getTafsir(nomorSurat)
-                     .map { DataMapperSurat.tafsirEntitiesToTafsir(it) }
-             }
-
-             override suspend fun createCall(): Flow<ApiResponse<ListTafsirResponse>> {
-                 return suratRemoteDataSource.getTafsir(nomorSurat)
-             }
-
-             override suspend fun saveCallResult(data: ListTafsirResponse) {
-                 val tafsir = DataMapperSurat.tafsirResponseToTafsirEntity(data.tafsir, nomorSurat)
-                 suratLocalDataSource.insertTafsir(tafsir)
-             }
-
-             override fun shouldFetch(data: List<TafsirItem>?): Boolean {
-                 val conditions = data == null || data.isNullOrEmpty()
-                 return conditions
-             }
-
-         }.asFlow()
-     }*/
-
+    override fun getTafsirWithSurat(): Flow<TafsirWithSurat> {
+        return suratLocalDataSource.getTafsirWithSurat()
+            .map { tafsirWithSurat -> TafsirMapper.toDomain(tafsirWithSurat) }
+    }
+    override fun setTafsirTerakhirDibaca(tafsir: Tafsir, newState: Boolean) {
+        val tafsirEntity = TafsirMapper.toEntity(tafsir.copy(isLastRead = newState))
+        appExecutors.diskIO().execute {
+            suratLocalDataSource.updateTafsirTerakhirDibaca(tafsirEntity.id, newState)
+        }
+    }
 
 }

@@ -53,45 +53,44 @@ class AyatFragment : Fragment() {
     }
 
     private fun populateRecyclerView(suratNomor: Int) {
-        lifecycleScope.launch {
-            detailSuratViewModel.setId(suratNomor)
+        detailSuratViewModel.setId(suratNomor)
 
-            detailSuratViewModel.suratDetail.observe(viewLifecycleOwner) {
-                val result = it
-                if (result != null) {
+        detailSuratViewModel.suratDetail.observe(viewLifecycleOwner) {
+            val result = it
+            if (result != null) {
 
 
-                    when (result) {
-                        is Resource.Loading -> {
+                when (result) {
+                    is Resource.Loading -> {
 
-                            binding.progressBarAyat.visibility = View.VISIBLE
+                        binding.progressBarAyat.visibility = View.VISIBLE
 
-                        }
+                    }
 
-                        is Resource.Success -> {
-                            binding.progressBarAyat.visibility = View.INVISIBLE
+                    is Resource.Success -> {
+                        binding.progressBarAyat.visibility = View.INVISIBLE
 
-                            result.data?.let { data ->
-                                updateRecyclerView(data.listAyat)
-
-                            }
+                        result.data?.let { data ->
+                            updateRecyclerView(data.listAyat)
 
                         }
 
-                        is Resource.Error -> {
+                    }
 
-                            binding.progressBarAyat.visibility = View.INVISIBLE
-                            Toast.makeText(
-                                requireActivity(),
-                                result.message,
-                                Toast.LENGTH_SHORT
-                            )
-                                .show()
-                        }
+                    is Resource.Error -> {
+
+                        binding.progressBarAyat.visibility = View.INVISIBLE
+                        Toast.makeText(
+                            requireActivity(),
+                            result.message,
+                            Toast.LENGTH_SHORT
+                        )
+                            .show()
                     }
                 }
-
             }
+
+
         }
 
     }
