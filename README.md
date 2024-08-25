@@ -29,13 +29,12 @@
 
 ## 📱 Screenshots
 
-          Home Fragment | Lokasi Fragment | List Surah | Detail Surah | Asmaul Husna | Doa | Hadits Arbain
+          Home Fragment | Lokasi Fragment | List Surah | Detail Surah | Asmaul Husna | Hadits Arbain
 | <img src="image/home-fragment.png" align="center" width="30%" height="30%" /> 
 | <img src="image/lokasi-fragment.png" align="center" width="30%" height="30%" /> 
 | <img src="image/list-surah.png" align="center" width="30%" height="30%" />
 | <img src="image/detail-surah.png" align="center" width="30%" height="30%" />
 | <img src="image/asmaul-husna.png" align="center" width="30%" height="30%" />
-| <img src="image/doa.png" align="center" width="30%" height="30%" />
 | <img src="image/hadits-arbain.png" align="center" width="30%" height="30%" />
 
 
